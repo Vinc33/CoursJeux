@@ -16,7 +16,7 @@ Hunter::Hunter() : Hero("Hunter", 50, 100)
 	drag = 1200;
 	jumpingStrength = 600;
 	airdrag = 400;
-	gravity = 300;
+	gravity = 3000;
 
 	setPosition(50, 200);
 
@@ -24,9 +24,9 @@ Hunter::Hunter() : Hero("Hunter", 50, 100)
 	CurrentAction = new Standing(this);
 }
 
-
 Hunter::~Hunter()
 {
+
 }
 
 void Hunter::ChangeAction(int enumIndex)

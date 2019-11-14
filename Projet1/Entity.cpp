@@ -38,8 +38,8 @@ void Entity::accelerate(float x)
 
 void Entity::jump(float power)
 {
-		isAirborne = true;
-		velY -= jumpingStrength * power;
+	isAirborne = true;
+	velY -= jumpingStrength * power;
 }
 
 void Entity::ChangeAction(int enumIndex)
@@ -68,17 +68,17 @@ void Entity::Update()
 	}
 
 	/*temporary ground*/
-	if (velY > 0 && position.getPosition().y > 321  - velY * TimeManager::DeltaTime)
+	if (velY > 0 && position.getPosition().y > 321 - velY * TimeManager::DeltaTime)
 	{
 		isAirborne = false;
-    	position.setPosition(position.getPosition().x, 321);
+		position.setPosition(position.getPosition().x, 321);
 		velY = 0;
 	}	/*end temporary ground*/
 
 	if (isAirborne)
 	{
 		position.move(0, velY * TimeManager::DeltaTime + 0.5f * acc * TimeManager::DeltaTime * TimeManager::DeltaTime);
-		velY += gravity * gravityMult;
+		velY += gravity * gravityMult * TimeManager::DeltaTime;
 	}
 }
 

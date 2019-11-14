@@ -171,7 +171,11 @@
     <ClCompile Include="Rogue.cpp" />
     <ClCompile Include="RogueAttack.cpp" />
     <ClCompile Include="RogueCrounch.cpp" />
+    <ClCompile Include="RogueJump.cpp" />
     <ClCompile Include="RogueRoll.cpp" />
+    <ClCompile Include="RogueSomersault.cpp" />
+    <ClCompile Include="RogueStanding.cpp" />
+    <ClCompile Include="RogueWalk.cpp" />
     <ClCompile Include="Standing.cpp" />
     <ClCompile Include="Settings.cpp" />
     <ClCompile Include="Stage.cpp" />
@@ -223,7 +227,11 @@
     <ClInclude Include="Rogue.h" />
     <ClInclude Include="RogueAttack.h" />
     <ClInclude Include="RogueCrounch.h" />
+    <ClInclude Include="RogueJump.h" />
     <ClInclude Include="RogueRoll.h" />
+    <ClInclude Include="RogueSomersault.h" />
+    <ClInclude Include="RogueStanding.h" />
+    <ClInclude Include="RogueWalk.h" />
     <ClInclude Include="Standing.h" />
     <ClInclude Include="Settings.h" />
     <ClInclude Include="Stage.h" />

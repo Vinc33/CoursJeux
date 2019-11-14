@@ -1,27 +1,29 @@
 #include "Rogue.h"
 #include "Animation.h"
 #include "HeroActionsEnum.h"
-#include "Standing.h"
-#include "Walking.h"
+#include "RogueStanding.h"
+#include "RogueWalk.h"
 #include "RogueCrounch.h"
-#include "Jumping.h"
+#include "RogueJump.h"
 #include "RogueAttack.h"
 #include "RogueRoll.h"
+#include "RogueSomersault.h"
 
 Rogue::Rogue() : Hero("Rogue", 20, 40)
 {
 
 	acc = 1000;
 	maxVelX = 500;
-	drag = 1200;
+	drag = 1600;
 	jumpingStrength = 700;
 	airdrag = 400;
-	gravity = 150;
+	gravity = 2000;
+	//gravity = 1000;
 
 	setPosition(50, 200);
 
 	addAnimations();
-	CurrentAction = new Standing(this);
+	CurrentAction = new RogueStanding(this);
 }
 
 Rogue::~Rogue()
@@ -36,12 +38,12 @@ void Rogue::ChangeAction(int enumIndex)
 	case STAND:
 		animator.ChangeAnimation("Stand");
 		delete CurrentAction;
-		CurrentAction = new Standing(this);
+		CurrentAction = new RogueStanding(this);
 		break;
 	case WALK:
 		animator.ChangeAnimation("Walk");
 		delete CurrentAction;
-		CurrentAction = new Walking(this);
+		CurrentAction = new RogueWalk(this);
 		break;
 	case CROUNCH:
 		animator.ChangeAnimation("Crounch");
@@ -51,7 +53,17 @@ void Rogue::ChangeAction(int enumIndex)
 	case JUMP:
 		animator.ChangeAnimation("Jump");
 		delete CurrentAction;
-		CurrentAction = new Jumping(this);
+		CurrentAction = new RogueJump(this);
+		break;
+	case FALL:
+		animator.ChangeAnimation("Jump");
+		delete CurrentAction;
+		CurrentAction = new RogueJump(this, false, false);
+		break;
+	case FALLMAYROLL:
+		animator.ChangeAnimation("Jump");
+		delete CurrentAction;
+		CurrentAction = new RogueJump(this, false);
 		break;
 	case BASICATTACK:
 		animator.ChangeAnimation("Attack");
@@ -62,6 +74,11 @@ void Rogue::ChangeAction(int enumIndex)
 		animator.ChangeAnimation("Roll");
 		delete CurrentAction;
 		CurrentAction = new RogueRoll(this);
+		break;
+	case SOMERSAULT:
+		animator.ChangeAnimation("Roll");
+		delete CurrentAction;
+		CurrentAction = new RogueSomersault(this);
 		break;
 	}
 }
@@ -124,15 +141,15 @@ void Rogue::addAnimations()
 	showTimes = vector<int>();
 
 	indexes.push_back({ 0, 1 });
-	showTimes.push_back(100);
+	showTimes.push_back(25);
 	indexes.push_back({ 1, 1 });
-	showTimes.push_back(100);
+	showTimes.push_back(200);
 	indexes.push_back({ 2, 1 });
-	showTimes.push_back(100);
+	showTimes.push_back(175);
 	indexes.push_back({ 3, 1 });
-	showTimes.push_back(100);
+	showTimes.push_back(150);
 	indexes.push_back({ 4, 1 });
-	showTimes.push_back(100);
+	showTimes.push_back(125);
 	indexes.push_back({ 5, 1 });
 	showTimes.push_back(100);
 	indexes.push_back({ 6, 1 });

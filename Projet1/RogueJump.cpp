@@ -1,23 +1,28 @@
-#include "Jumping.h"
+#include "RogueJump.h"
 #include "InputManager.h"
 #include "HeroActionsEnum.h"
 #include "Entity.h"
 
-Jumping::Jumping(Entity* e, bool canDoubleJump) : Action(e)
-{		
-	parent->isAirborne = true;
-	parent->velY = 0;
-	parent->jump();
+
+RogueJump::RogueJump(Entity* e, bool jump, bool canRoll) : Action(e)
+{
+	if (jump)
+	{
+		parent->isAirborne = true;
+		parent->velY = 0;
+		parent->jump();
+	}
 	parent->gravityMult = 1;
-	this->canDoubleJump = canDoubleJump;
+	this->canRoll = canRoll;
 }
 
-Jumping::~Jumping()
+
+RogueJump::~RogueJump()
 {
 
 }
 
-int Jumping::Update()
+int RogueJump::Update()
 {
 	bool right = InputManager::GetKeyState(Keys::RIGHT);
 	bool left = InputManager::GetKeyState(Keys::LEFT);
@@ -35,28 +40,26 @@ int Jumping::Update()
 		return ((int)PlayerAction::STAND);
 	}
 
-	if (canDoubleJump)
-	{
-		if (!jump)
-		{
-			doubleJumpReady = true;
-		}
-		else if (jump && doubleJumpReady)
-		{
-			parent->gravityMult = 1;
-			return (int)PlayerAction::SECONDJUMP;
-		}
-	}
-
 	if (jump)
+	{
 		parent->gravityMult = 1;
+	}
 	else
-		parent->gravityMult = 2;
+		parent->gravityMult = 3;
+
 
 	if (right && !left)
 		parent->accelerate(0.5);
 	else if (left && !right)
 		parent->accelerate(-0.5);
+
+	if (InputManager::GetKeyState(UP) && parent->velY < -(parent->jumpingStrength * 0.8))
+		return(int)PlayerAction::SOMERSAULT;
+
+	if (down && jump && canRoll)
+	{
+		return(int)PlayerAction::ROLL;
+	}
 
 	if (InputManager::GetKeyState(X))
 	{
@@ -66,4 +69,3 @@ int Jumping::Update()
 
 	return -1;
 }
-

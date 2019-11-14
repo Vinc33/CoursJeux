@@ -26,12 +26,15 @@ MonkDiveKick::~MonkDiveKick()
 
 int MonkDiveKick::Update()
 {
-	countDown -= TimeManager::DeltaTime;
 	//parent->velY = .0f - parent->gravity;
+
+	//if (countDown = )
 	if (parent->isFacingLeft)
-		parent->velX = (-1300.0f * countDown - 400) ;
+		parent->velX = (-1300.0f * countDown - parent->maxVelX * 1.8f) ;
 	else
-		parent->velX = (1300.0f * countDown + 400) ;
+		parent->velX = (1300.0f * countDown + parent->maxVelX * 1.8f) ;
+
+	countDown -= TimeManager::DeltaTime;
 
 	bool right = InputManager::GetKeyState(Keys::RIGHT);
 	bool left = InputManager::GetKeyState(Keys::LEFT);
@@ -39,7 +42,7 @@ int MonkDiveKick::Update()
 
 	if (!parent->isAirborne)
 	{
-		if (parent->velX > parent->maxVelX * 2)
+		if (parent->velX > parent->maxVelX * 2.0f)
 			parent->velX = parent->maxVelX * 2.0f;
 
 		if (down)
@@ -52,7 +55,7 @@ int MonkDiveKick::Update()
 
 	if (countDown < 0)
 	{
-		if (!InputManager::GetKeyState(Keys::X))
+		if (!InputManager::GetKeyState(Keys::X) || abs(parent->velX) <= 1.4 * parent->maxVelX)
 		{
 			if (parent->isAirborne)
 				return (int)PlayerAction::FALL;
@@ -66,10 +69,6 @@ int MonkDiveKick::Update()
 			if (right || left)
 				return (int)PlayerAction::WALK;
 			return ((int)PlayerAction::STAND);
-		}
-		else
-		{
-			countDown = 0;
 		}
 	}
 	return -1;
