@@ -5,7 +5,7 @@
 #include "Entity.h"
 
 
-RogueRoll::RogueRoll(Entity* e) : Action(e)
+RogueRoll::RogueRoll(Entity* e) : ActionEntity(e)
 {
 	bool right = InputManager::GetKeyState(Keys::RIGHT);
 	bool left = InputManager::GetKeyState(Keys::LEFT);

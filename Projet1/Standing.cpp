@@ -4,7 +4,7 @@
 #include "Entity.h"
 #include "Settings.h"
 
-Standing::Standing(Entity* e) : Action(e)
+Standing::Standing(Entity* e) : ActionEntity(e)
 {
 
 }

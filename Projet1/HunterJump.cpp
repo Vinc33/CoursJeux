@@ -4,7 +4,7 @@
 #include "InputManager.h"
 #include "Settings.h"
 
-HunterJump::HunterJump(Entity* e) : Action(e)
+HunterJump::HunterJump(Entity* e) : ActionEntity(e)
 {
 
 	bool left = InputManager::GetKeyState(LEFT);

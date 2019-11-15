@@ -1,7 +1,7 @@
 #pragma once
 #include "Hero.h"
 
-enum Bullet { NORMAL, FIERY, SHREDDING, EXPLOSIVE };
+enum Bullet { NORMAL, FIERY, MAGIC, EXPLOSIVE };
 
 class Hunter :
 	public Hero

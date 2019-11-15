@@ -5,13 +5,13 @@
 #include "Entity.h"
 #include "Settings.h"
 
-MonkRisingKick::MonkRisingKick(Entity* e) : Action(e)
+MonkRisingKick::MonkRisingKick(Entity* e) : ActionEntity(e)
 {
 	bool right = InputManager::GetKeyState(Keys::RIGHT);
 	bool left = InputManager::GetKeyState(Keys::LEFT);
-	if (right)
+	if (right && !left)
 		parent->isFacingLeft = false;
-	else if (left)
+	else if (left && !right)
 		parent->isFacingLeft = true;
 	parent->isAirborne = true;
 	timeRemaining = 0.350f;
@@ -50,7 +50,13 @@ int MonkRisingKick::Update()
 	if (timeRemaining < 0)
 	{
 		if (parent->isAirborne)
-			return (int)PlayerAction::FALLJUMPREADY;
+		{
+			if (InputManager::GetKeyState(Keys::A))
+				return (int)PlayerAction::SECONDJUMP;
+			else
+				return (int)PlayerAction::FALL;
+
+		}
 
 		bool right = InputManager::GetKeyState(Keys::RIGHT);
 		bool left = InputManager::GetKeyState(Keys::LEFT);

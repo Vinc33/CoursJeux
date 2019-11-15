@@ -6,7 +6,7 @@
 
 
 
-MonkHoldAttack::MonkHoldAttack(Entity* e) : Action(e)
+MonkHoldAttack::MonkHoldAttack(Entity* e) : ActionEntity(e)
 {
 	bool left = InputManager::GetKeyState(LEFT);
 	bool right = InputManager::GetKeyState(RIGHT);

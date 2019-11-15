@@ -1,7 +1,7 @@
 #pragma once
-#include "Action.h"
+#include "ActionEntity.h"
 class Falling :
-	public Action
+	public ActionEntity
 {
 public:
 	Falling(Entity* e);

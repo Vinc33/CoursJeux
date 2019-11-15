@@ -4,7 +4,7 @@
 #include "HeroActionsEnum.h"
 #include "Entity.h"
 
-RogueAttack::RogueAttack(Entity* e) : Action(e)
+RogueAttack::RogueAttack(Entity* e) : ActionEntity(e)
 {
 	timeRemaining = 0.35f;
 	if (parent->velY > 0)

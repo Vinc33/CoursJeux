@@ -4,7 +4,7 @@
 #include "Entity.h"
 
 
-RogueJump::RogueJump(Entity* e, bool jump, bool canRoll) : Action(e)
+RogueJump::RogueJump(Entity* e, bool jump, bool canRoll) : ActionEntity(e)
 {
 	if (jump)
 	{
@@ -15,7 +15,6 @@ RogueJump::RogueJump(Entity* e, bool jump, bool canRoll) : Action(e)
 	parent->gravityMult = 1;
 	this->canRoll = canRoll;
 }
-
 
 RogueJump::~RogueJump()
 {
@@ -45,7 +44,7 @@ int RogueJump::Update()
 		parent->gravityMult = 1;
 	}
 	else
-		parent->gravityMult = 3;
+		parent->gravityMult = 2.5f;
 
 
 	if (right && !left)
@@ -53,11 +52,12 @@ int RogueJump::Update()
 	else if (left && !right)
 		parent->accelerate(-0.5);
 
-	if (InputManager::GetKeyState(UP) && parent->velY < -(parent->jumpingStrength * 0.8))
+	if (InputManager::GetKeyState(UP) && parent->velY < -(parent->jumpingStrength * 0.8f))
 		return(int)PlayerAction::SOMERSAULT;
 
 	if (down && jump && canRoll)
 	{
+		parent->gravityMult = 1;
 		return(int)PlayerAction::ROLL;
 	}
 

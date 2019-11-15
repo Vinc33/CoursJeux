@@ -6,7 +6,7 @@
 
 
 
-RogueStanding::RogueStanding(Entity* e): Action(e)
+RogueStanding::RogueStanding(Entity* e): ActionEntity(e)
 {
 }
 

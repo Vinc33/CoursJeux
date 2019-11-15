@@ -6,7 +6,7 @@
 #include <cmath>
 
 
-RogueSomersault::RogueSomersault(Entity* e) : Action(e)
+RogueSomersault::RogueSomersault(Entity* e) : ActionEntity(e)
 {
 	bool right = InputManager::GetKeyState(Keys::RIGHT);
 	bool left = InputManager::GetKeyState(Keys::LEFT);
@@ -85,4 +85,5 @@ int RogueSomersault::Update()
 	{
 		return (int)PlayerAction::FALL;
 	}
+	return -1;
 }

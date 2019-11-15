@@ -5,7 +5,7 @@
 #include "Entity.h"
 
 
-RogueWalk::RogueWalk(Entity* e) : Action(e)
+RogueWalk::RogueWalk(Entity* e) : ActionEntity(e)
 {
 	bool right = InputManager::GetKeyState(Keys::RIGHT);
 	bool left = InputManager::GetKeyState(Keys::LEFT);

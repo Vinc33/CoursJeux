@@ -1,7 +1,7 @@
 #pragma once
-#include "Action.h"
+#include "ActionEntity.h"
 class RogueRoll :
-	public Action
+	public ActionEntity
 {
 public:
 	RogueRoll(Entity* e);

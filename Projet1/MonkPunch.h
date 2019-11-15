@@ -1,7 +1,7 @@
 #pragma once
-#include "Action.h"
+#include "ActionEntity.h"
 class MonkPunch :
-	public Action
+	public ActionEntity
 {
 public:
 	MonkPunch(Entity* e);

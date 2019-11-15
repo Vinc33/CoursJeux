@@ -6,7 +6,7 @@
 #include "Settings.h"
 
 
-MonkDiveKick::MonkDiveKick(Entity* e) : Action(e)
+MonkDiveKick::MonkDiveKick(Entity* e) : ActionEntity(e)
 {
 	parent->gravityMult = 1;
 	bool right = InputManager::GetKeyState(Keys::RIGHT);
@@ -42,8 +42,10 @@ int MonkDiveKick::Update()
 
 	if (!parent->isAirborne)
 	{
-		if (parent->velX > parent->maxVelX * 2.0f)
-			parent->velX = parent->maxVelX * 2.0f;
+		if (parent->velX > parent->maxVelX * 2.8f)
+			parent->velX = parent->maxVelX * 2.8f;
+		else if (parent->velX < -parent->maxVelX * 2.8f)
+			parent->velX = -parent->maxVelX * 2.8f;
 
 		if (down)
 			return (int)PlayerAction::CROUNCH;
@@ -59,9 +61,6 @@ int MonkDiveKick::Update()
 		{
 			if (parent->isAirborne)
 				return (int)PlayerAction::FALL;
-			bool right = InputManager::GetKeyState(Keys::RIGHT);
-			bool left = InputManager::GetKeyState(Keys::LEFT);
-			bool down = InputManager::GetKeyState(Keys::DOWN);
 			bool holdingJump = InputManager::GetKeyState(Keys::A);
 
 			if (down)

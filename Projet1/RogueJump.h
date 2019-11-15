@@ -1,7 +1,7 @@
 #pragma once
-#include "Action.h"
+#include "ActionEntity.h"
 class RogueJump :
-	public Action
+	public ActionEntity
 {
 public:
 	RogueJump(Entity* e, bool jump = true, bool canRoll = true);

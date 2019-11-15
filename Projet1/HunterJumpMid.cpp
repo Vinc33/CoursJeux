@@ -4,7 +4,7 @@
 #include "InputManager.h"
 #include "Settings.h"
 
-HunterJumpMid::HunterJumpMid(Entity* e) : Action(e)
+HunterJumpMid::HunterJumpMid(Entity* e) : ActionEntity(e)
 {
 }
 

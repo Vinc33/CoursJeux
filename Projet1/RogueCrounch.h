@@ -1,7 +1,7 @@
 #pragma once
-#include "Action.h"
+#include "ActionEntity.h"
 class RogueCrounch :
-	public Action
+	public ActionEntity
 {
 public:
 	RogueCrounch(Entity* e, float forceAction = 0.0f);

@@ -3,7 +3,7 @@
 #include "HeroActionsEnum.h"
 #include "Entity.h"
 
-Jumping::Jumping(Entity* e, bool canDoubleJump) : Action(e)
+Jumping::Jumping(Entity* e, bool canDoubleJump) : ActionEntity(e)
 {		
 	parent->isAirborne = true;
 	parent->velY = 0;

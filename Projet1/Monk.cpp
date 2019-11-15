@@ -81,12 +81,6 @@ void Monk::ChangeAction(int enumIndex)
 		delete CurrentAction;
 		CurrentAction = new MonkFall(this, !hasRoundhoused, !hasPunched, !hasDropkicked, !hasDoubleJumped);
 		break;
-	case FALLJUMPREADY:
-		animator.ChangeAnimation("Jump");
-		animatorFX.ChangeAnimation("Jump");
-		delete CurrentAction;
-		CurrentAction = new MonkFall(this, !hasRoundhoused, !hasPunched, !hasDropkicked, !hasDoubleJumped, true);
-		break;
 	case ROUNDHOUSE:
 		hasRoundhoused = true;
 		animator.ChangeAnimation("Roundhouse kick");

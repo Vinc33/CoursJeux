@@ -6,7 +6,7 @@
 
 
 
-MonkPunch::MonkPunch(Entity* e) : Action(e)
+MonkPunch::MonkPunch(Entity* e) : ActionEntity(e)
 {
 	timeRemaining = 0.375f;
 }

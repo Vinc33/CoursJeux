@@ -5,7 +5,7 @@
 #include "Entity.h"
 
 
-MonkRoundhouse::MonkRoundhouse(Entity* e, bool asDoubleJump, bool canPunch, bool canDropkick) : Action(e)
+MonkRoundhouse::MonkRoundhouse(Entity* e, bool asDoubleJump, bool canPunch, bool canDropkick) : ActionEntity(e)
 {
 	bool left = InputManager::GetKeyState(LEFT);
 	bool right = InputManager::GetKeyState(RIGHT);
