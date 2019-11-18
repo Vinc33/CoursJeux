@@ -1,7 +1,7 @@
 #pragma once
-#include "Action.h"
+#include "ActionEntity.h"
 class MonkRoundhouse :
-	public Action
+	public ActionEntity
 {
 public:
 	MonkRoundhouse(Entity* e, bool asDoubleJump, bool canPunch, bool canDropkick);

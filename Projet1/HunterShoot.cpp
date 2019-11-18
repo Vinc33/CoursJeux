@@ -5,7 +5,7 @@
 #include "Entity.h"
 
 
-HunterShoot::HunterShoot(Entity* e) : Action(e)
+HunterShoot::HunterShoot(Entity* e) : ActionEntity(e)
 {
 	timeRemaining = .4f;
 }

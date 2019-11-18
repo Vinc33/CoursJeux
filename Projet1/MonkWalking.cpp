@@ -5,7 +5,7 @@
 #include "Entity.h"
 
 
-MonkWalking::MonkWalking(Entity* e) : Action(e)
+MonkWalking::MonkWalking(Entity* e) : ActionEntity(e)
 {
 	bool right = InputManager::GetKeyState(Keys::RIGHT);
 	bool left = InputManager::GetKeyState(Keys::LEFT);

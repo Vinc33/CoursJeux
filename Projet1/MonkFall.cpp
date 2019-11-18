@@ -2,7 +2,7 @@
 
 
 
-MonkFall::MonkFall(Entity* e, bool canRoundhouse, bool canPunch, bool canDropkick, bool canDoubleJump, bool doubleJumpReady) : Action(e)
+MonkFall::MonkFall(Entity* e, bool canRoundhouse, bool canPunch, bool canDropkick, bool canDoubleJump, bool doubleJumpReady) : ActionEntity(e)
 {
 	parent->gravityMult = 1;
 	this->canDoubleJump = canDoubleJump;

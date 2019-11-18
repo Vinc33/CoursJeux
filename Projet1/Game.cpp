@@ -48,7 +48,6 @@ namespace GameView
 			if (event.type == Event::Closed)
 				data->window.close();
 
-			//data->inputManager.update(event);
 			//myEntity->updateInput((float)FPS,true);
 		}
 	}
@@ -96,9 +95,6 @@ namespace GameView
 		{
 			e->Draw(data->window);
 		}
-
-		/*myEntity->draw(data->window);
-		test->Draw(data->window);*/
 
 		data->window.display();
 	}

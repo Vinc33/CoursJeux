@@ -6,7 +6,7 @@
 
 
 
-MonkHoldAttack::MonkHoldAttack(Entity* e) : Action(e)
+MonkHoldAttack::MonkHoldAttack(Entity* e) : ActionEntity(e)
 {
 	bool left = InputManager::GetKeyState(LEFT);
 	bool right = InputManager::GetKeyState(RIGHT);
@@ -17,8 +17,8 @@ MonkHoldAttack::MonkHoldAttack(Entity* e) : Action(e)
 
 	currentTime = 0.0f;
 	parent->gravityMult = 0.3f;
-	if (parent->velY < -200)
-		parent->velY = -200;
+	if (parent->velY > 200)
+		parent->velY = 200;
 }
 
 
@@ -40,6 +40,7 @@ int MonkHoldAttack::Update()
 		else
 			parent->gravityMult = 0.4f + 0.8f * currentTime;
 	}
+
 	if (currentTime > 0.1f)
 	{
 		if (!InputManager::GetKeyState(X))

@@ -46,9 +46,6 @@
     <ClCompile Include="Collider.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Entity.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="EntityState.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
@@ -136,13 +133,44 @@
     <ClCompile Include="Action.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="HunterShoot.cpp" />
     <ClCompile Include="RogueRoll.cpp">
       <Filter>Vania\Actions\Rogue</Filter>
     </ClCompile>
     <ClCompile Include="RogueCrounch.cpp">
       <Filter>Vania\Actions\Rogue</Filter>
     </ClCompile>
+    <ClCompile Include="HunterShoot.cpp">
+      <Filter>Vania\Actions\Hunter</Filter>
+    </ClCompile>
+    <ClCompile Include="RogueJump.cpp">
+      <Filter>Vania\Actions\Rogue</Filter>
+    </ClCompile>
+    <ClCompile Include="RogueSomersault.cpp">
+      <Filter>Vania\Actions\Rogue</Filter>
+    </ClCompile>
+    <ClCompile Include="RogueWalk.cpp">
+      <Filter>Vania\Actions\Rogue</Filter>
+    </ClCompile>
+    <ClCompile Include="RogueStanding.cpp">
+      <Filter>Vania\Actions\Rogue</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Engine\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityBase.cpp">
+      <Filter>Engine\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityPhysic.cpp">
+      <Filter>Engine\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityAnimated.cpp">
+      <Filter>Engine\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityBrain.cpp">
+      <Filter>Engine\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionEntity.cpp" />
+    <ClCompile Include="RogueThrowKnife.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Level.h" />
@@ -191,9 +219,6 @@
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="Collider.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity.h">
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="EntityState.h">
@@ -280,13 +305,44 @@
     <ClInclude Include="Action.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="HunterShoot.h" />
     <ClInclude Include="RogueRoll.h">
       <Filter>Vania\Actions\Rogue</Filter>
     </ClInclude>
     <ClInclude Include="RogueCrounch.h">
       <Filter>Vania\Actions\Rogue</Filter>
     </ClInclude>
+    <ClInclude Include="HunterShoot.h">
+      <Filter>Vania\Actions\Hunter</Filter>
+    </ClInclude>
+    <ClInclude Include="RogueJump.h">
+      <Filter>Vania\Actions\Rogue</Filter>
+    </ClInclude>
+    <ClInclude Include="RogueSomersault.h">
+      <Filter>Vania\Actions\Rogue</Filter>
+    </ClInclude>
+    <ClInclude Include="RogueWalk.h">
+      <Filter>Vania\Actions\Rogue</Filter>
+    </ClInclude>
+    <ClInclude Include="RogueStanding.h">
+      <Filter>Vania\Actions\Rogue</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Engine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityBase.h">
+      <Filter>Engine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityPhysic.h">
+      <Filter>Engine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityAnimated.h">
+      <Filter>Engine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityBrain.h">
+      <Filter>Engine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionEntity.h" />
+    <ClInclude Include="RogueThrowKnife.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Vania">
@@ -318,6 +374,9 @@
     </Filter>
     <Filter Include="Engine\GenericAction - player">
       <UniqueIdentifier>{10e34f31-691b-46f2-a69c-328207d86bad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Entity">
+      <UniqueIdentifier>{58c83756-3989-42ee-b7f2-9aab3ecf3ecb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

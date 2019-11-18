@@ -5,7 +5,7 @@
 #include "Entity.h"
 
 
-Crounching::Crounching(Entity* e, float forceAction) : Action (e)
+Crounching::Crounching(Entity* e, float forceAction) : ActionEntity(e)
 {
 	this->forceAction = forceAction;
 	bool left = InputManager::GetKeyState(LEFT);

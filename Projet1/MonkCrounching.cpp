@@ -5,7 +5,7 @@
 #include "Entity.h"
 
 
-MonkCrounching::MonkCrounching(Entity* e, float forceAction) : Action(e)
+MonkCrounching::MonkCrounching(Entity* e, float forceAction) : ActionEntity(e)
 {
 	this->forceAction = forceAction;
 	forceActionCounter = 0;

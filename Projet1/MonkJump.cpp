@@ -5,7 +5,7 @@
 #include "Entity.h"
 #include "Settings.h"
 
-MonkJump::MonkJump(Entity* e, bool canRoundhouse, bool canPunch, bool canDropkick, bool canDoubleJump) : Action(e)
+MonkJump::MonkJump(Entity* e, bool canRoundhouse, bool canPunch, bool canDropkick, bool canDoubleJump) : ActionEntity(e)
 {
 	parent->gravityMult = 1;
 	doubleJumpReady = false;

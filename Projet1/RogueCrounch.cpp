@@ -5,7 +5,7 @@
 #include "Entity.h"
 
 
-RogueCrounch::RogueCrounch(Entity* e, float forceAction) : Action (e)
+RogueCrounch::RogueCrounch(Entity* e, float forceAction) : ActionEntity(e)
 {
 	this->forceAction = forceAction;
 }

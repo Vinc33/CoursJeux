@@ -6,7 +6,7 @@
 
 
 
-Walking::Walking(Entity * e) : Action(e)
+Walking::Walking(Entity * e) : ActionEntity(e)
 {
 	bool right = InputManager::GetKeyState(Keys::RIGHT);
 	bool left = InputManager::GetKeyState(Keys::LEFT);
@@ -43,7 +43,7 @@ int Walking::Update()
 		return (int)PlayerAction::BASICATTACK;
 	if (left == right)
 		return (int)PlayerAction::STAND;
-	if ((!parent->isFacingLeft && left) || (parent->isFacingLeft && right))
+	if ((!parent->isFacingLeft  && left) || (parent->isFacingLeft  && right))
 		return (int)PlayerAction::WALK;
 	return -1;
 }

@@ -1,7 +1,7 @@
 #pragma once
-#include "Action.h"
+#include "ActionEntity.h"
 class MonkCrounching :
-	public Action
+	public ActionEntity
 {
 public:
 	MonkCrounching(Entity* e, float forceAction);

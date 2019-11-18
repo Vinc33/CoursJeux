@@ -1,7 +1,7 @@
 #pragma once
-#include "Action.h"
+#include "ActionEntity.h"
 class HunterJump :
-	public Action
+	public ActionEntity
 {
 public:
 	HunterJump(Entity* e);

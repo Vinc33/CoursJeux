@@ -21,7 +21,7 @@ Monk::Monk() : Hero("Monk", 50, 30)
 	drag = 600;
 	jumpingStrength = 700;
 	airdrag = 200;
-	gravity = 100;
+	gravity = 1500;
 
 	setPosition(50, 200);
 
@@ -80,12 +80,6 @@ void Monk::ChangeAction(int enumIndex)
 		animatorFX.ChangeAnimation("Jump");
 		delete CurrentAction;
 		CurrentAction = new MonkFall(this, !hasRoundhoused, !hasPunched, !hasDropkicked, !hasDoubleJumped);
-		break;
-	case FALLJUMPREADY:
-		animator.ChangeAnimation("Jump");
-		animatorFX.ChangeAnimation("Jump");
-		delete CurrentAction;
-		CurrentAction = new MonkFall(this, !hasRoundhoused, !hasPunched, !hasDropkicked, !hasDoubleJumped, true);
 		break;
 	case ROUNDHOUSE:
 		hasRoundhoused = true;
@@ -151,7 +145,7 @@ void Monk::AddAnimations()
 	Spritesheet spritesheet = { texture, nbRows, nbColums};
 
 	sf::Texture* textureFX = new Texture();
-	textureFX->loadFromFile("Assets\\SpriteSheet\\MonkFX_Fiery.png");
+	textureFX->loadFromFile("Assets\\SpriteSheet\\MonkFX_blue.png");
 	Spritesheet spritesheetFX = { textureFX, nbRows, nbColums };
 
 	vector<Coord> indexes;

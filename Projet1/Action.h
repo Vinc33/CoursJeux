@@ -1,13 +1,13 @@
 #pragma once
-class Entity;
+class EntityBrain;
 
 class Action
 {
 public:
-	Action(Entity* e);
+	Action(EntityBrain* e);
 	~Action();
 	virtual int Update();
 protected:
-	Entity* parent;
+	EntityBrain* p;
 };
 
