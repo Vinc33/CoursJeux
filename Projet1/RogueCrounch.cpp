@@ -19,11 +19,15 @@ int RogueCrounch::Update()
 	bool down = InputManager::GetKeyState(DOWN);
 	bool jump = InputManager::GetKeyState(A);
 	forceAction -= TimeManager::DeltaTime;
-	if (InputManager::GetKeyState(X) && forceAction < 0)
-		return (int)PlayerAction::CROUNCHATTACK;
-	if (!down && forceAction < 0)
-		return (int)PlayerAction::STAND;
 	if (jump)
 		return (int)PlayerAction::ROLL;
+	if (InputManager::GetKeyState(X) && forceAction < 0)
+	{
+		if (InputManager::GetKeyState(UP))
+			return (int)PlayerAction::ITEMUP;
+		return (int)PlayerAction::ITEMDOWN;
+	}
+	if (!down && forceAction < 0)
+		return (int)PlayerAction::STAND;
 	return -1;
 }

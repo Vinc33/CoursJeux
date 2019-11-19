@@ -5,31 +5,31 @@
 #include "Monk.h"
 #include "Rogue.h"
 
+std::vector<EntityBase*> GameView::Game::newEntities = std::vector<EntityBase*>();
 namespace GameView
 {
+
 	Game::Game(int width, int height, string titleScreen)
 	{
 		data->window.setVerticalSyncEnabled(true);
 		data->window.create(VideoMode(width, height), titleScreen, Style::Close | Style::Titlebar);
 		InputManager inputManager;
 		inputManager.Initiate();
-		//myTexture.loadFromFile("Image/Capture.png");
 
-		//myEntity = new MyEntity(&myTexture, sf::Vector2u(3, 2), 0.001f, 0.01f);
-		//Tileset entityTileset = {};
-		//entity = new Entity();
-		entities.push_back(new Hunter());
-		entities.push_back(new Monk());
-		entities.push_back(new Rogue());
+		//AddEntity(new Hunter());
+		AddEntity(new Monk());
+		AddEntity(new Rogue());
 
 		//test = new Platform(&myTexture, Vector2f(100.0f, 30.0f), Vector2f(200.0f, 150.0f));
-		//myEntity = new MyEntity(&myTexture,sf::Vector2f(20.0f,45.0f), sf::Vector2u(3, 2), 0.001f, 0.1f);
 	}
 
 	Game::~Game()
 	{
-		for (Entity* e : entities)
-			delete e;
+		std::vector<EntityBase*>::iterator it;
+		for (it = entities.begin(); it != entities.end();it++)
+		{
+			delete *it;
+		}
 	}
 
 	void Game::init()
@@ -47,8 +47,6 @@ namespace GameView
 		{
 			if (event.type == Event::Closed)
 				data->window.close();
-
-			//myEntity->updateInput((float)FPS,true);
 		}
 	}
 
@@ -57,9 +55,9 @@ namespace GameView
 		/*if (test->hitbox->checkCollision(myEntity->GetCollider(), 1.0f))
 			myEntity->moveOnHitBox();*/
 	}
+
 	void Game::update()
 	{
-		//float currentTime = 0, frameTime = 0.0, interpolation =0.0f;
 		while (data->window.isOpen())
 		{
 			timeManager.Update();
@@ -74,10 +72,11 @@ namespace GameView
 
 	void Game::updateInput()
 	{
-		for (Entity* e : entities)
-		{
+		for (EntityBase* e : entities)
 			e->Update();
-		}
+
+		entities.insert(entities.end(), newEntities.begin(), newEntities.end());
+		newEntities = std::vector<EntityBase*>();
 	}
 
 	void Game::startGame()
@@ -85,16 +84,19 @@ namespace GameView
 		update();
 	}
 
+	void Game::AddEntity(EntityBase * e)
+	{
+		newEntities.push_back(e);
+	}
+
 	void Game::render()
 	{
 		data->window.clear(Color::Black);
-		
+
 		level.drawPlayGround(data->window);
-		
-		for (Entity* e : entities)
-		{
+
+		for (EntityBase* e : entities)
 			e->Draw(data->window);
-		}
 
 		data->window.display();
 	}

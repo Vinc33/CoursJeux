@@ -6,7 +6,7 @@
 
 
 
-MonkPunch::MonkPunch(Entity* e) : ActionEntity(e)
+MonkPunch::MonkPunch(Entity* e, bool canJump) : ActionEntity(e)
 {
 	timeRemaining = 0.375f;
 }
@@ -35,7 +35,9 @@ int MonkPunch::Update()
 	{
 		if (parent->isAirborne)
 		{
-			parent->velY = currentVelY;
+			parent->velY = 0;
+			if (canJump)
+				return (int)PlayerAction::SECONDJUMP;
 			return (int)PlayerAction::FALL;
 		}
 		bool right = InputManager::GetKeyState(Keys::RIGHT);

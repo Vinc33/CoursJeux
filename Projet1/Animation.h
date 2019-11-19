@@ -2,7 +2,8 @@
 #include <string>
 #include <SFML/Graphics.hpp>
 #include "./Manager/StateManager.h"
-#include "./Manager/AssetManager.h"
+#include <vector>
+#include <string>
 
 struct Coord {
 	int x;
@@ -18,11 +19,13 @@ struct Spritesheet {
 class Animation
 {
 public:
-	Animation(Spritesheet ss, vector<Coord> indexes, vector<int> showTimes, bool loop = true);
+	Animation(Spritesheet ss, std::vector<Coord> indexes, std::vector<int> showTimes, bool loop = true);
 	~Animation();
 	void Update();
-	Sprite* GetSprite(bool reverse = false);
+	sf::Sprite* GetSprite(bool reverse = false);
 	void Reset();
+
+	void JumpToFrame(unsigned int index);
 
 private:
 	int currentFrame;
@@ -32,8 +35,8 @@ private:
 	sf::IntRect uvRect;
 
 	Spritesheet spritesheet;
-	vector<Coord> indexes;
-	vector<int> showTimes;
+	std::vector<Coord> indexes;
+	std::vector<int> showTimes;
 
 	int spriteWidth;
 	int spriteHeight;

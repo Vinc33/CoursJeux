@@ -6,10 +6,10 @@ public:
 	EntityPhysic();
 	~EntityPhysic();
 
-	void Update();
+	virtual void Update();
 
 	void accelerate(float x);
-	void jump(float power = 1);
+	void jump(float powerMult = 1);
 
 	bool isAirborne;
 	int maxVelX;

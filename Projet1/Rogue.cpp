@@ -1,4 +1,5 @@
 #include "Rogue.h"
+#include "TimeManager.h"
 #include "Animation.h"
 #include "HeroActionsEnum.h"
 #include "RogueStanding.h"
@@ -8,6 +9,8 @@
 #include "RogueAttack.h"
 #include "RogueRoll.h"
 #include "RogueSomersault.h"
+#include "RogueThrowKnife.h"
+#include "RogueThrowAxe.h"
 
 Rogue::Rogue() : Hero("Rogue", 20, 40)
 {
@@ -24,11 +27,26 @@ Rogue::Rogue() : Hero("Rogue", 20, 40)
 
 	addAnimations();
 	CurrentAction = new RogueStanding(this);
+
+	downToolTimer = 0.0f;
+	downToolCooldown = 0.75f;
+	upToolTimer = 0.0f;
+	upToolCooldown = 0.75f;
+
+	EquipedUp = AXE;
+	EquipedDown = KNIFE;
 }
 
 Rogue::~Rogue()
 {
 
+}
+
+void Rogue::Update()
+{
+	Entity::Update();
+	downToolTimer -= TimeManager::DeltaTime;
+	upToolTimer -= TimeManager::DeltaTime;
 }
 
 void Rogue::ChangeAction(int enumIndex)
@@ -80,6 +98,39 @@ void Rogue::ChangeAction(int enumIndex)
 		delete CurrentAction;
 		CurrentAction = new RogueSomersault(this);
 		break;
+	case ITEMDOWN:
+		if (downToolTimer < 0)
+		{
+			downToolTimer = downToolCooldown;
+			useWeapon(EquipedDown);
+		}
+		break;
+	case ITEMUP:
+		if (upToolTimer < 0)
+		{
+			upToolTimer = upToolCooldown;
+			useWeapon(EquipedUp);
+		}
+		break;
+	}
+}
+
+void Rogue::useWeapon(RogueWeapon rw)
+{
+	delete CurrentAction;
+	animator.ChangeAnimation("Item");
+	switch (rw)
+	{
+	case NONE:
+		break;
+	case KNIFE:
+		CurrentAction = new RogueThrowKnife(this);
+		break;
+	case AXE:
+		CurrentAction = new RogueThrowAxe(this);
+		break;
+	default:
+		break;
 	}
 }
 
@@ -124,6 +175,20 @@ void Rogue::addAnimations()
 	showTimes.push_back(100);
 
 	animator.AddAnimation(new Animation(spritesheet, indexes, showTimes, false), "Attack");
+
+	indexes = vector<Coord>();
+	showTimes = vector<int>();
+
+	indexes.push_back({ 1, 0 });
+	showTimes.push_back(100);
+	indexes.push_back({ 2, 0 });
+	showTimes.push_back(75);
+	indexes.push_back({ 3, 0 });
+	showTimes.push_back(75);
+	indexes.push_back({ 4, 0 });
+	showTimes.push_back(75);
+
+	animator.AddAnimation(new Animation(spritesheet, indexes, showTimes, false), "Item");
 
 	indexes = vector<Coord>();
 	showTimes = vector<int>();

@@ -20,10 +20,13 @@ RogueRoll::RogueRoll(Entity* e) : ActionEntity(e)
 
 	parent->gravityMult = 1.1f;
 	chainAttack = false;
+	chainItemUp = false;
+	chainItemDown = false;
 }
 
 RogueRoll::~RogueRoll()
 {
+
 }
 
 int RogueRoll::Update()
@@ -54,13 +57,37 @@ int RogueRoll::Update()
 	}
 
 	if (timeRemaining < 0.7 && InputManager::GetKeyState(X))
-		chainAttack = true;
+	{
+		if (InputManager::GetKeyState(DOWN))
+		{
+			chainItemDown = true;
+			chainItemUp = false;
+			chainAttack = false;
+		}
+		else if (InputManager::GetKeyState(UP))
+		{
+			chainItemDown = false;
+			chainItemUp = true;
+			chainAttack = false;
+		}
+		else
+		{
+			chainItemDown = false;
+			chainItemUp = false;
+			chainAttack = true;
+		}
+	}
 
-	if (timeRemaining < 0.2 && chainAttack)
+	if (timeRemaining < 0.2 && !parent->isAirborne && (chainAttack || chainItemDown || chainItemUp))
 	{
 		parent->gravityMult = 1;
 		parent->isFacingLeft = !parent->isFacingLeft;
-		return (int)PlayerAction::BASICATTACK;
+		if (chainAttack)
+			return (int)PlayerAction::BASICATTACK;
+		else if (chainItemUp)
+			return (int)PlayerAction::ITEMUP;
+		else
+			return (int)PlayerAction::ITEMDOWN;
 	}
 
 	if (timeRemaining < 0)
@@ -68,20 +95,28 @@ int RogueRoll::Update()
 		parent->gravityMult = 1;
 		parent->isFacingLeft = !parent->isFacingLeft;
 
+		if (chainAttack)
+			return (int)PlayerAction::BASICATTACK;
+		if (chainItemUp)
+			return (int)PlayerAction::ITEMUP;
+		if (chainItemDown)
+			return (int)PlayerAction::ITEMDOWN;
 		if (parent->isAirborne)
-		{
 			return (int)PlayerAction::FALL;
-		}
-		else
+		if (InputManager::GetKeyState(DOWN))
+			return (int)PlayerAction::CROUNCH;
+
+		bool right = InputManager::GetKeyState(Keys::RIGHT);
+		bool left = InputManager::GetKeyState(Keys::LEFT);
+
+		if (right != left)
 		{
-			if (InputManager::GetKeyState(DOWN))
-				return (int)PlayerAction::CROUNCH;
-			if (InputManager::GetKeyState(Keys::RIGHT))
+			if (right)
 				parent->isFacingLeft = false;
-			if (InputManager::GetKeyState(Keys::LEFT))
+			else
 				parent->isFacingLeft = true;
-			return (int)PlayerAction::STAND;
 		}
+		return (int)PlayerAction::STAND;
 	}
 	return -1;
 }

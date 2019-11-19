@@ -1,16 +1,15 @@
 #pragma once
 #include "Animator.h"
-#include "Action.h"
 #include "EntityBase.h"
+class Action;
 
-class EntityBrain
+class EntityBrain : public virtual EntityBase
 {
 public:
 	EntityBrain();
 	~EntityBrain();
 
-	void Update();
-
+	virtual void Update();
 	virtual void ChangeAction(int enumIndex) = 0;
 
 protected:

@@ -25,13 +25,12 @@ int RogueJump::Update()
 {
 	bool right = InputManager::GetKeyState(Keys::RIGHT);
 	bool left = InputManager::GetKeyState(Keys::LEFT);
-	bool down = InputManager::GetKeyState(Keys::DOWN);
 	bool jump = InputManager::GetKeyState(Keys::A);
 
 	if (!parent->isAirborne)
 	{
 		parent->gravityMult = 1;
-		if (down)
+		if (InputManager::GetKeyState(Keys::DOWN))
 			return (int)PlayerAction::CROUNCH;
 
 		if (right || left)
@@ -44,27 +43,33 @@ int RogueJump::Update()
 		parent->gravityMult = 1;
 	}
 	else
-		parent->gravityMult = 2.5f;
+		parent->gravityMult = 2;
 
 
 	if (right && !left)
-		parent->accelerate(0.5);
+		parent->accelerate(0.5f);
 	else if (left && !right)
-		parent->accelerate(-0.5);
+		parent->accelerate(-0.5f);
 
 	if (InputManager::GetKeyState(UP) && parent->velY < -(parent->jumpingStrength * 0.8f))
 		return(int)PlayerAction::SOMERSAULT;
 
-	if (down && jump && canRoll)
-	{
-		parent->gravityMult = 1;
-		return(int)PlayerAction::ROLL;
-	}
 
 	if (InputManager::GetKeyState(X))
 	{
 		parent->gravityMult = 1;
-		return (int)PlayerAction::BASICATTACK;
+		if (InputManager::GetKeyState(Keys::DOWN))
+			return (int)PlayerAction::ITEMDOWN;
+		if (InputManager::GetKeyState(Keys::UP))
+			return (int)PlayerAction::ITEMUP;
+		if (InputManager::GetKeyState(Keys::UP))
+			return (int)PlayerAction::BASICATTACK;
+	}
+
+	if (InputManager::GetKeyState(Keys::DOWN) && jump && canRoll)
+	{
+		parent->gravityMult = 1;
+		return(int)PlayerAction::ROLL;
 	}
 
 	return -1;

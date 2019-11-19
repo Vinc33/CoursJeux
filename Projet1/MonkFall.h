@@ -9,14 +9,14 @@ class MonkFall :
 	public ActionEntity
 {
 public:
-	MonkFall(Entity* e, bool canRoundhouse, bool canPunch, bool canDropkick, bool canDoubleJump, bool doubleJumpReady = false);
+	MonkFall(Entity* e, bool canRoundhouse, bool canPunch, bool canDropkick, bool canJump);
 	~MonkFall();
 
 	int Update();
-	bool canDoubleJump;
+private:
 	bool canRoundhouse;
 	bool canPunch;
 	bool canDropkick;
-	bool doubleJumpReady;
+	bool canJump;
 };
 

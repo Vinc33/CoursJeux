@@ -2,13 +2,17 @@
 #include "EntityAnimated.h"
 #include "EntityBrain.h"
 #include "EntityPhysic.h"
-
-class Action;
+#include "EntitySpawner.h"
+#include "EntityParticleEmitter.h"
+#include <SFML\Graphics\Transformable.hpp>
+#include <SFML\Graphics\RenderTarget.hpp>
 
 class Entity :
 	public EntityAnimated,
 	public EntityBrain,
-	public EntityPhysic
+	public EntityPhysic,
+	public EntitySpawner,
+	public EntityParticleEmitter
 {
 public:
 	Entity();
@@ -17,7 +21,8 @@ public:
 	void setPosition(const sf::Vector2f& pos);
 	void setPosition(const int& x, const int& y);
 
-	void Update();
+	virtual void Update();
+	virtual void Draw(sf::RenderTarget& target);
 
 	void MoveOnHitBox();
 

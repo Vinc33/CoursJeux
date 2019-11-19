@@ -39,6 +39,15 @@ int RogueWalk::Update()
 	}
 	if (InputManager::GetKeyState(Keys::DOWN))
 	{
+		if (InputManager::GetKeyState(Keys::X))
+		{
+			if (InputManager::GetKeyState(Keys::UP))
+				return (int)PlayerAction::ITEMUP;
+			if (InputManager::GetKeyState(Keys::DOWN))
+				return (int)PlayerAction::ITEMDOWN;
+
+			return (int)PlayerAction::BASICATTACK;
+		}
 		if(right != left)
 			return (int)PlayerAction::ROLL;
 		else

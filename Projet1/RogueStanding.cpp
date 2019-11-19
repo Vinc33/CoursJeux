@@ -31,6 +31,11 @@ int RogueStanding::Update()
 		else
 			return (int)PlayerAction::JUMP;
 	}
+
+	if (down && attack)
+		return (int)PlayerAction::ITEMDOWN;
+	if (up && attack)
+		return (int)PlayerAction::ITEMUP;
 	if (down)
 		return (int)PlayerAction::CROUNCH;
 	if (attack)

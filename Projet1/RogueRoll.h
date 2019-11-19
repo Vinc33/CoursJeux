@@ -12,6 +12,7 @@ private:
 	bool jumpAtHalf;
 	bool releasedJump;
 	bool chainAttack;
-	bool sommersault;
+	bool chainItemUp;
+	bool chainItemDown;
 };
 

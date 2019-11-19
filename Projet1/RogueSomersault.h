@@ -9,6 +9,8 @@ public:
 	int Update();
 private:
 	bool chainAttack;
+	bool chainItemUp;
+	bool chainItemDown;
 	float timeRemaining;
 };
 

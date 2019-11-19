@@ -9,10 +9,13 @@ MonkRisingKick::MonkRisingKick(Entity* e) : ActionEntity(e)
 {
 	bool right = InputManager::GetKeyState(Keys::RIGHT);
 	bool left = InputManager::GetKeyState(Keys::LEFT);
-	if (right && !left)
-		parent->isFacingLeft = false;
-	else if (left && !right)
-		parent->isFacingLeft = true;
+	if (right != left)
+	{
+		if (right)
+			parent->isFacingLeft = false;
+		else
+			parent->isFacingLeft = true;
+	}
 	parent->isAirborne = true;
 	timeRemaining = 0.350f;
 }
@@ -42,7 +45,7 @@ int MonkRisingKick::Update()
 		if (down)
 			return (int)PlayerAction::CROUNCH;
 
-		if (right || left)
+		if (right != left)
 			return (int)PlayerAction::WALK;
 		return ((int)PlayerAction::STAND);
 	}
@@ -55,17 +58,11 @@ int MonkRisingKick::Update()
 				return (int)PlayerAction::SECONDJUMP;
 			else
 				return (int)PlayerAction::FALL;
-
 		}
-
-		bool right = InputManager::GetKeyState(Keys::RIGHT);
-		bool left = InputManager::GetKeyState(Keys::LEFT);
-		bool down = InputManager::GetKeyState(Keys::DOWN);
-		bool holdingJump = InputManager::GetKeyState(Keys::A);
 
 		if (down)
 			return (int)PlayerAction::CROUNCH;
-		if (right || left)
+		if (right != left)
 			return (int)PlayerAction::WALK;
 		return ((int)PlayerAction::STAND);
 	}

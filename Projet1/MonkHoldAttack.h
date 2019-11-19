@@ -9,5 +9,6 @@ public:
 	int Update();
 private:
 	float currentTime;
+	float particleTimer;
 };
 

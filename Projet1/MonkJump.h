@@ -4,16 +4,15 @@ class MonkJump :
 	public ActionEntity
 {
 public:
-	MonkJump(Entity* e, bool canRoundhouse, bool canPunch, bool canDropkick, bool canDoubleJump);
+	MonkJump(Entity* e, bool canRoundhouse, bool canPunch, bool canDropkick, bool canJump);
 	~MonkJump();
 
 	int Update();
 private:
 	bool doubleJumpReady;
-
 	bool canPunch;
 	bool canDropkick;
-	bool canDoubleJump;
+	bool canJump;
 	bool canRoundhouse;
 };
 

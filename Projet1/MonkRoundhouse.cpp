@@ -5,7 +5,7 @@
 #include "Entity.h"
 
 
-MonkRoundhouse::MonkRoundhouse(Entity* e, bool asDoubleJump, bool canPunch, bool canDropkick) : ActionEntity(e)
+MonkRoundhouse::MonkRoundhouse(Entity* e, bool asDoubleJump, bool canPunch, bool canDropkick, bool canJump) : ActionEntity(e)
 {
 	bool left = InputManager::GetKeyState(LEFT);
 	bool right = InputManager::GetKeyState(RIGHT);
@@ -28,6 +28,7 @@ MonkRoundhouse::MonkRoundhouse(Entity* e, bool asDoubleJump, bool canPunch, bool
 
 	this->canPunch = canPunch;
 	this->canDropkick = canDropkick;
+	this->canJump = canJump;
 }
 
 MonkRoundhouse::~MonkRoundhouse()
@@ -83,6 +84,8 @@ int MonkRoundhouse::Update()
 
 		if (parent->isAirborne)
 		{
+			if (canJump && jump)
+				return (int)PlayerAction::SECONDJUMP;
 			return (int)PlayerAction::FALL;
 		}
 		if (down) return (int)PlayerAction::CROUNCH;

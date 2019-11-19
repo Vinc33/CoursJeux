@@ -1,10 +1,12 @@
 #pragma once
-#include "ActionEntity.h"
+#include "RogueItemUse.h"
 class RogueThrowKnife :
-	public ActionEntity
+	public RogueItemUse
 {
 public:
 	RogueThrowKnife(Entity* e);
 	~RogueThrowKnife();
+
+	int Update();
 };
 
