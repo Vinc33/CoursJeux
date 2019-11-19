@@ -190,9 +190,6 @@
     <ClInclude Include="Animator.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Collider.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
     <ClInclude Include="Entity.h">
       <Filter>Engine</Filter>
     </ClInclude>
@@ -287,6 +284,9 @@
     <ClInclude Include="RogueCrounch.h">
       <Filter>Vania\Actions\Rogue</Filter>
     </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Vania">
@@ -319,5 +319,13 @@
     <Filter Include="Engine\GenericAction - player">
       <UniqueIdentifier>{10e34f31-691b-46f2-a69c-328207d86bad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Image">
+      <UniqueIdentifier>{0442644a-2039-42fb-a1f0-e15a4a67ce3d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Image\image.png">
+      <Filter>Image</Filter>
+    </Image>
   </ItemGroup>
 </Project>
