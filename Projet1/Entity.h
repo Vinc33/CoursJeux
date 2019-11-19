@@ -12,15 +12,17 @@ class Entity :
 public:
 	Entity();
 	~Entity();
+	Animator animator;
 
-	void setPosition(const sf::Vector2f& pos);
-	void setPosition(const int& x, const int& y);
+	void SetPosition(const sf::Vector2f& pos);
+	void SetPosition(const int& x, const int& y);
 	void accelerate(float x);
 	void jump(float power = 1);
 
 	virtual void ChangeAction(int enumIndex);
 	void Update();
 	virtual void Draw(sf::RenderTarget& target);
+	RectangleShape* GetCollider() { return body; }
 
 	void MoveOnHitBox();
 
@@ -38,10 +40,12 @@ public:
 	int airdrag;
 	//int airacc;
 
+	const Texture* GetTexture() { return body->getTexture(); }
+
 protected:
 	sf::RectangleShape* body;
 
-	Animator animator;
+	
 	sf::Transformable position;
 	Action* CurrentAction;
 };

@@ -5,6 +5,8 @@
 Entity::Entity()
 {
 	body = new RectangleShape();
+	body->setSize(Vector2f(10.0f,10.0f));
+	body->setPosition(30, 20);
 	CurrentAction = new Action(this);
 	gravityMult = 1;
 }
@@ -15,13 +17,15 @@ Entity::~Entity()
 	delete body;
 }
 
-void Entity::setPosition(const sf::Vector2f& pos)
+void Entity::SetPosition(const sf::Vector2f& pos)
 {
 	position.setPosition(pos.x, pos.y);
+	body->setPosition(pos.x, pos.y);
 }
-void Entity::setPosition(const int& x, const int& y)
+void Entity::SetPosition(const int& x, const int& y)
 {
 	position.setPosition((float)x, (float)y);
+	body->setPosition((float)x, (float)y);
 }
 
 void Entity::accelerate(float x)
@@ -71,7 +75,8 @@ void Entity::Update()
 	if (velY > 0 && position.getPosition().y > 321  - velY * TimeManager::DeltaTime)
 	{
 		isAirborne = false;
-    	position.setPosition(position.getPosition().x, 321);
+		position.setPosition(position.getPosition().x, 321);
+		SetPosition(position.getPosition().x, 321);
 		velY = 0;
 	}	/*end temporary ground*/
 

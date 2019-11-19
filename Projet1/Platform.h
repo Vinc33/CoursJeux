@@ -1,6 +1,8 @@
 #pragma once
 #include <SFML\Graphics.hpp>
 #include "Collider.h"
+#include "Animator.h"
+#include <SFML/Graphics.hpp>
 class Platform
 {
 public:
@@ -12,9 +14,11 @@ public:
 	{ 
 		return body; 
 	}
+	const Texture* GetTexture() { return body->getTexture(); }
 
-	Collider* hitbox;
+	Animator animator;
 private:
 	sf::RectangleShape* body;
+	Sprite currentSprite;
 };
 

@@ -1,7 +1,5 @@
 #include "Collider.h"
-
-
-
+#include <SFML/Graphics.hpp>
 Collider::Collider(RectangleShape* _body)
 {
 	body = _body;
@@ -11,9 +9,7 @@ Collider::Collider(RectangleShape* _body)
 Collider::~Collider()
 {
 }
-
-
-bool Collider::checkCollision(RectangleShape* other,float push) {
+bool Collider::checkCollision(RectangleShape* other, float push) {
 	sf::Vector2f otherPosition = other->getPosition();
 	sf::Vector2f otherHalfSize = GetHalfSize(other);
 	sf::Vector2f thisPosition = body->getPosition();
@@ -30,7 +26,7 @@ bool Collider::checkCollision(RectangleShape* other,float push) {
 		if (intersectX > intersectY) {
 			if (deltaX > 0.0f) {
 				other->move(-intersectX * push, 0.0f);
-				
+
 			}
 			else {
 				other->move(intersectX * push, 0.0f);
@@ -38,12 +34,9 @@ bool Collider::checkCollision(RectangleShape* other,float push) {
 		}
 		else {
 			if (deltaY > 0.0f) {
-				other->move( 0.0f,-intersectY * push);
+				other->move(0.0f, intersectY * push);
 			}
-			else {
-				other->move( 0.0f,intersectY * push);
-			}
-		
+
 		}
 		return true;
 	}

@@ -4,6 +4,9 @@
 #include "Hunter.h"
 #include "Monk.h"
 #include "Rogue.h"
+#include <iostream>
+
+using namespace std;
 
 namespace GameView
 {
@@ -13,16 +16,17 @@ namespace GameView
 		data->window.create(VideoMode(width, height), titleScreen, Style::Close | Style::Titlebar);
 		InputManager inputManager;
 		inputManager.Initiate();
-		//myTexture.loadFromFile("Image/Capture.png");
+		myTexture.loadFromFile("Image/image.png");
 
 		//myEntity = new MyEntity(&myTexture, sf::Vector2u(3, 2), 0.001f, 0.01f);
 		//Tileset entityTileset = {};
 		//entity = new Entity();
-		entities.push_back(new Hunter());
-		entities.push_back(new Monk());
+		//entities.push_back(new Hunter());
+		//entities.push_back(new Monk());
 		entities.push_back(new Rogue());
+		entities[0]->setPosition(data->window.getSize().x / 2 - entities[0]->animator.GetSprite()->getLocalBounds().width / 2, data->window.getSize().y / 2 - entities[0]->animator.GetSprite()->getLocalBounds().height / 2);
 
-		//test = new Platform(&myTexture, Vector2f(100.0f, 30.0f), Vector2f(200.0f, 150.0f));
+		test = new Platform(&myTexture, Vector2f(10.0f, 10.0f), Vector2f(20.0f, 20.0f));
 		//myEntity = new MyEntity(&myTexture,sf::Vector2f(20.0f,45.0f), sf::Vector2u(3, 2), 0.001f, 0.1f);
 	}
 
@@ -55,8 +59,6 @@ namespace GameView
 
 	void Game::updateLogic()
 	{
-		/*if (test->hitbox->checkCollision(myEntity->GetCollider(), 1.0f))
-			myEntity->moveOnHitBox();*/
 	}
 	void Game::update()
 	{

@@ -13,6 +13,7 @@
 #include "MonkRisingKick.h"
 #include "MonkSecondJump.h"
 #include "MonkDiveKick.h"
+#include "Collider.h"
 
 Monk::Monk() : Hero("Monk", 50, 30)
 {
@@ -153,7 +154,7 @@ void Monk::AddAnimations()
 	sf::Texture* textureFX = new Texture();
 	textureFX->loadFromFile("Assets\\SpriteSheet\\MonkFX_Fiery.png");
 	Spritesheet spritesheetFX = { textureFX, nbRows, nbColums };
-
+	
 	vector<Coord> indexes;
 	vector<int> showTimes;
 

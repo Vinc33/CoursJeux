@@ -9,7 +9,13 @@ Platform::Platform(sf::Texture* texture, sf::Vector2f size, sf::Vector2f positio
 	body->setOrigin(size / 2.0f);
 	body->setTexture(texture);
 	body->setPosition(position);
-	hitbox = new Collider(body);
+	/*
+	currentSprite = Sprite();
+	currentSprite.setTexture(*texture);
+	currentSprite.setScale(2, 2);
+	currentSprite.setTextureRect(*(sf::IntRect*)body);
+	*/
+	
 }
 
 
