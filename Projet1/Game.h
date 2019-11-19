@@ -7,6 +7,7 @@
 #include "Entity.h"
 #include "Platform.h"
 #include "TimeManager.h"
+#include "ViewManager.h"
 
 using namespace sf;
 
@@ -45,5 +46,6 @@ namespace GameView
 		Platform* test;
 
 		vector<Entity*> entities;
+		ViewManager* viewCharacter;
 	};
 }

@@ -15,6 +15,7 @@ namespace GameView
 		//Tileset entityTileset = {};
 		//entity = new Entity();
 		entities.push_back(new Monk());
+		viewCharacter = new ViewManager(entities[0]->getPosition(), sf::Vector2f(data->window.getSize().x / 2, data->window.getSize().y / 2));
 
 		//test = new Platform(&myTexture, Vector2f(100.0f, 30.0f), Vector2f(200.0f, 150.0f));
 		//myEntity = new MyEntity(&myTexture,sf::Vector2f(20.0f,45.0f), sf::Vector2u(3, 2), 0.001f, 0.1f);
@@ -85,6 +86,13 @@ namespace GameView
 		for (Entity* e : entities)
 		{
 			e->Draw(data->window);
+			viewCharacter->ViewUpdate(e->getPosition());
+			
+			viewCharacter->ShakeView(5, e->getPosition());
+			//viewCharacter->ZoomView(1 + 0.2f * TimeManager::DeltaTime);
+			data->window.setView(*viewCharacter->getView());
+			//data->window.setView(*viewCharacter->getViewMinimap());
+			//viewCharacter->ShakeView();
 		}
 
 		/*myEntity->draw(data->window);
