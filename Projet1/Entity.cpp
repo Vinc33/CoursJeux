@@ -30,6 +30,7 @@ void Entity::Update()
 	if (velY > 0 && position.getPosition().y > 321 - velY * TimeManager::DeltaTime)
 	{
 		isAirborne = false;
+		body->setPosition(position.getPosition());
 		position.setPosition(position.getPosition().x, 321);
 		velY = 0;
 	}

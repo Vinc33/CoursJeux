@@ -378,5 +378,19 @@
     <Filter Include="Engine\Entity">
       <UniqueIdentifier>{58c83756-3989-42ee-b7f2-9aab3ecf3ecb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Image">
+      <UniqueIdentifier>{8bd5e8fe-f201-49ee-94ae-b927e74711e1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Image\Capture.png">
+      <Filter>Image</Filter>
+    </Image>
+    <Image Include="Image\Sprite.png">
+      <Filter>Image</Filter>
+    </Image>
+    <Image Include="Image\image.png">
+      <Filter>Image</Filter>
+    </Image>
   </ItemGroup>
 </Project>

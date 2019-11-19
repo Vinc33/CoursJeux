@@ -18,6 +18,7 @@ public:
 	void setPosition(const int& x, const int& y);
 
 	void Update();
+	RectangleShape* GetCollider() { return body; }
 
 	void MoveOnHitBox();
 

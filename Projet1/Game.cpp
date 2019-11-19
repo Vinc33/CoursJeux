@@ -13,16 +13,16 @@ namespace GameView
 		data->window.create(VideoMode(width, height), titleScreen, Style::Close | Style::Titlebar);
 		InputManager inputManager;
 		inputManager.Initiate();
-		//myTexture.loadFromFile("Image/Capture.png");
+		myTexture.loadFromFile("Image/image.png");
 
 		//myEntity = new MyEntity(&myTexture, sf::Vector2u(3, 2), 0.001f, 0.01f);
 		//Tileset entityTileset = {};
 		//entity = new Entity();
-		entities.push_back(new Hunter());
+		//entities.push_back(new Hunter());
 		entities.push_back(new Monk());
-		entities.push_back(new Rogue());
+		//entities.push_back(new Rogue());
 
-		//test = new Platform(&myTexture, Vector2f(100.0f, 30.0f), Vector2f(200.0f, 150.0f));
+		test = new Platform(&myTexture, Vector2f(100.0f, 30.0f), Vector2f(20.0f, 20.0f));
 		//myEntity = new MyEntity(&myTexture,sf::Vector2f(20.0f,45.0f), sf::Vector2u(3, 2), 0.001f, 0.1f);
 	}
 
@@ -54,8 +54,8 @@ namespace GameView
 
 	void Game::updateLogic()
 	{
-		/*if (test->hitbox->checkCollision(myEntity->GetCollider(), 1.0f))
-			myEntity->moveOnHitBox();*/
+		if (test->hitbox->checkCollision(entities[0]->GetCollider(), 1.0f))
+			entities[0]->MoveOnHitBox();
 	}
 	void Game::update()
 	{

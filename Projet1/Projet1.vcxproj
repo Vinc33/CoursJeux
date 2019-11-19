@@ -254,6 +254,11 @@
     <ClInclude Include="StateMachine.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Image\Capture.png" />
+    <Image Include="Image\image.png" />
+    <Image Include="Image\Sprite.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -1,6 +1,7 @@
 #include "Collider.h"
-
-
+#include <string>
+#include <iostream>
+using namespace std;
 
 Collider::Collider(RectangleShape* _body)
 {
@@ -45,6 +46,7 @@ bool Collider::checkCollision(RectangleShape* other,float push) {
 			}
 		
 		}
+		cout << "Collision" << endl;
 		return true;
 	}
 	return false;

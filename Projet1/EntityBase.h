@@ -17,7 +17,7 @@ public:
 	virtual void Update() = 0;
 	virtual void Draw(sf::RenderTarget& target) = 0;
 
-protected: 
 	sf::Transformable position;
+protected: 
 };
 
