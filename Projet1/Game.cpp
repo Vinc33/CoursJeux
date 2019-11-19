@@ -4,6 +4,7 @@
 #include "Hunter.h"
 #include "Monk.h"
 #include "Rogue.h"
+#include "Hero.h"
 
 std::vector<EntityBase*> GameView::Game::newEntities = std::vector<EntityBase*>();
 namespace GameView
@@ -25,10 +26,9 @@ namespace GameView
 
 	Game::~Game()
 	{
-		std::vector<EntityBase*>::iterator it;
-		for (it = entities.begin(); it != entities.end();it++)
+		for(auto ent : entities)
 		{
-			delete *it;
+			delete ent;
 		}
 	}
 

@@ -7,7 +7,7 @@ class EntityBase
 {
 public:
 	EntityBase();
-	~EntityBase();
+	virtual ~EntityBase();
 
 	virtual void Update() = 0;
 	virtual void Draw(sf::RenderTarget& target) = 0;

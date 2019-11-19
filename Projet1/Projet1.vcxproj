@@ -150,6 +150,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Hero.cpp" />
     <ClCompile Include="HunterShoot.cpp" />
+    <ClCompile Include="Manager\ViewManager.cpp" />
     <ClCompile Include="MonkChargeParticle.cpp" />
     <ClCompile Include="MonkHoldAttack.cpp" />
     <ClCompile Include="Hunter.cpp" />
@@ -223,6 +224,7 @@
     <ClInclude Include="Hero.h" />
     <ClInclude Include="HeroActionsEnum.h" />
     <ClInclude Include="HunterShoot.h" />
+    <ClInclude Include="Manager\ViewManager.h" />
     <ClInclude Include="MonkChargeParticle.h" />
     <ClInclude Include="MonkHoldAttack.h" />
     <ClInclude Include="Hunter.h" />
