@@ -146,17 +146,17 @@ void Rogue::addAnimations()
 	vector<int> showTimes;
 
 	indexes.push_back({ 0, 2 });
-	showTimes.push_back(200);
+	showTimes.push_back(150);
 	indexes.push_back({ 1, 2 });
-	showTimes.push_back(200);
+	showTimes.push_back(150);
 	indexes.push_back({ 2, 2 });
-	showTimes.push_back(200);
+	showTimes.push_back(150);
 	indexes.push_back({ 3, 2 });
-	showTimes.push_back(200);
+	showTimes.push_back(150);
 	indexes.push_back({ 4, 2 });
-	showTimes.push_back(200);
+	showTimes.push_back(150);
 	indexes.push_back({ 5, 2 });
-	showTimes.push_back(200);
+	showTimes.push_back(150);
 
 	animator.AddAnimation(new Animation(spritesheet, indexes, showTimes), "Stand");
 

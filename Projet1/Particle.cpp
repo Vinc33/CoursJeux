@@ -2,12 +2,10 @@
 
 
 
-Particle::Particle(float lifeTime, float originX, float originY)
+Particle::Particle(float lifeTime, float offsetX, float offsetY)
 {
-	position.setPosition(originX, originY);
+	position.setPosition(offsetX, offsetY);
 	this->lifeTime = lifeTime;
-	this->originX = 0;
-	this->originY = 0;
 }
 
 Particle::~Particle()
@@ -15,9 +13,15 @@ Particle::~Particle()
 
 }
 
-void Particle::MoveOrigin(float newOriginX, float newOriginY)
+void Particle::setOrigin(float x, float y)
 {
-	position.setPosition(newOriginX + position.getPosition().x - originX, newOriginY + position.getPosition().y - originY);
-	originX = newOriginX;
-	originY = newOriginY;
+	originX = x;
+	originY = y;
+}
+
+void Particle::MoveOrigin(float newX, float newY)
+{
+	position.move((newX - originX), (newY - originY));
+	originX = newX;
+	originY = newY;
 }

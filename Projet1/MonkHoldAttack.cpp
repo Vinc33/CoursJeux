@@ -59,9 +59,9 @@ int MonkHoldAttack::Update()
 
 	//particles
 	particleTimer += TimeManager::DeltaTime;
-	if (particleTimer > .2349f)
+	if (particleTimer > .23f)
 	{
-		particleTimer -= .2349f;
+		particleTimer -= .23f;
 		if (parent->isFacingLeft)
 			parent->AddParticle(new MonkChargeParticle(true, 128, 84));
 		else

@@ -45,7 +45,9 @@ void EntityParticleEmitter::Draw(sf::RenderTarget& target)
 }
 
 void EntityParticleEmitter::AddParticle(Particle* p)
-{
+{ 
+	p->setOrigin(this->position.getPosition().x, this->position.getPosition().y);
+	p->position.move(this->position.getPosition().x, this->position.getPosition().y);
 	particles.push_back(p);
 }
 
