@@ -202,9 +202,17 @@
     <ClCompile Include="RogueThrowAxe.cpp">
       <Filter>Vania\Actions\Rogue</Filter>
     </ClCompile>
-    <ClCompile Include="RogueItemUse.cpp" />
     <ClCompile Include="Manager\ViewManager.cpp">
       <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="RogueItemUse.cpp">
+      <Filter>Vania\Actions\Rogue</Filter>
+    </ClCompile>
+    <ClCompile Include="Caltrops.cpp">
+      <Filter>Vania\Projectiles and magics</Filter>
+    </ClCompile>
+    <ClCompile Include="RogueThrowCaltrops.cpp">
+      <Filter>Vania\Actions\Rogue</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -409,9 +417,17 @@
     <ClInclude Include="RogueThrowAxe.h">
       <Filter>Vania\Actions\Rogue</Filter>
     </ClInclude>
-    <ClInclude Include="RogueItemUse.h" />
     <ClInclude Include="Manager\ViewManager.h">
       <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="RogueItemUse.h">
+      <Filter>Vania\Actions\Rogue</Filter>
+    </ClInclude>
+    <ClInclude Include="Caltrops.h">
+      <Filter>Vania\Projectiles and magics</Filter>
+    </ClInclude>
+    <ClInclude Include="RogueThrowCaltrops.h">
+      <Filter>Vania\Actions\Rogue</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -11,12 +11,12 @@ RogueThrowAxe::RogueThrowAxe(Entity* e) : RogueItemUse(e, .35f)
 	if (parent->isFacingLeft)
 	{
 		parent->accelerate(-.5f);
-		parent->Spawn(new ThrownAxe(-575 + (int)(parent->velX / 2)), 120, 48);
+		parent->Spawn(new ThrownAxe(-575 + (int)(parent->velX / 2 )), 120, 48);
 	}
 	else
 	{
 		parent->accelerate(.5f);
-		parent->Spawn(new ThrownAxe(575 + (int)(parent->velX / 2)), 84, 48);
+		parent->Spawn(new ThrownAxe(575 + (int)(parent->velX / 2 )), 84, 48);
 	}
 }
 

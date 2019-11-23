@@ -4,6 +4,7 @@
 #include "Timemanager.h"
 #include "Entity.h"
 
+enum direction { NA, EST, WEST };
 
 RogueRoll::RogueRoll(Entity* e) : ActionEntity(e)
 {
@@ -22,6 +23,8 @@ RogueRoll::RogueRoll(Entity* e) : ActionEntity(e)
 	chainAttack = false;
 	chainItemUp = false;
 	chainItemDown = false;
+	chainItemFront = false;
+	chainItemStand = false;
 }
 
 RogueRoll::~RogueRoll()

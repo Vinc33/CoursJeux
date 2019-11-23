@@ -17,6 +17,7 @@ MonkDiveKick::MonkDiveKick(Entity* e) : ActionEntity(e)
 		parent->isFacingLeft = true;
 	parent->isAirborne = true;
 	countDown = 0.350f;
+		parent->velY += 50;
 }
 
 
@@ -26,7 +27,6 @@ MonkDiveKick::~MonkDiveKick()
 
 int MonkDiveKick::Update()
 {
-	//parent->velY = .0f - parent->gravity;
 
 	//if (countDown = )
 	if (parent->isFacingLeft)

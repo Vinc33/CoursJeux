@@ -5,7 +5,8 @@ enum RogueWeapon
 {
 	NONE,
 	KNIFE,
-	AXE
+	AXE,
+	CALTROPS
 };
 
 class Rogue :
@@ -25,8 +26,14 @@ private:
 	float downToolCooldown;
 	float upToolTimer;
 	float upToolCooldown;
+	float frontToolTimer;
+	float frontToolCooldown;
+	float standToolTimer;
+	float standToolCooldown;
 
-	RogueWeapon EquipedDown;
-	RogueWeapon EquipedUp;
+	RogueWeapon equipedDown;
+	RogueWeapon equipedUp;
+	RogueWeapon equipedFront;
+	RogueWeapon equipedStand;
 };
 

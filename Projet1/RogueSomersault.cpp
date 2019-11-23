@@ -5,6 +5,7 @@
 #include "Entity.h"
 #include <cmath>
 
+enum direction { NA, EST, WEST };
 
 RogueSomersault::RogueSomersault(Entity* e) : ActionEntity(e)
 {
@@ -37,33 +38,61 @@ int RogueSomersault::Update()
 	if (parent->velX > parent->maxVelX * 0.4f || -parent->velX > parent->maxVelX * 0.4f)
 		parent->velX /= 1 + abs(parent->velX / 100) * TimeManager::DeltaTime;
 
-	if (timeRemaining < 0.7f && InputManager::GetKeyState(X))
+	bool left = InputManager::GetKeyState(LEFT);
+	bool right = InputManager::GetKeyState(RIGHT);
+
+	if (timeRemaining < 0.7f)
 	{
-		if (InputManager::GetKeyState(DOWN))
+		if (InputManager::GetKeyState(B))
 		{
-			chainItemDown = true;
-			chainItemUp = false;
-			chainAttack = false;
+			if (left != right)
+			{
+				if (left)
+					chainDirection = direction::WEST;
+				else
+					chainDirection = direction::EST;
+			}
+			else
+			{
+				chainDirection = direction::NA;
+			}
+
+			if (InputManager::GetKeyState(DOWN))
+			{
+				chainItemStand = false;
+				chainItemFront = false;
+				chainItemDown = true;
+				chainItemUp = false;
+			}
+			else if (InputManager::GetKeyState(UP))
+			{
+				chainItemStand = false;
+				chainItemFront = false;
+				chainItemDown = false;
+				chainItemUp = true;
+			}
+			else if (left != right)
+			{
+				chainItemStand = false;
+				chainItemFront = true;
+				chainItemDown = false;
+				chainItemUp = false;
+			}
+			else
+			{
+				chainItemStand = true;
+				chainItemFront = false;
+				chainItemDown = false;
+				chainItemUp = false;
+			}
 		}
-		else if (InputManager::GetKeyState(UP))
-		{
-			chainItemDown = false;
-			chainItemUp = true;
-			chainAttack = false;
-		}
-		else
-		{
-			chainItemDown = false;
-			chainItemUp = false;
+
+		if (InputManager::GetKeyState(X))
 			chainAttack = true;
-		}
 	}
 
 	if (timeRemaining > .45f)
 	{
-		bool left = InputManager::GetKeyState(LEFT);
-		bool right = InputManager::GetKeyState(RIGHT);
-
 		if (right && !left)
 			parent->accelerate(0.5f * (1 - timeRemaining));
 		else if (left && !right)
@@ -76,37 +105,46 @@ int RogueSomersault::Update()
 	}
 
 
-	if (timeRemaining < 0.35f && (chainAttack || chainItemDown || chainItemUp))
+	if (timeRemaining < 0.35f)
 	{
 		parent->gravityMult = 1;
-		parent->isFacingLeft = !parent->isFacingLeft;
-		bool right = InputManager::GetKeyState(Keys::RIGHT);
-		bool left = InputManager::GetKeyState(Keys::LEFT);
+		switch (chainDirection)
+		{
+		case direction::EST:
+			parent->isFacingLeft = false;
+			break;
+
+		case direction::WEST:
+			parent->isFacingLeft = true;
+			break;
+		}
 
 		if (chainItemUp)
 		{
-			if (right != left)
-			{
-				if (right)
-					parent->isFacingLeft = false;
-				else
-					parent->isFacingLeft = true;
-			}
+			parent->isFacingLeft = !parent->isFacingLeft;
 			return (int)PlayerAction::ITEMUP;
 		}
 		if (chainItemDown)
 		{
-			if (right != left)
-			{
-				if (right)
-					parent->isFacingLeft = false;
-				else
-					parent->isFacingLeft = true;
-			}
+			parent->isFacingLeft = !parent->isFacingLeft;
 			return (int)PlayerAction::ITEMDOWN;
 		}
+		if (chainItemFront)
+		{
+			parent->isFacingLeft = !parent->isFacingLeft;
+			return (int)PlayerAction::ITEMFRONT;
+		}
+		if (chainItemStand)
+		{
+			parent->isFacingLeft = !parent->isFacingLeft;
+			return (int)PlayerAction::ITEMSTAND;
+		}
+		if (chainAttack)
+		{
+			parent->isFacingLeft = !parent->isFacingLeft;
+			return (int)PlayerAction::BASICATTACK;
+		}
 
-		return (int)PlayerAction::BASICATTACK;
 	}
 
 	if (!parent->isAirborne)
@@ -114,9 +152,6 @@ int RogueSomersault::Update()
 		parent->isFacingLeft = !parent->isFacingLeft;
 		if (InputManager::GetKeyState(DOWN))
 			return (int)PlayerAction::CROUNCH;
-
-		bool right = InputManager::GetKeyState(RIGHT);
-		bool left = InputManager::GetKeyState(LEFT);
 
 		if (right != left)
 		{

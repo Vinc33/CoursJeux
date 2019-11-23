@@ -11,6 +11,7 @@
 #include "RogueSomersault.h"
 #include "RogueThrowKnife.h"
 #include "RogueThrowAxe.h"
+#include "RogueThrowCaltrops.h"
 
 Rogue::Rogue() : Hero("Rogue", 20, 40)
 {
@@ -30,11 +31,20 @@ Rogue::Rogue() : Hero("Rogue", 20, 40)
 
 	downToolTimer = 0.0f;
 	downToolCooldown = 0.75f;
+
 	upToolTimer = 0.0f;
 	upToolCooldown = 0.75f;
 
-	EquipedUp = AXE;
-	EquipedDown = KNIFE;
+	frontToolTimer = 0.0f;
+	frontToolCooldown = 0.75f;
+
+	standToolTimer = 0.0f;
+	standToolCooldown = 0.75f;
+
+	equipedUp = AXE;
+	equipedDown = CALTROPS;
+	equipedFront = KNIFE;
+	equipedStand = KNIFE;
 }
 
 Rogue::~Rogue()
@@ -47,6 +57,8 @@ void Rogue::Update()
 	Entity::Update();
 	downToolTimer -= TimeManager::DeltaTime;
 	upToolTimer -= TimeManager::DeltaTime;
+	frontToolTimer -= TimeManager::DeltaTime;
+	standToolTimer -= TimeManager::DeltaTime;
 }
 
 void Rogue::ChangeAction(int enumIndex)
@@ -102,14 +114,28 @@ void Rogue::ChangeAction(int enumIndex)
 		if (downToolTimer < 0)
 		{
 			downToolTimer = downToolCooldown;
-			useWeapon(EquipedDown);
+			useWeapon(equipedDown);
 		}
 		break;
 	case ITEMUP:
 		if (upToolTimer < 0)
 		{
 			upToolTimer = upToolCooldown;
-			useWeapon(EquipedUp);
+			useWeapon(equipedUp);
+		}
+		break;
+	case ITEMFRONT:
+		if (frontToolTimer < 0)
+		{
+			frontToolTimer = frontToolCooldown;
+			useWeapon(equipedFront);
+		}
+		break;
+	case ITEMSTAND:
+		if (standToolTimer < 0)
+		{
+			standToolTimer = standToolCooldown;
+			useWeapon(equipedStand);
 		}
 		break;
 	}
@@ -128,6 +154,9 @@ void Rogue::useWeapon(RogueWeapon rw)
 		break;
 	case AXE:
 		CurrentAction = new RogueThrowAxe(this);
+		break;
+	case CALTROPS:
+		CurrentAction = new RogueThrowCaltrops(this);
 		break;
 	default:
 		break;

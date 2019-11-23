@@ -43,7 +43,7 @@ int RogueJump::Update()
 		parent->gravityMult = 1;
 	}
 	else
-		parent->gravityMult = 2;
+		parent->gravityMult = 1.5f;
 
 
 	if (right && !left)
@@ -54,17 +54,21 @@ int RogueJump::Update()
 	if (InputManager::GetKeyState(UP) && parent->velY < -(parent->jumpingStrength * 0.8f))
 		return(int)PlayerAction::SOMERSAULT;
 
-
-	if (InputManager::GetKeyState(X))
+	if (InputManager::GetKeyState(B))
 	{
 		parent->gravityMult = 1;
 		if (InputManager::GetKeyState(Keys::DOWN))
 			return (int)PlayerAction::ITEMDOWN;
 		if (InputManager::GetKeyState(Keys::UP))
 			return (int)PlayerAction::ITEMUP;
-		if (InputManager::GetKeyState(Keys::UP))
-			return (int)PlayerAction::BASICATTACK;
+		if (right != left)
+			return (int)PlayerAction::ITEMFRONT;
+		return (int)PlayerAction::ITEMSTAND;
+
 	}
+
+	if (InputManager::GetKeyState(X))
+		return (int)PlayerAction::BASICATTACK;
 
 	if (InputManager::GetKeyState(Keys::DOWN) && jump && canRoll)
 	{

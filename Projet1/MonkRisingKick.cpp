@@ -18,6 +18,8 @@ MonkRisingKick::MonkRisingKick(Entity* e) : ActionEntity(e)
 	}
 	parent->isAirborne = true;
 	timeRemaining = 0.350f;
+
+	parent->velY = -150.0f;
 }
 
 MonkRisingKick::~MonkRisingKick()
