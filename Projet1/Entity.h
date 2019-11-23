@@ -3,9 +3,9 @@
 #include "EntityBrain.h"
 #include "EntityPhysic.h"
 #include "EntitySpawner.h"
+#include "EntityCollision.h"
 #include "EntityParticleEmitter.h"
-#include <SFML\Graphics\Transformable.hpp>
-#include <SFML\Graphics\RenderTarget.hpp>
+#include "Collider.h"
 
 class Entity :
 	public EntityAnimated,
@@ -13,6 +13,8 @@ class Entity :
 	public EntityPhysic,
 	public EntitySpawner,
 	public EntityParticleEmitter
+	//public EntityCollision
+
 {
 public:
 	Entity();
@@ -23,10 +25,7 @@ public:
 
 	virtual void Update();
 	virtual void Draw(sf::RenderTarget& target);
+	
 
-	void MoveOnHitBox();
-
-protected:
-	sf::RectangleShape* body;
 };
 

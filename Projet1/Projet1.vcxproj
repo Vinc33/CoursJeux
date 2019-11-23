@@ -141,6 +141,7 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="EntityAnimated.cpp" />
     <ClCompile Include="EntityBrain.cpp" />
+    <ClCompile Include="EntityCollision.cpp" />
     <ClCompile Include="EntityInanimate.cpp" />
     <ClCompile Include="EntityParticleEmitter.cpp" />
     <ClCompile Include="EntityPhysic.cpp" />
@@ -214,6 +215,7 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityAnimated.h" />
     <ClInclude Include="EntityBrain.h" />
+    <ClInclude Include="EntityCollision.h" />
     <ClInclude Include="EntityInanimate.h" />
     <ClInclude Include="EntityParticleEmitter.h" />
     <ClInclude Include="EntityPhysic.h" />

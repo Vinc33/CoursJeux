@@ -203,9 +203,13 @@
       <Filter>Vania\Actions\Rogue</Filter>
     </ClCompile>
     <ClCompile Include="RogueItemUse.cpp" />
+
     <ClCompile Include="Manager\ViewManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
+
+    <ClCompile Include="EntityCollision.cpp" />
+
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Level.h" />
@@ -410,9 +414,13 @@
       <Filter>Vania\Actions\Rogue</Filter>
     </ClInclude>
     <ClInclude Include="RogueItemUse.h" />
+
     <ClInclude Include="Manager\ViewManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
+
+    <ClInclude Include="EntityCollision.h" />
+
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Vania">
