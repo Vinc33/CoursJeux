@@ -203,6 +203,7 @@
       <Filter>Vania\Actions\Rogue</Filter>
     </ClCompile>
     <ClCompile Include="RogueItemUse.cpp" />
+    <ClCompile Include="EntityCollision.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Level.h" />
@@ -407,6 +408,7 @@
       <Filter>Vania\Actions\Rogue</Filter>
     </ClInclude>
     <ClInclude Include="RogueItemUse.h" />
+    <ClInclude Include="EntityCollision.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Vania">
