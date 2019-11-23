@@ -4,13 +4,11 @@
 
 Entity::Entity()
 {
-	body = new sf::RectangleShape();
 	particlesMoveWithParent = true;
 }
 
 Entity::~Entity()
 {
-	delete body;
 }
 
 void Entity::setPosition(const sf::Vector2f& pos)
@@ -27,6 +25,7 @@ void Entity::Update()
 	EntityBrain::Update();
 	EntityPhysic::Update();
 	EntityParticleEmitter::Update();
+	EntityCollision::Update();
 
 	//temporary ground
 	if (velY > 0 && position.getPosition().y > 321 - velY * TimeManager::DeltaTime)
@@ -44,6 +43,3 @@ void Entity::Draw(sf::RenderTarget& target)
 	EntityParticleEmitter::Draw(target);
 }
 
-void Entity::MoveOnHitBox()
-{
-}

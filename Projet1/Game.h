@@ -31,7 +31,7 @@ namespace GameView
 		void startGame();
 
 		static void AddEntity(EntityBase* e);
-
+		static void AddForCheckCollision(EntityBase* e);
 	private:
 		void update();
 		void updateInput();
@@ -48,6 +48,7 @@ namespace GameView
 
 		vector<EntityBase*> entities;
 		static vector<EntityBase*> newEntities;
+		static vector<EntityBase*> entitiesForCollision;
 		Level level;
 
 	};
