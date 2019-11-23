@@ -11,9 +11,9 @@ RogueRoll::RogueRoll(Entity* e) : ActionEntity(e)
 	bool right = InputManager::GetKeyState(Keys::RIGHT);
 	bool left = InputManager::GetKeyState(Keys::LEFT);
 	if (right)
-		parent->isFacingLeft = false;
+		parent->imageReversed = false;
 	else if (left)
-		parent->isFacingLeft = true;
+		parent->imageReversed = true;
 	parent->isAirborne = true;
 	timeRemaining = 0.80f;
 	jumpAtHalf = false;
@@ -32,11 +32,11 @@ RogueRoll::~RogueRoll()
 
 }
 
-int RogueRoll::Update()
+int RogueRoll::update()
 {
 	timeRemaining -= TimeManager::DeltaTime;
 
-	if (parent->isFacingLeft)
+	if (parent->imageReversed)
 		parent->accelerate(-1.8f);
 	else
 		parent->accelerate(1.8f);
@@ -84,7 +84,7 @@ int RogueRoll::Update()
 	if (timeRemaining < 0.2 && !parent->isAirborne && (chainAttack || chainItemDown || chainItemUp))
 	{
 		parent->gravityMult = 1;
-		parent->isFacingLeft = !parent->isFacingLeft;
+		parent->imageReversed = !parent->imageReversed;
 		if (chainAttack)
 			return (int)PlayerAction::BASICATTACK;
 		else if (chainItemUp)
@@ -96,7 +96,7 @@ int RogueRoll::Update()
 	if (timeRemaining < 0)
 	{
 		parent->gravityMult = 1;
-		parent->isFacingLeft = !parent->isFacingLeft;
+		parent->imageReversed = !parent->imageReversed;
 
 		if (chainAttack)
 			return (int)PlayerAction::BASICATTACK;
@@ -115,9 +115,9 @@ int RogueRoll::Update()
 		if (right != left)
 		{
 			if (right)
-				parent->isFacingLeft = false;
+				parent->imageReversed = false;
 			else
-				parent->isFacingLeft = true;
+				parent->imageReversed = true;
 		}
 		return (int)PlayerAction::STAND;
 	}

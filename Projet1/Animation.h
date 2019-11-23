@@ -21,7 +21,7 @@ class Animation
 public:
 	Animation(Spritesheet ss, std::vector<Coord> indexes, std::vector<int> showTimes, bool loop = true);
 	~Animation();
-	void Update();
+	void update();
 	sf::Sprite* GetSprite(bool reverse = false);
 	void Reset();
 

@@ -9,7 +9,7 @@ class RogueSomersault :
 public:
 	RogueSomersault(Entity* e);
 	~RogueSomersault();
-	int Update();
+	int update();
 private:
 	bool chainAttack;
 	bool chainItemStand;

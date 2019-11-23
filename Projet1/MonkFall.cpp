@@ -17,7 +17,7 @@ MonkFall::~MonkFall()
 
 }
 
-int MonkFall::Update()
+int MonkFall::update()
 {
 	bool right = InputManager::GetKeyState(Keys::RIGHT);
 	bool left = InputManager::GetKeyState(Keys::LEFT);

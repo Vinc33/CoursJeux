@@ -6,7 +6,7 @@ class MonkHoldAttack :
 public:
 	MonkHoldAttack(Entity* e);
 	~MonkHoldAttack();
-	int Update();
+	int update();
 private:
 	float currentTime;
 	float particleTimer;

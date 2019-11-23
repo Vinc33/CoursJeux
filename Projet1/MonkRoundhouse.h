@@ -7,7 +7,7 @@ public:
 	MonkRoundhouse(Entity* e, bool asDoubleJump, bool canPunch, bool canDropkick, bool canJump);
 	~MonkRoundhouse();
 
-	int Update();
+	int update();
 private:
 	float timeRemaining;
 	bool chainKick;

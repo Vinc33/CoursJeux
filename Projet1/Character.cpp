@@ -4,10 +4,10 @@
 
 Character::Character(string unitName, short baseDamage, short maxHP)
 {
-	this->UnitName = unitName;
-	this->BaseDamage = baseDamage;
-	this->MaxHP = maxHP;
-	this->CurrentHP = maxHP;
+	this->unitName = unitName;
+	this->baseDamage = baseDamage;
+	this->maxHP = maxHP;
+	this->currentHP = maxHP;
 }
 
 
@@ -15,14 +15,14 @@ Character::~Character()
 {
 }
 
-DamageInfo Character::GetDamage()
+DamageInfo Character::getDamage()
 {
-	return { DamageType::PHYSICAL, BaseDamage };
+	return { DamageType::PHYSICAL, baseDamage };
 }
 
 
 bool Character::ApplyDamage(short damage)
 {
-	CurrentHP -= damage;
-	return CurrentHP > 0 ? true : false;
+	currentHP -= damage;
+	return currentHP > 0 ? true : false;
 }

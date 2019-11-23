@@ -6,7 +6,7 @@ class MonkCrounching :
 public:
 	MonkCrounching(Entity* e, float forceAction);
 	~MonkCrounching();
-	int Update();
+	int update();
 private:
 	float forceAction;
 	float forceActionCounter;

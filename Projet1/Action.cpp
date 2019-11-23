@@ -13,7 +13,7 @@ Action::~Action()
 }
 
 
-int Action::Update()
+int Action::update()
 {
 	return -1;
 }

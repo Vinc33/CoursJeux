@@ -12,9 +12,9 @@ EntityAnimated::~EntityAnimated()
 
 }
 
-void EntityAnimated::Draw(sf::RenderTarget& target)
+void EntityAnimated::draw(sf::RenderTarget& target)
 {
-	animator.Update();
-	sf::Sprite* s = animator.GetSprite(isFacingLeft);
+	animator.update();
+	sf::Sprite* s = animator.GetSprite(imageReversed);
 	target.draw(*s, position.getTransform());
 }

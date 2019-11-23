@@ -7,7 +7,7 @@ class RogueRoll :
 public:
 	RogueRoll(Entity* e);
 	~RogueRoll();
-	int Update();
+	int update();
 
 private:
 	float timeRemaining;

@@ -7,7 +7,7 @@ public:
 	MonkChargeParticle(bool reversed = false, float originX = 0, float originY = 0);
 	~MonkChargeParticle();
 
-	void Update();
+	void update();
 private:
 	bool rotatingLeft;
 	bool isCounterClockwise;

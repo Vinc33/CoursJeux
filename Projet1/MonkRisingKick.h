@@ -6,7 +6,7 @@ class MonkRisingKick :
 public:
 	MonkRisingKick(Entity* e);
 	~MonkRisingKick();
-	int Update();
+	int update();
 private:
 	float timeRemaining;
 };

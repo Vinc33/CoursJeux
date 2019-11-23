@@ -6,7 +6,7 @@ public:
 	StraightProjectile(float speedX, float speedY = 0);
 	~StraightProjectile();
 
-	virtual void Update();
+	virtual void update();
 
 private:
 	float speedX;

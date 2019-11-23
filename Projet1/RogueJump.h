@@ -6,7 +6,7 @@ class RogueJump :
 public:
 	RogueJump(Entity* e, bool jump = true, bool canRoll = true);
 	~RogueJump();
-	int Update();
+	int update();
 private:
 	bool canRoll;
 };

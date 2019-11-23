@@ -1,7 +1,7 @@
 #pragma once
 #pragma once
 #include <SFML\Graphics\Transformable.hpp>
-#include <SFML\Graphics\Drawable.hpp>
+#include <SFML\Graphics\drawable.hpp>
 #include <SFML\Graphics\Sprite.hpp>
 #include <SFML\Graphics\Texture.hpp>
 #include <SFML\Graphics.hpp>
@@ -21,7 +21,7 @@ public:
 	ViewManager(sf::Vector2f center, sf::Vector2f hlafSize);
 	~ViewManager();
 
-	void ViewUpdate(sf::Vector2f position);
+	void Viewupdate(sf::Vector2f position);
 	View* getView();
 	void ShakeView(int intensity,sf::Vector2f positionInitial);
 	void ZoomView(float zoomRaport);

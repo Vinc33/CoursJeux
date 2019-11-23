@@ -14,7 +14,7 @@ EntityCollision::~EntityCollision()
 	delete body;
 }
 
-void EntityCollision::Update()
+void EntityCollision::update()
 {
 	GameView::Game::AddForCheckCollision(this);
 	body->setPosition(position.getPosition());

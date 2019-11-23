@@ -9,9 +9,9 @@ class Hunter :
 public:
 	Hunter();
 	~Hunter();
-	//DamageInfo GetDamage() override;
-	void ChangeAction(int enumIndex);
+	//DamageInfo getDamage() override;
+	void changeAction(int enumIndex);
 private:
-	Bullet EquipedBullet;
-	void AddAnimations();
+	Bullet equipedBullet;
+	void addAnimations();
 };

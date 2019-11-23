@@ -12,9 +12,9 @@ MonkDiveKick::MonkDiveKick(Entity* e) : ActionEntity(e)
 	bool right = InputManager::GetKeyState(Keys::RIGHT);
 	bool left = InputManager::GetKeyState(Keys::LEFT);
 	if (right)
-		parent->isFacingLeft = false;
+		parent->imageReversed = false;
 	else if (left)
-		parent->isFacingLeft = true;
+		parent->imageReversed = true;
 	parent->isAirborne = true;
 	countDown = 0.350f;
 		parent->velY += 50;
@@ -25,11 +25,11 @@ MonkDiveKick::~MonkDiveKick()
 {
 }
 
-int MonkDiveKick::Update()
+int MonkDiveKick::update()
 {
 
 	//if (countDown = )
-	if (parent->isFacingLeft)
+	if (parent->imageReversed)
 		parent->velX = (-1300.0f * countDown - parent->maxVelX * 1.8f) ;
 	else
 		parent->velX = (1300.0f * countDown + parent->maxVelX * 1.8f) ;

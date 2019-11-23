@@ -7,7 +7,7 @@ public:
 	Particle(float lifeTime, float originX = 0, float originY = 0);
 	~Particle();
 
-	virtual void Update() = 0;
+	virtual void update() = 0;
 	void setOrigin(float x, float y);
 	void MoveOrigin(float newX, float newY);
 

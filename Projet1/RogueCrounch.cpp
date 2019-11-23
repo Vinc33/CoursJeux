@@ -14,7 +14,7 @@ RogueCrounch::~RogueCrounch()
 {
 }
 
-int RogueCrounch::Update()
+int RogueCrounch::update()
 {
 	bool jump = InputManager::GetKeyState(A);
 	bool down = InputManager::GetKeyState(DOWN);

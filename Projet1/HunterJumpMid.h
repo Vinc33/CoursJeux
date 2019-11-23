@@ -6,6 +6,6 @@ class HunterJumpMid :
 public:
 	HunterJumpMid(Entity* e);
 	~HunterJumpMid();
-	int Update();
+	int update();
 };
 

@@ -11,9 +11,9 @@ Crounching::Crounching(Entity* e, float forceAction) : ActionEntity(e)
 	bool left = InputManager::GetKeyState(LEFT);
 	bool right = InputManager::GetKeyState(RIGHT);
 	if (left && !right)
-		parent->isFacingLeft = true;
+		parent->imageReversed = true;
 	else if (!left && right)
-		parent->isFacingLeft = false;
+		parent->imageReversed = false;
 }
 
 Crounching::~Crounching()
@@ -21,7 +21,7 @@ Crounching::~Crounching()
 
 }
 
-int Crounching::Update()
+int Crounching::update()
 {
 	forceAction -= TimeManager::DeltaTime;
 	if (InputManager::GetKeyState(X) && forceAction < 0)

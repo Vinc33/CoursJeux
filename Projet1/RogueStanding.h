@@ -6,6 +6,6 @@ class RogueStanding :
 public:
 	RogueStanding(Entity* e);
 	~RogueStanding();
-	int Update();
+	int update();
 };
 

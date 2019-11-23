@@ -16,7 +16,7 @@ MonkPunch::~MonkPunch()
 	
 }
 
-int MonkPunch::Update()
+int MonkPunch::update()
 {
 	if (parent->isAirborne)
 	{
@@ -26,7 +26,7 @@ int MonkPunch::Update()
 	if (timeRemaining < .4f && timeRemaining > .3f)
 	{
 		parent->velY = 0;
-		if (parent->isFacingLeft)
+		if (parent->imageReversed)
 			parent->accelerate(-3);
 		else
 			parent->accelerate(3);

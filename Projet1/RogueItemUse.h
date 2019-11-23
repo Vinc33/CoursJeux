@@ -7,7 +7,7 @@ public:
 	RogueItemUse(Entity* e, float timer);
 	~RogueItemUse();
 
-	int Update();
+	int update();
 protected:
 	float timer;
 };

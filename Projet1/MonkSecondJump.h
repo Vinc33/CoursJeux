@@ -8,7 +8,7 @@ public:
 	MonkSecondJump(Entity* e, bool canRoundhouse, bool canPunch, bool canDropkick);
 	~MonkSecondJump();
 
-	int Update();
+	int update();
 private:
 	bool canRoundhouse;
 	bool canPunch;

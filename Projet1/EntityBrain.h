@@ -9,9 +9,9 @@ public:
 	EntityBrain();
 	~EntityBrain();
 
-	virtual void Update();
-	virtual void ChangeAction(int enumIndex) = 0;
+	virtual void update();
+	virtual void changeAction(int enumIndex) = 0;
 
 protected:
-	Action* CurrentAction;
+	Action* currentAction;
 };

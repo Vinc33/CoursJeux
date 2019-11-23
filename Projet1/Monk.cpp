@@ -25,8 +25,8 @@ Monk::Monk() : Hero("Monk", 50, 30)
 
 	setPosition(50, 200);
 
-	AddAnimations();
-	CurrentAction = new Standing(this);
+	addAnimations();
+	currentAction = new Standing(this);
 
 	hasRoundhoused = false;
 	hasPunched = false;
@@ -43,91 +43,91 @@ Monk::~Monk()
 {
 }
 
-void Monk::ChangeAction(int enumIndex)
+void Monk::changeAction(int enumIndex)
 {
 	switch ((PlayerAction)enumIndex)
 	{
 	case STAND:
 		animator.ChangeAnimation("Stand");
-		delete CurrentAction;
-		CurrentAction = new Standing(this);
+		delete currentAction;
+		currentAction = new Standing(this);
 		break;
 	case WALK:
 		animator.ChangeAnimation("Walk");
-		delete CurrentAction;
-		CurrentAction = new MonkWalking(this);
+		delete currentAction;
+		currentAction = new MonkWalking(this);
 		break;
 	case CROUNCH:
 		animator.ChangeAnimation("Crounch");
-		delete CurrentAction;
-		CurrentAction = new MonkCrounching(this, 0.0f);
+		delete currentAction;
+		currentAction = new MonkCrounching(this, 0.0f);
 		break;
 	case JUMP:
 		hasRoundhoused = false;
 		hasPunched = false;
 		hasDropkicked = false;
 		animator.ChangeAnimation("Jump");
-		delete CurrentAction;
+		delete currentAction;
 		jump();
 		jumpRemaining = maxNumberOfJumps - 1;
-		CurrentAction = new MonkJump(this, !hasRoundhoused, !hasPunched, !hasDropkicked, jumpRemaining > 0);
+		currentAction = new MonkJump(this, !hasRoundhoused, !hasPunched, !hasDropkicked, jumpRemaining > 0);
 		break;
 	case SECONDJUMP:
 		animator.ChangeAnimation("Fall");
-		delete CurrentAction;
+		delete currentAction;
 		jumpRemaining--;
 		velY = 0;
 		jump(0.9f);
-		CurrentAction = new MonkFall(this, !hasRoundhoused, !hasPunched, !hasDropkicked, false);
+		currentAction = new MonkFall(this, !hasRoundhoused, !hasPunched, !hasDropkicked, false);
 		break;
 	case FALL:
 		if (jumpRemaining > 0)
 			animator.ChangeAnimation("Jump");
 		else
 			animator.ChangeAnimation("Fall");
-		delete CurrentAction;
-		CurrentAction = new MonkFall(this, !hasRoundhoused, !hasPunched, !hasDropkicked, jumpRemaining > 0);
+		delete currentAction;
+		currentAction = new MonkFall(this, !hasRoundhoused, !hasPunched, !hasDropkicked, jumpRemaining > 0);
 		break;
 	case ROUNDHOUSE:
 		hasRoundhoused = true;
 		animator.ChangeAnimation("Roundhouse kick");
-		delete CurrentAction;
-		CurrentAction = new MonkRoundhouse(this, true, !hasPunched, !hasDropkicked, jumpRemaining > 0);
+		delete currentAction;
+		currentAction = new MonkRoundhouse(this, true, !hasPunched, !hasDropkicked, jumpRemaining > 0);
 		break;
 	case NOJUMPROUNDHOUSE:
 		animator.ChangeAnimation("Roundhouse kick");
-		delete CurrentAction;
-		CurrentAction = new MonkRoundhouse(this, false, !hasPunched, !hasDropkicked, jumpRemaining > 0);
+		delete currentAction;
+		currentAction = new MonkRoundhouse(this, false, !hasPunched, !hasDropkicked, jumpRemaining > 0);
 		break;
 	case BASICATTACK:
 		hasPunched = true;
 		animator.ChangeAnimation("ChargePunch");
-		delete CurrentAction;
-		CurrentAction = new MonkHoldAttack(this);
+		delete currentAction;
+		currentAction = new MonkHoldAttack(this);
 		break;
 	case RELEASEATTACK:
 		animator.ChangeAnimation("Punch");
-		delete CurrentAction;
-		CurrentAction = new MonkPunch(this, jumpRemaining > 0);
+		delete currentAction;
+		currentAction = new MonkPunch(this, jumpRemaining > 0);
 		break;
 	case CROUNCHATTACK:
 		hasRoundhoused = false;
 		hasPunched = false;
 		hasDropkicked = false;
 		animator.ChangeAnimation("Low kick");
-		delete CurrentAction;
-		CurrentAction = new MonkRisingKick(this);
+		delete currentAction;
+		currentAction = new MonkRisingKick(this);
 		break;
 	case DIVEKICK:
 		hasDropkicked = true;
 		animator.ChangeAnimation("Flying kick");
-		delete CurrentAction;
-		CurrentAction = new MonkDiveKick(this);
+		delete currentAction;
+		currentAction = new MonkDiveKick(this);
 		break;
 	}
 }
 
-void Monk::AddAnimations()
+void Monk::addAnimations()
 {
 	sf::Texture* texture = new Texture();
 	texture->loadFromFile("Assets\\SpriteSheet\\Monk.png");

@@ -6,6 +6,6 @@ class Falling :
 public:
 	Falling(Entity* e);
 	~Falling();
-	int Update();
+	int update();
 };
 

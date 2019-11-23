@@ -6,7 +6,7 @@ class RogueCrounch :
 public:
 	RogueCrounch(Entity* e, float forceAction = 0.0f);
 	~RogueCrounch();
-	int Update();
+	int update();
 private:
 	float forceAction;
 };

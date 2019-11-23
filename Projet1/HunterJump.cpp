@@ -24,7 +24,7 @@ HunterJump::~HunterJump()
 {
 }
 
-int HunterJump::Update()
+int HunterJump::update()
 {
 	bool left = InputManager::GetKeyState(LEFT);
 	bool right = InputManager::GetKeyState(RIGHT);

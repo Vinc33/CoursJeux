@@ -10,16 +10,16 @@ MonkRoundhouse::MonkRoundhouse(Entity* e, bool asDoubleJump, bool canPunch, bool
 	bool left = InputManager::GetKeyState(LEFT);
 	bool right = InputManager::GetKeyState(RIGHT);
 	if (left && !right)
-		parent->isFacingLeft = true;
+		parent->imageReversed = true;
 	else if (!left && right)
-		parent->isFacingLeft = false;
+		parent->imageReversed = false;
 
 	if (asDoubleJump)
 	{
 		parent->gravityMult = 1.5;
 		parent->velY = 0;
 		parent->jump();
-		if (parent->isFacingLeft)
+		if (parent->imageReversed)
 			parent->velX = (float)-parent->maxVelX*1.2f;
 		else
 			parent->velX = (float)parent->maxVelX*1.2f;
@@ -36,7 +36,7 @@ MonkRoundhouse::~MonkRoundhouse()
 
 }
 
-int MonkRoundhouse::Update()
+int MonkRoundhouse::update()
 {
 	timeRemaining -= TimeManager::DeltaTime;
 	bool right = InputManager::GetKeyState(Keys::RIGHT);

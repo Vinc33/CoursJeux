@@ -7,6 +7,6 @@ public:
 	RogueThrowAxe(Entity* e);
 	~RogueThrowAxe();
 
-	int Update();
+	int update();
 };
 

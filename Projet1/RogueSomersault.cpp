@@ -12,9 +12,9 @@ RogueSomersault::RogueSomersault(Entity* e) : ActionEntity(e)
 	bool right = InputManager::GetKeyState(Keys::RIGHT);
 	bool left = InputManager::GetKeyState(Keys::LEFT);
 	if (right)
-		parent->isFacingLeft = false;
+		parent->imageReversed = false;
 	else if (left)
-		parent->isFacingLeft = true;
+		parent->imageReversed = true;
 
 	timeRemaining = 1.0f;
 	chainAttack = false;
@@ -31,7 +31,7 @@ RogueSomersault::~RogueSomersault()
 
 }
 
-int RogueSomersault::Update()
+int RogueSomersault::update()
 {
 	timeRemaining -= TimeManager::DeltaTime;
 
@@ -98,7 +98,7 @@ int RogueSomersault::Update()
 		else if (left && !right)
 			parent->accelerate(-0.5f * (1 - timeRemaining));
 
-		if (parent->isFacingLeft)
+		if (parent->imageReversed)
 			parent->accelerate(-1.8f * (1 - timeRemaining));
 		else
 			parent->accelerate(1.8f * (1 - timeRemaining));
@@ -111,37 +111,37 @@ int RogueSomersault::Update()
 		switch (chainDirection)
 		{
 		case direction::EST:
-			parent->isFacingLeft = false;
+			parent->imageReversed = false;
 			break;
 
 		case direction::WEST:
-			parent->isFacingLeft = true;
+			parent->imageReversed = true;
 			break;
 		}
 
 		if (chainItemUp)
 		{
-			parent->isFacingLeft = !parent->isFacingLeft;
+			parent->imageReversed = !parent->imageReversed;
 			return (int)PlayerAction::ITEMUP;
 		}
 		if (chainItemDown)
 		{
-			parent->isFacingLeft = !parent->isFacingLeft;
+			parent->imageReversed = !parent->imageReversed;
 			return (int)PlayerAction::ITEMDOWN;
 		}
 		if (chainItemFront)
 		{
-			parent->isFacingLeft = !parent->isFacingLeft;
+			parent->imageReversed = !parent->imageReversed;
 			return (int)PlayerAction::ITEMFRONT;
 		}
 		if (chainItemStand)
 		{
-			parent->isFacingLeft = !parent->isFacingLeft;
+			parent->imageReversed = !parent->imageReversed;
 			return (int)PlayerAction::ITEMSTAND;
 		}
 		if (chainAttack)
 		{
-			parent->isFacingLeft = !parent->isFacingLeft;
+			parent->imageReversed = !parent->imageReversed;
 			return (int)PlayerAction::BASICATTACK;
 		}
 
@@ -149,7 +149,7 @@ int RogueSomersault::Update()
 
 	if (!parent->isAirborne)
 	{
-		parent->isFacingLeft = !parent->isFacingLeft;
+		parent->imageReversed = !parent->imageReversed;
 		if (InputManager::GetKeyState(DOWN))
 			return (int)PlayerAction::CROUNCH;
 

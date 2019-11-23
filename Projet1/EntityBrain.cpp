@@ -5,7 +5,7 @@
 
 EntityBrain::EntityBrain()
 {
-	CurrentAction = new Action(this);
+	currentAction = new Action(this);
 }
 
 
@@ -14,9 +14,9 @@ EntityBrain::~EntityBrain()
 
 }
 
-void EntityBrain::Update()
+void EntityBrain::update()
 {
-	int i = CurrentAction->Update();
+	int i = currentAction->update();
 	if (i != -1)
-		this->ChangeAction(i);
+		this->changeAction(i);
 }

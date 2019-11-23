@@ -27,7 +27,7 @@ Rogue::Rogue() : Hero("Rogue", 20, 40)
 	setPosition(50, 200);
 
 	addAnimations();
-	CurrentAction = new RogueStanding(this);
+	currentAction = new RogueStanding(this);
 
 	downToolTimer = 0.0f;
 	downToolCooldown = 0.75f;
@@ -52,63 +52,63 @@ Rogue::~Rogue()
 
 }
 
-void Rogue::Update()
+void Rogue::update()
 {
-	Entity::Update();
+	Entity::update();
 	downToolTimer -= TimeManager::DeltaTime;
 	upToolTimer -= TimeManager::DeltaTime;
 	frontToolTimer -= TimeManager::DeltaTime;
 	standToolTimer -= TimeManager::DeltaTime;
 }
 
-void Rogue::ChangeAction(int enumIndex)
+void Rogue::changeAction(int enumIndex)
 {
 	switch ((PlayerAction)enumIndex)
 	{
 	case STAND:
 		animator.ChangeAnimation("Stand");
-		delete CurrentAction;
-		CurrentAction = new RogueStanding(this);
+		delete currentAction;
+		currentAction = new RogueStanding(this);
 		break;
 	case WALK:
 		animator.ChangeAnimation("Walk");
-		delete CurrentAction;
-		CurrentAction = new RogueWalk(this);
+		delete currentAction;
+		currentAction = new RogueWalk(this);
 		break;
 	case CROUNCH:
 		animator.ChangeAnimation("Crounch");
-		delete CurrentAction;
-		CurrentAction = new RogueCrounch(this);
+		delete currentAction;
+		currentAction = new RogueCrounch(this);
 		break;
 	case JUMP:
 		animator.ChangeAnimation("Jump");
-		delete CurrentAction;
-		CurrentAction = new RogueJump(this);
+		delete currentAction;
+		currentAction = new RogueJump(this);
 		break;
 	case FALL:
 		animator.ChangeAnimation("Jump");
-		delete CurrentAction;
-		CurrentAction = new RogueJump(this, false, false);
+		delete currentAction;
+		currentAction = new RogueJump(this, false, false);
 		break;
 	case FALLMAYROLL:
 		animator.ChangeAnimation("Jump");
-		delete CurrentAction;
-		CurrentAction = new RogueJump(this, false);
+		delete currentAction;
+		currentAction = new RogueJump(this, false);
 		break;
 	case BASICATTACK:
 		animator.ChangeAnimation("Attack");
-		delete CurrentAction;
-		CurrentAction = new RogueAttack(this);
+		delete currentAction;
+		currentAction = new RogueAttack(this);
 		break;
 	case ROLL:
 		animator.ChangeAnimation("Roll");
-		delete CurrentAction;
-		CurrentAction = new RogueRoll(this);
+		delete currentAction;
+		currentAction = new RogueRoll(this);
 		break;
 	case SOMERSAULT:
 		animator.ChangeAnimation("Roll");
-		delete CurrentAction;
-		CurrentAction = new RogueSomersault(this);
+		delete currentAction;
+		currentAction = new RogueSomersault(this);
 		break;
 	case ITEMDOWN:
 		if (downToolTimer < 0)
@@ -143,20 +143,20 @@ void Rogue::ChangeAction(int enumIndex)
 
 void Rogue::useWeapon(RogueWeapon rw)
 {
-	delete CurrentAction;
+	delete currentAction;
 	animator.ChangeAnimation("Item");
 	switch (rw)
 	{
 	case NONE:
 		break;
 	case KNIFE:
-		CurrentAction = new RogueThrowKnife(this);
+		currentAction = new RogueThrowKnife(this);
 		break;
 	case AXE:
-		CurrentAction = new RogueThrowAxe(this);
+		currentAction = new RogueThrowAxe(this);
 		break;
 	case CALTROPS:
-		CurrentAction = new RogueThrowCaltrops(this);
+		currentAction = new RogueThrowCaltrops(this);
 		break;
 	default:
 		break;

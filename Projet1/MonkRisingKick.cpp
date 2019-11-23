@@ -12,9 +12,9 @@ MonkRisingKick::MonkRisingKick(Entity* e) : ActionEntity(e)
 	if (right != left)
 	{
 		if (right)
-			parent->isFacingLeft = false;
+			parent->imageReversed = false;
 		else
-			parent->isFacingLeft = true;
+			parent->imageReversed = true;
 	}
 	parent->isAirborne = true;
 	timeRemaining = 0.350f;
@@ -27,11 +27,11 @@ MonkRisingKick::~MonkRisingKick()
 
 }
 
-int MonkRisingKick::Update()
+int MonkRisingKick::update()
 {
 	timeRemaining -= TimeManager::DeltaTime;
 	parent->velY = -150.0f;
-	if (parent->isFacingLeft)
+	if (parent->imageReversed)
 		parent->velX = -1500.0f * timeRemaining - 200;
 	else
 		parent->velX = 1500.0f * timeRemaining + 200;

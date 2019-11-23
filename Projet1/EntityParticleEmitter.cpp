@@ -16,7 +16,7 @@ EntityParticleEmitter::~EntityParticleEmitter()
 		delete *it;
 }
 
-void EntityParticleEmitter::Update()
+void EntityParticleEmitter::update()
 {
 	std::vector<Particle*>::iterator it;
 	for (it = particles.begin(); it != particles.end(); )
@@ -29,7 +29,7 @@ void EntityParticleEmitter::Update()
 		}
 		else
 		{
-			(*it)->Update();
+			(*it)->update();
 			if (particlesMoveWithParent)
 				(*it)->MoveOrigin(position.getPosition().x, position.getPosition().y);
 			it++;
@@ -37,11 +37,11 @@ void EntityParticleEmitter::Update()
 	}
 }
 
-void EntityParticleEmitter::Draw(sf::RenderTarget& target)
+void EntityParticleEmitter::draw(sf::RenderTarget& target)
 {
 	std::vector<Particle*>::iterator it;
 	for (it = particles.begin(); it != particles.end(); it++)
-		(*it)->Draw(target);
+		(*it)->draw(target);
 }
 
 void EntityParticleEmitter::AddParticle(Particle* p)

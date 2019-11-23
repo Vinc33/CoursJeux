@@ -63,7 +63,7 @@ namespace GameView
 	{
 		while (data->window.isOpen())
 		{
-			timeManager.Update();
+			timeManager.update();
 
 			updateInput();
 			updateEvent();
@@ -76,7 +76,7 @@ namespace GameView
 	void Game::updateInput()
 	{
 		for (EntityBase* e : entities)
-			e->Update();
+			e->update();
 
 		entities.insert(entities.end(), newEntities.begin(), newEntities.end());
 		newEntities = std::vector<EntityBase*>();
@@ -103,7 +103,7 @@ namespace GameView
 		level.drawPlayGround(data->window);
 
 		for (EntityBase* e : entities)
-			e->Draw(data->window);
+			e->draw(data->window);
 
 		data->window.display();
 	}

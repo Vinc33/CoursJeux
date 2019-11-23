@@ -4,7 +4,7 @@
 
 RogueThrowCaltrops::RogueThrowCaltrops(Entity * e) : RogueItemUse(e, .05f)
 {
-	if (parent->isFacingLeft)
+	if (parent->imageReversed)
 	{
 		parent->accelerate(-.5f);
 		parent->Spawn(new Caltrops(-300 + (parent->velX) * .9f), 120, 48);

@@ -7,7 +7,7 @@ public:
 	Jumping(Entity* e, bool canDoubleJump = false);
 	~Jumping();
 
-	int Update();
+	int update();
 private:
 	bool canDoubleJump;
 	bool doubleJumpReady;

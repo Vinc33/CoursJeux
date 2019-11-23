@@ -12,7 +12,7 @@ public:
 	MonkFall(Entity* e, bool canRoundhouse, bool canPunch, bool canDropkick, bool canJump);
 	~MonkFall();
 
-	int Update();
+	int update();
 private:
 	bool canRoundhouse;
 	bool canPunch;

@@ -10,9 +10,9 @@ RogueWalk::RogueWalk(Entity* e) : ActionEntity(e)
 	bool right = InputManager::GetKeyState(Keys::RIGHT);
 	bool left = InputManager::GetKeyState(Keys::LEFT);
 	if (right)
-		parent->isFacingLeft = false;
+		parent->imageReversed = false;
 	else if (left)
-		parent->isFacingLeft = true;
+		parent->imageReversed = true;
 }
 
 
@@ -20,7 +20,7 @@ RogueWalk::~RogueWalk()
 {
 }
 
-int RogueWalk::Update()
+int RogueWalk::update()
 {
 	bool right = InputManager::GetKeyState(Keys::RIGHT);
 	bool left = InputManager::GetKeyState(Keys::LEFT);
@@ -58,7 +58,7 @@ int RogueWalk::Update()
 		return (int)PlayerAction::BASICATTACK;
 	if (left == right)
 		return (int)PlayerAction::STAND;
-	if ((!parent->isFacingLeft && left) || (parent->isFacingLeft && right))
+	if ((!parent->imageReversed && left) || (parent->imageReversed && right))
 		return (int)PlayerAction::WALK;
 	return -1;
 }

@@ -15,7 +15,7 @@ RogueItemUse::~RogueItemUse()
 {
 }
 
-int RogueItemUse::Update()
+int RogueItemUse::update()
 {
 	timer -= TimeManager::DeltaTime;
 	if (timer < 0)

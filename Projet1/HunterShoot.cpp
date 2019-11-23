@@ -15,7 +15,7 @@ HunterShoot::~HunterShoot()
 {
 }
 
-int HunterShoot::Update()
+int HunterShoot::update()
 {
 	timeRemaining -= TimeManager::DeltaTime;
 	if (timeRemaining < 0)

@@ -11,15 +11,15 @@ MonkHoldAttack::MonkHoldAttack(Entity* e) : ActionEntity(e)
 	bool left = InputManager::GetKeyState(LEFT);
 	bool right = InputManager::GetKeyState(RIGHT);
 	if (left && !right)
-		parent->isFacingLeft = true;
+		parent->imageReversed = true;
 	else if (!left && right)
-		parent->isFacingLeft = false;
+		parent->imageReversed = false;
 
 	parent->gravityMult = .3f;
 	if (parent->velY > 200)
 		parent->velY = 200;
 
-	if (parent->isFacingLeft)
+	if (parent->imageReversed)
 		parent->AddParticle(new MonkChargeParticle(true, 128, 84));
 	else
 		parent->AddParticle(new MonkChargeParticle(false, 38, 84));
@@ -30,7 +30,7 @@ MonkHoldAttack::~MonkHoldAttack()
 {
 }
 
-int MonkHoldAttack::Update()
+int MonkHoldAttack::update()
 {
 	if (!parent->isAirborne)
 		parent->gravityMult = 1;
@@ -62,7 +62,7 @@ int MonkHoldAttack::Update()
 	if (particleTimer > .23f)
 	{
 		particleTimer -= .23f;
-		if (parent->isFacingLeft)
+		if (parent->imageReversed)
 			parent->AddParticle(new MonkChargeParticle(true, 128, 84));
 		else
 			parent->AddParticle(new MonkChargeParticle(false, 38, 84));

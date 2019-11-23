@@ -6,6 +6,6 @@ class RogueWalk :
 public:
 	RogueWalk(Entity* e);
 	~RogueWalk();
-	int Update();
+	int update();
 };
 

@@ -19,7 +19,7 @@ MonkSecondJump::~MonkSecondJump()
 
 }
 
-int MonkSecondJump::Update()
+int MonkSecondJump::update()
 {
 	bool right = InputManager::GetKeyState(Keys::RIGHT);
 	bool left = InputManager::GetKeyState(Keys::LEFT);

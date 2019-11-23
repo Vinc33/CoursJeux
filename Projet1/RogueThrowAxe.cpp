@@ -8,7 +8,7 @@
 
 RogueThrowAxe::RogueThrowAxe(Entity* e) : RogueItemUse(e, .35f)
 {
-	if (parent->isFacingLeft)
+	if (parent->imageReversed)
 	{
 		parent->accelerate(-.5f);
 		parent->Spawn(new ThrownAxe(-575 + (int)(parent->velX / 2 )), 120, 48);
@@ -26,7 +26,7 @@ RogueThrowAxe::~RogueThrowAxe()
 
 }
 
-int RogueThrowAxe::Update()
+int RogueThrowAxe::update()
 {
-	return RogueItemUse::Update();
+	return RogueItemUse::update();
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include "EntityBase.h"
+#include "Collider.h"
 class EntityCollision :
 	public virtual EntityBase
 {
@@ -7,7 +8,7 @@ public:
 	EntityCollision();
 	~EntityCollision();
 
-	void Update();
+	virtual void update();
 
 	RectangleShape* GetCollider();
 	Collider* hitbox;

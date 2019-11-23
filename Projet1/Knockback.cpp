@@ -17,7 +17,7 @@ Knockback::~Knockback()
 
 }
 
-int Knockback::Update()
+int Knockback::update()
 {
 	if (!(parent->isAirborne))
 		return (int)PlayerAction::STAND;

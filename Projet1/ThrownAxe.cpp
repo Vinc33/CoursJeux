@@ -58,7 +58,7 @@ ThrownAxe::ThrownAxe(int initialSpeed)
 	jump();
 
 	if (initialSpeed < 0)
-		isFacingLeft = true;
+		imageReversed = true;
 }
 
 ThrownAxe::~ThrownAxe()

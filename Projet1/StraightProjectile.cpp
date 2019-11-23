@@ -13,7 +13,7 @@ StraightProjectile::~StraightProjectile()
 {
 }
 
-void StraightProjectile::Update()
+void StraightProjectile::update()
 {
 	position.move(speedX * TimeManager::DeltaTime, speedY * TimeManager::DeltaTime);
 }

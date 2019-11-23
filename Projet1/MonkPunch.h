@@ -7,7 +7,7 @@ public:
 	MonkPunch(Entity* e, bool canJump);
 	~MonkPunch();
 
-	int Update();
+	int update();
 
 private:
 	float timeRemaining;

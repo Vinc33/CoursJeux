@@ -6,6 +6,6 @@ class Standing :
 public:
 	Standing(Entity* e);
 	~Standing();
-	int Update();
+	int update();
 };
 

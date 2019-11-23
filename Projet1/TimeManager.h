@@ -7,6 +7,6 @@ class TimeManager : public sf::Clock
 public:
 	TimeManager();
 	~TimeManager();
-	void Update();
+	void update();
 	static float DeltaTime;
 };

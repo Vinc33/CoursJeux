@@ -6,7 +6,7 @@ class Action
 public:
 	Action(EntityBrain* e);
 	~Action();
-	virtual int Update();
+	virtual int update();
 protected:
 	EntityBrain* p;
 };

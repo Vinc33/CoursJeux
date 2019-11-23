@@ -9,6 +9,6 @@ public:
 	Caltrops(float initialSpeed);
 	~Caltrops();
 
-	void Update();
+	void update();
 };
 

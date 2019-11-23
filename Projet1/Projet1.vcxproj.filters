@@ -202,7 +202,6 @@
     <ClCompile Include="RogueThrowAxe.cpp">
       <Filter>Vania\Actions\Rogue</Filter>
     </ClCompile>
-<<<<<<< HEAD
     <ClCompile Include="Manager\ViewManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
@@ -215,16 +214,9 @@
     <ClCompile Include="RogueThrowCaltrops.cpp">
       <Filter>Vania\Actions\Rogue</Filter>
     </ClCompile>
-=======
-    <ClCompile Include="RogueItemUse.cpp" />
-
-    <ClCompile Include="Manager\ViewManager.cpp">
-      <Filter>Manager</Filter>
+    <ClCompile Include="EntityCollision.cpp">
+      <Filter>Engine\Entity</Filter>
     </ClCompile>
-
-    <ClCompile Include="EntityCollision.cpp" />
-
->>>>>>> 419787a54b5c94ce1cbd250fae012ed5a89d97c1
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Level.h" />
@@ -428,7 +420,6 @@
     <ClInclude Include="RogueThrowAxe.h">
       <Filter>Vania\Actions\Rogue</Filter>
     </ClInclude>
-<<<<<<< HEAD
     <ClInclude Include="Manager\ViewManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
@@ -441,16 +432,9 @@
     <ClInclude Include="RogueThrowCaltrops.h">
       <Filter>Vania\Actions\Rogue</Filter>
     </ClInclude>
-=======
-    <ClInclude Include="RogueItemUse.h" />
-
-    <ClInclude Include="Manager\ViewManager.h">
-      <Filter>Manager</Filter>
+    <ClInclude Include="EntityCollision.h">
+      <Filter>Engine\Entity</Filter>
     </ClInclude>
-
-    <ClInclude Include="EntityCollision.h" />
-
->>>>>>> 419787a54b5c94ce1cbd250fae012ed5a89d97c1
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Vania">

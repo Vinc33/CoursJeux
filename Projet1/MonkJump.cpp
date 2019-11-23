@@ -20,7 +20,7 @@ MonkJump::~MonkJump()
 
 }
 
-int MonkJump::Update()
+int MonkJump::update()
 {
 
 	bool right = InputManager::GetKeyState(Keys::RIGHT);

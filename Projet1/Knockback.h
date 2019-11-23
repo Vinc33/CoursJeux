@@ -8,6 +8,6 @@ public:
 	Knockback(int initialForceX, int initialForceY, Entity* e);
 	~Knockback();
 
-	int Update();
+	int update();
 };
 

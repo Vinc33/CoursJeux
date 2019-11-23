@@ -16,8 +16,8 @@ public:
 	Rogue();
 	~Rogue();
 
-	void ChangeAction(int enumIndex);
-	void Update();
+	void changeAction(int enumIndex);
+	void update();
 private:
 	void addAnimations();
 	void useWeapon(RogueWeapon weapon);

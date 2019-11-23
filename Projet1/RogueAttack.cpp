@@ -13,7 +13,7 @@ RogueAttack::RogueAttack(Entity* e) : ActionEntity(e)
 		parent->velY = 0;
 	}
 
-	if (parent->isFacingLeft)
+	if (parent->imageReversed)
 		parent->accelerate(-.7f);
 	else
 		parent->accelerate(.7f);
@@ -26,7 +26,7 @@ RogueAttack::~RogueAttack()
 
 }
 
-int RogueAttack::Update()
+int RogueAttack::update()
 {
 	bool left = InputManager::GetKeyState(LEFT);
 	bool right = InputManager::GetKeyState(RIGHT);

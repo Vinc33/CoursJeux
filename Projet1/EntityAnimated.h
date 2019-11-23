@@ -8,9 +8,9 @@ public:
 	EntityAnimated();
 	~EntityAnimated();
 
-	virtual void Draw(sf::RenderTarget& target);
+	virtual void draw(sf::RenderTarget& target);
 
-	bool isFacingLeft;
+	bool imageReversed;
 
 protected:
 	Animator animator;

@@ -6,7 +6,7 @@ class Crounching :
 public:
 	Crounching(Entity* e, float forceAction = 0.0f);
 	~Crounching();
-	int Update();
+	int update();
 private:
 	float forceAction;
 };

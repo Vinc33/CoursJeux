@@ -18,7 +18,7 @@ MonkChargeParticle::~MonkChargeParticle()
 {
 }
 
-void MonkChargeParticle::Update()
+void MonkChargeParticle::update()
 {
 	sprite->scale({ 1 - 2.2f * TimeManager::DeltaTime , 1 - 2.2f * TimeManager::DeltaTime });
 	

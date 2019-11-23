@@ -10,7 +10,7 @@ public:
 	EntityInanimate();
 	~EntityInanimate();
 
-	virtual void Draw(sf::RenderTarget& target);
+	virtual void draw(sf::RenderTarget& target);
 
 	void SetSprite(sf::Texture* t, bool reverseImage = false);
 

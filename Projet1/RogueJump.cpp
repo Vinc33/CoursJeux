@@ -21,7 +21,7 @@ RogueJump::~RogueJump()
 
 }
 
-int RogueJump::Update()
+int RogueJump::update()
 {
 	bool right = InputManager::GetKeyState(Keys::RIGHT);
 	bool left = InputManager::GetKeyState(Keys::LEFT);

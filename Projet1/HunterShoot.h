@@ -6,7 +6,7 @@ class HunterShoot :
 public:
 	HunterShoot(Entity* e);
 	~HunterShoot();
-	int Update();
+	int update();
 private:
 	float timeRemaining;
 };

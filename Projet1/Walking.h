@@ -6,7 +6,7 @@ class Walking :
 public:
 	Walking(Entity* e);
 	~Walking();
-	int Update();
+	int update();
 private:
 	float turnCharacter;
 };

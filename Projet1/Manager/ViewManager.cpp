@@ -40,7 +40,7 @@ void ViewManager::ShakeView(int intensity, sf::Vector2f positionInitial)
 	}
 }
 
-void ViewManager::ViewUpdate(sf::Vector2f mouvement)
+void ViewManager::Viewupdate(sf::Vector2f mouvement)
 {
 	myView->setCenter(mouvement);
 	myView->setViewport(sf::FloatRect(0, 0, 1, 1));

@@ -13,7 +13,7 @@ HunterJumpMid::~HunterJumpMid()
 {
 }
 
-int HunterJumpMid::Update()
+int HunterJumpMid::update()
 {
 	bool left = InputManager::GetKeyState(LEFT);
 	bool right = InputManager::GetKeyState(RIGHT);

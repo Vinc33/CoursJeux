@@ -7,7 +7,7 @@ public:
 	RogueAttack(Entity* e);
 	~RogueAttack();
 
-	int Update();
+	int update();
 
 	float timeRemaining;
 };

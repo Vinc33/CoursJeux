@@ -32,9 +32,9 @@ sf::Sprite* Animator::GetSprite(bool reverse)
 	return currentAnimation->GetSprite(reverse);
 }
 
-void Animator::Update()
+void Animator::update()
 {
-	currentAnimation->Update();
+	currentAnimation->update();
 }
 
 void Animator::JumpToFrame(unsigned int index)

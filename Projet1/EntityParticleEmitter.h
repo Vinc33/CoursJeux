@@ -9,8 +9,8 @@ public:
 	EntityParticleEmitter();
 	~EntityParticleEmitter();
 
-	virtual void Update();
-	virtual void Draw(sf::RenderTarget& target);
+	virtual void update();
+	virtual void draw(sf::RenderTarget& target);
 
 	void AddParticle(Particle* p);
 	void ResetEmitter();

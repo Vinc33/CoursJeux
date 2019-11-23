@@ -15,7 +15,7 @@ Standing::~Standing()
 
 }
 
-int Standing::Update()
+int Standing::update()
 {
 	bool right = InputManager::GetKeyState(Keys::RIGHT);
 	bool left = InputManager::GetKeyState(Keys::LEFT);

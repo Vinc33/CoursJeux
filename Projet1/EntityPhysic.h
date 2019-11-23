@@ -6,7 +6,7 @@ public:
 	EntityPhysic();
 	~EntityPhysic();
 
-	virtual void Update();
+	virtual void update();
 
 	void accelerate(float x);
 	void jump(float powerMult = 1);

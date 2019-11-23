@@ -86,9 +86,9 @@ Caltrops::~Caltrops()
 {
 }
 
-void Caltrops::Update()
+void Caltrops::update()
 {
-	EntityPhysic::Update();
+	EntityPhysic::update();
 	//temporary ground
 	if (velY > 0 && position.getPosition().y > 440)
 	{

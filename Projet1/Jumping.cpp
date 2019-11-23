@@ -17,7 +17,7 @@ Jumping::~Jumping()
 
 }
 
-int Jumping::Update()
+int Jumping::update()
 {
 	bool right = InputManager::GetKeyState(Keys::RIGHT);
 	bool left = InputManager::GetKeyState(Keys::LEFT);

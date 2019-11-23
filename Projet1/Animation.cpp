@@ -35,7 +35,7 @@ Animation::~Animation()
 	delete currentSprite;
 }
 
-void Animation::Update()
+void Animation::update()
 {
 	if (showTimes[currentFrame] != -1)
 	{

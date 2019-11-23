@@ -7,6 +7,6 @@ public:
 	Monster(string unitName, short baseDamage, short maxHP);
 	~Monster();
 protected:
-	void ChangeAction(int enumPlaceholder) override;
+	void changeAction(int enumPlaceholder) override;
 };
 

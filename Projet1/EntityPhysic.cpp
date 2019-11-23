@@ -32,7 +32,7 @@ void EntityPhysic::jump(float power)
 	velY -= jumpingStrength * power;
 }
 
-void EntityPhysic::Update()
+void EntityPhysic::update()
 {
 	int CurrentDrag = isAirborne ? airdrag : drag;
 	position.move(velX * TimeManager::DeltaTime, 0);

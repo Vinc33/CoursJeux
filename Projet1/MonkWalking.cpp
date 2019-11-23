@@ -10,16 +10,16 @@ MonkWalking::MonkWalking(Entity* e) : ActionEntity(e)
 	bool right = InputManager::GetKeyState(Keys::RIGHT);
 	bool left = InputManager::GetKeyState(Keys::LEFT);
 	if (right)
-		parent->isFacingLeft = false;
+		parent->imageReversed = false;
 	else if (left)
-		parent->isFacingLeft = true;
+		parent->imageReversed = true;
 }
 
 MonkWalking::~MonkWalking()
 {
 }
 
-int MonkWalking::Update()
+int MonkWalking::update()
 {
 	bool right = InputManager::GetKeyState(Keys::RIGHT);
 	bool left = InputManager::GetKeyState(Keys::LEFT);

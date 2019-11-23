@@ -20,12 +20,12 @@ void Entity::setPosition(const int& x, const int& y)
 	position.setPosition((float)x, (float)y);
 }
 
-void Entity::Update()
+void Entity::update()
 {
-	EntityBrain::Update();
-	EntityPhysic::Update();
-	EntityParticleEmitter::Update();
-	EntityCollision::Update();
+	EntityBrain::update();
+	EntityPhysic::update();
+	EntityParticleEmitter::update();
+	EntityCollision::update();
 
 	//temporary ground
 	if (velY > 0 && position.getPosition().y > 321 - velY * TimeManager::DeltaTime)
@@ -37,9 +37,9 @@ void Entity::Update()
 	//end temporary ground
 }
 
-void Entity::Draw(sf::RenderTarget& target)
+void Entity::draw(sf::RenderTarget& target)
 {
-	EntityAnimated::Draw(target);
-	EntityParticleEmitter::Draw(target);
+	EntityAnimated::draw(target);
+	EntityParticleEmitter::draw(target);
 }
 

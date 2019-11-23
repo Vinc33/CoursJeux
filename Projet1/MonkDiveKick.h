@@ -7,7 +7,7 @@ public:
 	MonkDiveKick(Entity* e);
 	~MonkDiveKick();
 
-	int Update();
+	int update();
 private:
 	float countDown;
 };

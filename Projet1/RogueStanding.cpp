@@ -15,7 +15,7 @@ RogueStanding::~RogueStanding()
 {
 }
 
-int RogueStanding::Update()
+int RogueStanding::update()
 {
 	bool right = InputManager::GetKeyState(Keys::RIGHT);
 	bool left = InputManager::GetKeyState(Keys::LEFT);

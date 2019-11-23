@@ -6,6 +6,6 @@ class MonkWalking :
 public:
 	MonkWalking(Entity* e);
 	~MonkWalking();
-	int Update();
+	int update();
 };
 

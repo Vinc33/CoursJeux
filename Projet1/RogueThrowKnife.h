@@ -7,6 +7,6 @@ public:
 	RogueThrowKnife(Entity* e);
 	~RogueThrowKnife();
 
-	int Update();
+	int update();
 };
 

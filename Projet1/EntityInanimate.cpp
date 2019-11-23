@@ -1,6 +1,6 @@
 #include "EntityInanimate.h"
 #include <SFML\Graphics\Transformable.hpp>
-#include <SFML\Graphics\Drawable.hpp>
+#include <SFML\Graphics\drawable.hpp>
 
 EntityInanimate::EntityInanimate()
 {
@@ -13,7 +13,7 @@ EntityInanimate::~EntityInanimate()
 	delete sprite;
 }
 
-void EntityInanimate::Draw(sf::RenderTarget& target)
+void EntityInanimate::draw(sf::RenderTarget& target)
 {
 	target.draw(*sprite, position.getTransform());
 }

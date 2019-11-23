@@ -6,6 +6,6 @@ class HunterJump :
 public:
 	HunterJump(Entity* e);
 	~HunterJump();
-	int Update();
+	int update();
 };
 

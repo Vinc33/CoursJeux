@@ -13,7 +13,7 @@ public:
 	void AddAnimation(Animation* a, std::string name);
 	void ChangeAnimation(std::string name);
 	sf::Sprite* GetSprite(bool reverse = false);
-	void Update();
+	void update();
 	void JumpToFrame(unsigned int index);
 private:
 	Animation* currentAnimation;
