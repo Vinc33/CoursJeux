@@ -6,6 +6,7 @@
 #include "Rogue.h"
 
 std::vector<EntityBase*> GameView::Game::newEntities = std::vector<EntityBase*>();
+std::vector<EntityBase*> GameView::Game::entitiesForCollision = std::vector<EntityBase*>();
 namespace GameView
 {
 
@@ -17,10 +18,12 @@ namespace GameView
 		inputManager.Initiate();
 
 		//AddEntity(new Hunter());
-		AddEntity(new Monk());
+		//AddEntity(new Monk());
 		AddEntity(new Rogue());
 
-		//test = new Platform(&myTexture, Vector2f(100.0f, 30.0f), Vector2f(200.0f, 150.0f));
+		sf::Texture* texture = new sf::Texture();
+		texture->loadFromFile("Assets/ToolAndMagic/ThrownAxe.png");
+		test = new Platform(texture, Vector2f(100.0f, 30.0f), Vector2f(200.0f, 150.0f));
 	}
 
 	Game::~Game()
@@ -52,8 +55,8 @@ namespace GameView
 
 	void Game::updateLogic()
 	{
-		/*if (test->hitbox->checkCollision(myEntity->GetCollider(), 1.0f))
-			myEntity->moveOnHitBox();*/
+		/*if (test->hitbox->checkCollision(entities[0]->GetCollider(), 1.0f))
+			entities[0]->MoveOnHitBox();*/
 	}
 
 	void Game::update()
@@ -87,6 +90,10 @@ namespace GameView
 	void Game::AddEntity(EntityBase * e)
 	{
 		newEntities.push_back(e);
+	}
+	void Game::AddForCheckCollision(EntityBase * e)
+	{
+		entitiesForCollision.push_back(e);
 	}
 
 	void Game::render()
