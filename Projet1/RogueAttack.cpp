@@ -10,7 +10,7 @@ RogueAttack::RogueAttack(Entity* e) : ActionEntity(e)
 	if (parent->velY > 0)
 	{
 		parent->gravityMult = 0.7f;
-		parent->velY = 0;
+		parent->velY /= 2;
 	}
 
 	if (parent->imageReversed)

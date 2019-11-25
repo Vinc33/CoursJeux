@@ -150,6 +150,7 @@
     <ClCompile Include="EntityState.cpp" />
     <ClCompile Include="Falling.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="HandBomb.cpp" />
     <ClCompile Include="Hero.cpp" />
     <ClCompile Include="HunterShoot.cpp" />
     <ClCompile Include="Manager\ViewManager.cpp" />
@@ -183,6 +184,9 @@
     <ClCompile Include="RogueItemUse.cpp" />
     <ClCompile Include="RogueThrowAxe.cpp" />
     <ClCompile Include="RogueThrowCaltrops.cpp" />
+    <ClCompile Include="RogueThrowSmallBomb.cpp" />
+    <ClCompile Include="RogueThrowSpear.cpp" />
+    <ClCompile Include="Spear.cpp" />
     <ClCompile Include="StraightProjectile.cpp" />
     <ClCompile Include="Rogue.cpp" />
     <ClCompile Include="RogueAttack.cpp" />
@@ -196,7 +200,6 @@
     <ClCompile Include="EntityBase.cpp" />
     <ClCompile Include="Standing.cpp" />
     <ClCompile Include="Settings.cpp" />
-    <ClCompile Include="Stage.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="ThrownAxe.cpp" />
     <ClCompile Include="ThrownKnife.cpp" />
@@ -226,6 +229,7 @@
     <ClInclude Include="EntityState.h" />
     <ClInclude Include="Falling.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="HandBomb.h" />
     <ClInclude Include="Hero.h" />
     <ClInclude Include="HeroActionsEnum.h" />
     <ClInclude Include="HunterShoot.h" />
@@ -259,6 +263,9 @@
     <ClInclude Include="RogueItemUse.h" />
     <ClInclude Include="RogueThrowAxe.h" />
     <ClInclude Include="RogueThrowCaltrops.h" />
+    <ClInclude Include="RogueThrowSmallBomb.h" />
+    <ClInclude Include="RogueThrowSpear.h" />
+    <ClInclude Include="Spear.h" />
     <ClInclude Include="StraightProjectile.h" />
     <ClInclude Include="Rogue.h" />
     <ClInclude Include="RogueAttack.h" />
@@ -272,7 +279,6 @@
     <ClInclude Include="EntityBase.h" />
     <ClInclude Include="Standing.h" />
     <ClInclude Include="Settings.h" />
-    <ClInclude Include="Stage.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="ThrownAxe.h" />
     <ClInclude Include="ThrownKnife.h" />

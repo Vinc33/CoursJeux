@@ -90,10 +90,10 @@ void Caltrops::update()
 {
 	EntityPhysic::update();
 	//temporary ground
-	if (velY > 0 && position.getPosition().y > 440)
+	if (velY > 0 && getPosition().y > 440)
 	{
 		isAirborne = false;
-		position.setPosition(position.getPosition().x, 440);
+		setPosition(getPosition().x, 440);
 		velY = 0;
 		animator.ChangeAnimation("Land");
 		animator.JumpToFrame(rand() % 9);

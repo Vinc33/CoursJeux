@@ -3,7 +3,6 @@
   <ItemGroup>
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LevelLoader.cpp" />
-    <ClCompile Include="Stage.cpp" />
     <ClCompile Include="Character.cpp">
       <Filter>Vania\Character</Filter>
     </ClCompile>
@@ -217,11 +216,22 @@
     <ClCompile Include="EntityCollision.cpp">
       <Filter>Engine\Entity</Filter>
     </ClCompile>
+    <ClCompile Include="RogueThrowSpear.cpp">
+      <Filter>Vania\Actions\Rogue</Filter>
+    </ClCompile>
+    <ClCompile Include="Spear.cpp">
+      <Filter>Vania\Projectiles and magics</Filter>
+    </ClCompile>
+    <ClCompile Include="HandBomb.cpp">
+      <Filter>Vania\Projectiles and magics</Filter>
+    </ClCompile>
+    <ClCompile Include="RogueThrowSmallBomb.cpp">
+      <Filter>Vania\Actions\Rogue</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelLoader.h" />
-    <ClInclude Include="Stage.h" />
     <ClInclude Include="Character.h">
       <Filter>Vania\Character</Filter>
     </ClInclude>
@@ -434,6 +444,18 @@
     </ClInclude>
     <ClInclude Include="EntityCollision.h">
       <Filter>Engine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="RogueThrowSpear.h">
+      <Filter>Vania\Actions\Rogue</Filter>
+    </ClInclude>
+    <ClInclude Include="Spear.h">
+      <Filter>Vania\Projectiles and magics</Filter>
+    </ClInclude>
+    <ClInclude Include="HandBomb.h">
+      <Filter>Vania\Projectiles and magics</Filter>
+    </ClInclude>
+    <ClInclude Include="RogueThrowSmallBomb.h">
+      <Filter>Vania\Actions\Rogue</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,12 +1,15 @@
 #pragma once
 #include "Hero.h"
+#include "HeroActionsEnum.h"
 
 enum RogueWeapon
 {
 	NONE,
 	KNIFE,
 	AXE,
-	CALTROPS
+	CALTROPS,
+	SPEAR,
+	HANDBOMB
 };
 
 class Rogue :
@@ -22,6 +25,14 @@ private:
 	void addAnimations();
 	void useWeapon(RogueWeapon weapon);
 
+	float attackTimer;
+	float attackCooldown;
+	float delayedActionTimer;
+	PlayerAction nextAction;
+	bool checkForDelayedAction;
+
+	float itemTimer;
+	float itemCooldown;
 	float downToolTimer;
 	float downToolCooldown;
 	float upToolTimer;

@@ -9,10 +9,16 @@ RogueWalk::RogueWalk(Entity* e) : ActionEntity(e)
 {
 	bool right = InputManager::GetKeyState(Keys::RIGHT);
 	bool left = InputManager::GetKeyState(Keys::LEFT);
-	if (right)
-		parent->imageReversed = false;
-	else if (left)
-		parent->imageReversed = true;
+	if (right != left)
+	{
+		if (right)
+			parent->imageReversed = false;
+		else
+			parent->imageReversed = true;
+	}
+
+	if (!InputManager::GetKeyState(Keys::A))
+		jumpReady = true;
 }
 
 
@@ -25,37 +31,63 @@ int RogueWalk::update()
 	bool right = InputManager::GetKeyState(Keys::RIGHT);
 	bool left = InputManager::GetKeyState(Keys::LEFT);
 
-	if (right && !left)
-		parent->accelerate(1);
-	else if (left && !right)
-		parent->accelerate(-1);
-
-	if (InputManager::GetKeyState(Keys::A))
+	if (right != left)
 	{
-		if (InputManager::GetKeyState(Keys::UP))
-			return (int)PlayerAction::SOMERSAULT;
+		if (right)
+			parent->accelerate(1);
 		else
-			return (int)PlayerAction::JUMP;
+			parent->accelerate(-1);
 	}
-	if (InputManager::GetKeyState(Keys::DOWN))
+
+	if (InputManager::GetKeyState(Keys::B))
 	{
-		if (InputManager::GetKeyState(Keys::X))
+		if (itemReady)
 		{
 			if (InputManager::GetKeyState(Keys::UP))
 				return (int)PlayerAction::ITEMUP;
 			if (InputManager::GetKeyState(Keys::DOWN))
 				return (int)PlayerAction::ITEMDOWN;
-
-			return (int)PlayerAction::BASICATTACK;
+			if (right != left)
+				return (int)PlayerAction::ITEMFRONT;
+			return (int)PlayerAction::ITEMSTAND;
 		}
-		if(right != left)
-			return (int)PlayerAction::ROLL;
-		else
-			return (int)PlayerAction::CROUNCH;
-
 	}
+	else
+	{
+		itemReady = true;
+	}
+
+	if (InputManager::GetKeyState(Keys::A))
+	{
+		if (jumpReady)
+		{
+			if (InputManager::GetKeyState(Keys::UP))
+				return (int)PlayerAction::SOMERSAULT;
+			else
+				return (int)PlayerAction::JUMP;
+		}
+	}
+	else
+	{
+		jumpReady = true;
+	}
+
 	if (InputManager::GetKeyState(Keys::X))
-		return (int)PlayerAction::BASICATTACK;
+	{
+		if (attackReady)
+			return (int)PlayerAction::BASICATTACK;
+	}
+	else
+	{
+		attackReady = true;
+	}
+
+	if (InputManager::GetKeyState(Keys::DOWN))
+	{
+		if (right != left)
+			return (int)PlayerAction::ROLL;
+		return (int)PlayerAction::CROUNCH;
+	}
 	if (left == right)
 		return (int)PlayerAction::STAND;
 	if ((!parent->imageReversed && left) || (parent->imageReversed && right))

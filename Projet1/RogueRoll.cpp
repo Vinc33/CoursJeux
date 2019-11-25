@@ -20,11 +20,6 @@ RogueRoll::RogueRoll(Entity* e) : ActionEntity(e)
 	releasedJump = false;
 
 	parent->gravityMult = 1.1f;
-	chainAttack = false;
-	chainItemUp = false;
-	chainItemDown = false;
-	chainItemFront = false;
-	chainItemStand = false;
 }
 
 RogueRoll::~RogueRoll()
@@ -59,51 +54,119 @@ int RogueRoll::update()
 		}
 	}
 
-	if (timeRemaining < 0.7 && InputManager::GetKeyState(X))
+	bool item = InputManager::GetKeyState(B);
+	bool attack = InputManager::GetKeyState(X);
+	if (!item)
+		canChainItem = true;
+	if (!attack)
+		canChainAttack = true;
+
+	if (timeRemaining < 0.7)
 	{
-		if (InputManager::GetKeyState(DOWN))
+		if (item && canChainItem)
 		{
-			chainItemDown = true;
-			chainItemUp = false;
-			chainAttack = false;
+			if (parent->imageReversed)
+				chainDirection = direction::WEST;
+			else
+				chainDirection = direction::EST;
+
+			bool right = InputManager::GetKeyState(RIGHT);
+			bool left = InputManager::GetKeyState(LEFT);
+			if (right != left)
+			{
+				if (right)
+					chainDirection = direction::WEST;
+				else
+					chainDirection = direction::EST;
+			}
+
+			if (InputManager::GetKeyState(DOWN))
+			{
+				chainItemDown = true;
+				chainItemUp = false;
+				chainItemFront = false;
+				chainItemStand = false;
+			}
+			else if (InputManager::GetKeyState(UP))
+			{
+				chainItemDown = false;
+				chainItemUp = true;
+				chainItemFront = false;
+				chainItemStand = false;
+			}
+			else if (right != left)
+			{
+				chainItemDown = false;
+				chainItemUp = false;
+				chainItemFront = true;
+				chainItemStand = false;
+			}
+			else
+			{
+				chainItemDown = false;
+				chainItemUp = false;
+				chainItemFront = false;
+				chainItemStand = true;
+			}
 		}
-		else if (InputManager::GetKeyState(UP))
-		{
-			chainItemDown = false;
-			chainItemUp = true;
-			chainAttack = false;
-		}
-		else
-		{
-			chainItemDown = false;
-			chainItemUp = false;
+		else if (canChainAttack && attack)
 			chainAttack = true;
-		}
 	}
 
-	if (timeRemaining < 0.2 && !parent->isAirborne && (chainAttack || chainItemDown || chainItemUp))
+	if (timeRemaining < 0.2 && !parent->isAirborne)
 	{
-		parent->gravityMult = 1;
-		parent->imageReversed = !parent->imageReversed;
+		if (chainItemDown || chainItemUp || chainItemFront || chainItemStand)
+		{
+			parent->gravityMult = 1;
+
+			if (chainDirection == direction::EST)
+				parent->imageReversed = false;
+			else if (chainDirection == direction::WEST)
+				parent->imageReversed = true;
+			else
+				parent->imageReversed = !parent->imageReversed;
+
+			if (chainItemUp)
+				return (int)PlayerAction::ITEMUP;
+			if (chainItemDown)
+				return (int)PlayerAction::ITEMDOWN;
+			if (chainItemFront)
+				return (int)PlayerAction::ITEMFRONT;
+
+			if (chainItemStand)
+				return (int)PlayerAction::ITEMSTAND;
+		}
+
 		if (chainAttack)
+		{
+			parent->gravityMult = 1;
+			parent->imageReversed = !parent->imageReversed;
 			return (int)PlayerAction::BASICATTACK;
-		else if (chainItemUp)
-			return (int)PlayerAction::ITEMUP;
-		else
-			return (int)PlayerAction::ITEMDOWN;
+		}
 	}
 
 	if (timeRemaining < 0)
 	{
 		parent->gravityMult = 1;
-		parent->imageReversed = !parent->imageReversed;
+		if (chainDirection == direction::EST)
+			parent->imageReversed = false;
+		else if (chainDirection == direction::WEST)
+			parent->imageReversed = true;
 
-		if (chainAttack)
-			return (int)PlayerAction::BASICATTACK;
 		if (chainItemUp)
 			return (int)PlayerAction::ITEMUP;
 		if (chainItemDown)
 			return (int)PlayerAction::ITEMDOWN;
+		if (chainItemFront)
+			return (int)PlayerAction::ITEMFRONT;
+
+		parent->imageReversed = !parent->imageReversed;
+		if (chainItemStand)
+			return (int)PlayerAction::ITEMSTAND;
+
+		if (chainAttack)
+			return (int)PlayerAction::BASICATTACK;
+
 		if (parent->isAirborne)
 			return (int)PlayerAction::FALL;
 		if (InputManager::GetKeyState(DOWN))

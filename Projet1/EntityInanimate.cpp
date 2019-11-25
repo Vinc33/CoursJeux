@@ -15,7 +15,7 @@ EntityInanimate::~EntityInanimate()
 
 void EntityInanimate::draw(sf::RenderTarget& target)
 {
-	target.draw(*sprite, position.getTransform());
+	target.draw(*sprite, getTransform());
 }
 
 void EntityInanimate::SetSprite(sf::Texture* t, bool reverseImage)
@@ -28,9 +28,14 @@ void EntityInanimate::SetSprite(sf::Texture* t, bool reverseImage)
 
 	if (reverseImage)
 	{
-		sprite->setOrigin({ sprite->getGlobalBounds().width, 0 });
+		sprite->setOrigin( 0, 0 );
+		setOrigin(0, 0);
 		sprite->setScale({ -2, 2 });
 	}
 	else
+	{
+		sprite->setOrigin(0, 0);
+		setOrigin(0, 0);
 		sprite->setScale({ 2, 2 });
+	}
 }

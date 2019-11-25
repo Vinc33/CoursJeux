@@ -9,5 +9,8 @@ public:
 	int update();
 private:
 	bool canRoll;
+	bool canAttack;
+	bool canUseItem;
+	bool chainJump;
+	float lastJumpInputTimer;
 };
-

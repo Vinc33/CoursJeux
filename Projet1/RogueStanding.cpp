@@ -6,8 +6,10 @@
 
 
 
-RogueStanding::RogueStanding(Entity* e): ActionEntity(e)
+RogueStanding::RogueStanding(Entity* e) : ActionEntity(e)
 {
+	if (!InputManager::GetKeyState(Keys::A))
+		jumpReady = true;
 }
 
 
@@ -19,40 +21,60 @@ int RogueStanding::update()
 {
 	bool right = InputManager::GetKeyState(Keys::RIGHT);
 	bool left = InputManager::GetKeyState(Keys::LEFT);
-	bool down = InputManager::GetKeyState(Keys::DOWN);
-	bool up = InputManager::GetKeyState(Keys::UP);
-	bool jump = InputManager::GetKeyState(Keys::A);
-	bool attack = InputManager::GetKeyState(Keys::X);
 
-	if (jump)
+	if (right != left)
 	{
-		if (up)
-			return (int)PlayerAction::SOMERSAULT;
+		if (right)
+			parent->accelerate(1);
 		else
-			return (int)PlayerAction::JUMP;
+			parent->accelerate(-1);
 	}
 
-	if (down && attack)
-		return (int)PlayerAction::ITEMDOWN;
-	if (up && attack)
-		return (int)PlayerAction::ITEMUP;
-	if (down)
-		return (int)PlayerAction::CROUNCH;
-	if (attack)
+	if (InputManager::GetKeyState(Keys::B))
+	{
+		if (InputManager::GetKeyState(Keys::UP))
+			return (int)PlayerAction::ITEMUP;
+		if (InputManager::GetKeyState(Keys::DOWN))
+			return (int)PlayerAction::ITEMDOWN;
+		if (right != left)
+			return (int)PlayerAction::ITEMFRONT;
+		return (int)PlayerAction::ITEMSTAND;
+	}
+
+	if (InputManager::GetKeyState(Keys::X))
 		return (int)PlayerAction::BASICATTACK;
 
-	if (right && !left)
+	if (InputManager::GetKeyState(Keys::A))
 	{
-		parent->accelerate(1);
-		if (parent->velX >= 50)
-			return (int)PlayerAction::WALK;
+		if (jumpReady)
+		{
+			if (InputManager::GetKeyState(Keys::UP))
+				return (int)PlayerAction::SOMERSAULT;
+			else
+				return (int)PlayerAction::JUMP;
+		}
 	}
-	else if (left && !right)
+	else
 	{
-		parent->accelerate(-1);
-		if (parent->velX <= -50)
-			return (int)PlayerAction::WALK;
+		jumpReady = true;
 	}
+
+	if (right != left)
+	{
+		if (right)
+		{
+			if (parent->velX >= 50)
+				return (int)PlayerAction::WALK;
+		}
+		else
+		{
+			if (parent->velX <= -50)
+				return (int)PlayerAction::WALK;
+		}
+	}
+
+	if (InputManager::GetKeyState(Keys::DOWN))
+		return (int)PlayerAction::CROUNCH;
 
 	return -1;
 }

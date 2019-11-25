@@ -20,6 +20,9 @@ private:
 	bool chainItemFront;
 	bool chainItemStand;
 
+	bool canChainItem;
+	bool canChainAttack;
+
 	direction chainDirection;
 };
 

@@ -35,7 +35,7 @@ void EntityPhysic::jump(float power)
 void EntityPhysic::update()
 {
 	int CurrentDrag = isAirborne ? airdrag : drag;
-	position.move(velX * TimeManager::DeltaTime, 0);
+	move(velX * TimeManager::DeltaTime, 0);
 	if (velX > 0)
 	{
 		velX -= CurrentDrag * TimeManager::DeltaTime;
@@ -51,7 +51,7 @@ void EntityPhysic::update()
 
 	if (isAirborne)
 	{
-		position.move(0, velY * TimeManager::DeltaTime + 0.5f * acc * pow(TimeManager::DeltaTime, 2));
+		move(0, velY * TimeManager::DeltaTime + 0.5f * acc * pow(TimeManager::DeltaTime, 2));
 		velY += gravity * gravityMult * TimeManager::DeltaTime;
 	}
 }

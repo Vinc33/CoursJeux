@@ -1,7 +1,7 @@
 #include "Rogue.h"
 #include "TimeManager.h"
 #include "Animation.h"
-#include "HeroActionsEnum.h"
+
 #include "RogueStanding.h"
 #include "RogueWalk.h"
 #include "RogueCrounch.h"
@@ -9,9 +9,12 @@
 #include "RogueAttack.h"
 #include "RogueRoll.h"
 #include "RogueSomersault.h"
+
 #include "RogueThrowKnife.h"
 #include "RogueThrowAxe.h"
 #include "RogueThrowCaltrops.h"
+#include "RogueThrowSpear.h"
+#include "RogueThrowSmallBomb.h"
 
 Rogue::Rogue() : Hero("Rogue", 20, 40)
 {
@@ -28,23 +31,21 @@ Rogue::Rogue() : Hero("Rogue", 20, 40)
 
 	addAnimations();
 	currentAction = new RogueStanding(this);
+	delayedActionTimer = 0.0f;
+	nextAction = PlayerAction::STAND;
 
-	downToolTimer = 0.0f;
+
+	attackCooldown = 0.75f;
+	itemCooldown = 0.2f;
 	downToolCooldown = 0.75f;
-
-	upToolTimer = 0.0f;
 	upToolCooldown = 0.75f;
-
-	frontToolTimer = 0.0f;
 	frontToolCooldown = 0.75f;
-
-	standToolTimer = 0.0f;
 	standToolCooldown = 0.75f;
 
 	equipedUp = AXE;
-	equipedDown = CALTROPS;
-	equipedFront = KNIFE;
-	equipedStand = KNIFE;
+	equipedDown = SPEAR;
+	equipedFront = HANDBOMB;
+	equipedStand = CALTROPS;
 }
 
 Rogue::~Rogue()
@@ -59,6 +60,17 @@ void Rogue::update()
 	upToolTimer -= TimeManager::DeltaTime;
 	frontToolTimer -= TimeManager::DeltaTime;
 	standToolTimer -= TimeManager::DeltaTime;
+	itemTimer -= TimeManager::DeltaTime;
+	attackTimer -= TimeManager::DeltaTime;
+	if (checkForDelayedAction)
+	{
+		delayedActionTimer -= TimeManager::DeltaTime;
+		if (delayedActionTimer < 0)
+		{
+			checkForDelayedAction = false;
+			changeAction(nextAction);
+		}
+	}
 }
 
 void Rogue::changeAction(int enumIndex)
@@ -96,9 +108,13 @@ void Rogue::changeAction(int enumIndex)
 		currentAction = new RogueJump(this, false);
 		break;
 	case BASICATTACK:
-		animator.ChangeAnimation("Attack");
-		delete currentAction;
-		currentAction = new RogueAttack(this);
+		if (attackTimer < 0)
+		{
+			attackTimer = attackCooldown;
+			animator.ChangeAnimation("Attack");
+			delete currentAction;
+			currentAction = new RogueAttack(this);
+		}
 		break;
 	case ROLL:
 		animator.ChangeAnimation("Roll");
@@ -109,6 +125,14 @@ void Rogue::changeAction(int enumIndex)
 		animator.ChangeAnimation("Roll");
 		delete currentAction;
 		currentAction = new RogueSomersault(this);
+		break;
+	case CHAINEDJUMP:
+		animator.ChangeAnimation("Walk");
+		delete currentAction;
+		currentAction = new RogueWalk(this);
+		nextAction = PlayerAction::JUMP;
+		delayedActionTimer = .12f;
+		checkForDelayedAction = true;
 		break;
 	case ITEMDOWN:
 		if (downToolTimer < 0)
@@ -143,23 +167,34 @@ void Rogue::changeAction(int enumIndex)
 
 void Rogue::useWeapon(RogueWeapon rw)
 {
-	delete currentAction;
-	animator.ChangeAnimation("Item");
-	switch (rw)
+	if (itemTimer < 0)
 	{
-	case NONE:
-		break;
-	case KNIFE:
-		currentAction = new RogueThrowKnife(this);
-		break;
-	case AXE:
-		currentAction = new RogueThrowAxe(this);
-		break;
-	case CALTROPS:
-		currentAction = new RogueThrowCaltrops(this);
-		break;
-	default:
-		break;
+		itemTimer = itemCooldown;
+		attackTimer = attackCooldown / 2;
+		delete currentAction;
+		animator.ChangeAnimation("Item");
+		switch (rw)
+		{
+		case NONE:
+			break;
+		case KNIFE:
+			currentAction = new RogueThrowKnife(this);
+			break;
+		case AXE:
+			currentAction = new RogueThrowAxe(this);
+			break;
+		case CALTROPS:
+			currentAction = new RogueThrowCaltrops(this);
+			break;
+		case SPEAR:
+			currentAction = new RogueThrowSpear(this);
+			break;
+		case HANDBOMB:
+			currentAction = new RogueThrowSmallBomb(this);
+			break;
+		default:
+			break;
+		}
 	}
 }
 

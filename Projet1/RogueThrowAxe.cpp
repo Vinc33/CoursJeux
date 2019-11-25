@@ -11,12 +11,12 @@ RogueThrowAxe::RogueThrowAxe(Entity* e) : RogueItemUse(e, .35f)
 	if (parent->imageReversed)
 	{
 		parent->accelerate(-.5f);
-		parent->Spawn(new ThrownAxe(-575 + (int)(parent->velX / 2 )), 120, 48);
+		parent->Spawn(new ThrownAxe(-575 + (int)(parent->velX / 2 )), 116, 35);
 	}
 	else
 	{
 		parent->accelerate(.5f);
-		parent->Spawn(new ThrownAxe(575 + (int)(parent->velX / 2 )), 84, 48);
+		parent->Spawn(new ThrownAxe(575 + (int)(parent->velX / 2 )), 66, 35);
 	}
 }
 

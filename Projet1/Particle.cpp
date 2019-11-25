@@ -4,7 +4,7 @@
 
 Particle::Particle(float lifeTime, float offsetX, float offsetY)
 {
-	position.setPosition(offsetX, offsetY);
+	setPosition(offsetX, offsetY);
 	this->lifeTime = lifeTime;
 }
 
@@ -21,7 +21,7 @@ void Particle::setOrigin(float x, float y)
 
 void Particle::MoveOrigin(float newX, float newY)
 {
-	position.move((newX - originX), (newY - originY));
+	move((newX - originX), (newY - originY));
 	originX = newX;
 	originY = newY;
 }

@@ -17,7 +17,7 @@ EntityCollision::~EntityCollision()
 void EntityCollision::update()
 {
 	GameView::Game::AddForCheckCollision(this);
-	body->setPosition(position.getPosition());
+	body->setPosition(getPosition());
 }
 
 RectangleShape * EntityCollision::GetCollider()
