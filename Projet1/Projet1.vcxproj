@@ -167,6 +167,9 @@
     <ClCompile Include="MonkWalking.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="Pingouin.cpp" />
+    <ClCompile Include="PingouinAttack.cpp" />
+    <ClCompile Include="PingouinCrouch.cpp" />
     <ClCompile Include="Platform.cpp" />
     <ClCompile Include="Rogue.cpp" />
     <ClCompile Include="RogueAttack.cpp" />
@@ -219,6 +222,9 @@
     <ClInclude Include="MonkWalking.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="pingouin.h" />
+    <ClInclude Include="PingouinAttack.h" />
+    <ClInclude Include="PingouinCrouch.h" />
     <ClInclude Include="Platform.h" />
     <ClInclude Include="Rogue.h" />
     <ClInclude Include="RogueAttack.h" />
