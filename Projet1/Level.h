@@ -19,7 +19,7 @@ namespace GameView
 		~Level();
 
 		// charge les sprites pour le backGround et le playGround
-		void init(AssetManager& asset);
+		void init();
 
 		void drawBackGround(sf::RenderTarget& target);
 		void drawPlayGround(sf::RenderTarget& target);

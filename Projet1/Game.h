@@ -16,7 +16,6 @@ namespace GameView
 	{
 		StateManager stateManager;
 		sf::RenderWindow window;
-		AssetManager assetManager;
 	};
 
 	typedef std::shared_ptr<GameData> GameDataRef;

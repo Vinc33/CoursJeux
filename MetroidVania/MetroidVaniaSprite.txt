@@ -1,1 +1,2 @@
-../MetroidVania/Church.png Church|../MetroidVania/Church.png clown
+../MetroidVania/Church.png Church|Assets/SpriteSheet/bat.png bat|
+Assets/ToolAndMagic/ThrownKnife.png knife|Assets/ToolAndMagic/ThrownAxe.png axe|

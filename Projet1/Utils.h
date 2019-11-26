@@ -3,13 +3,11 @@
 
 using namespace std;
 
-namespace GameView
-{
-	class Utils {
-	public :
-		static vector<string> Split(string s, char delim);
-		static string readFromFile(const string& fileName);
-	};
+
+class Utils {
+public :
+	static vector<string> split(string s, char delim);
+	static string readFromFile(const string& fileName);
+};
 	
 
-}

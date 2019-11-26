@@ -15,7 +15,7 @@ namespace GameView
 	{
 	}
 	
-	void Level::init(AssetManager& asset)
+	void Level::init()
 	{
 		LevelLoader loader;
 		//TODO: Receive the level in param
@@ -32,7 +32,7 @@ namespace GameView
 				{
 					if (levelInfo[i][j][k].Tileset != "")
 					{
-						Texture& text = asset.getTexture(levelInfo[i][j][k].Tileset);
+						Texture& text = AssetManager::getTexture(levelInfo[i][j][k].Tileset);
 						Sprite sp;
 						sp.setTexture(text);
 						int left = levelInfo[i][j][k].IndexesX[0]* tileSize;

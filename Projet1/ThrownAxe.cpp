@@ -1,11 +1,10 @@
 #include "ThrownAxe.h"
-
+#include "Manager\AssetManager.h"
 
 
 ThrownAxe::ThrownAxe(int initialSpeed)
 {
-	sf::Texture* texture = new sf::Texture();
-	texture->loadFromFile("Assets/ToolAndMagic/ThrownAxe.png");
+	sf::Texture* texture = &AssetManager::getTexture("axe");
 	int nbRows = 2;
 	int nbColums = 8;
 	Spritesheet spritesheet = { texture, nbRows, nbColums };
