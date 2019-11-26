@@ -8,12 +8,12 @@ public:
 	~Particle();
 
 	virtual void update() = 0;
-	void setOrigin(float x, float y);
-	void MoveOrigin(float newX, float newY);
+	void parentMove(float newX, float newY);
+	void setParentPosition(float newX, float newY);
 
 	float lifeTime;
 private:
-	float originX;
-	float originY;
+	float parentPosX;
+	float parentPosY;
 };
 

@@ -18,8 +18,8 @@ namespace GameView
 		InputManager inputManager;
 		inputManager.Initiate();
 
-		//AddEntity(new Hunter());
-		//AddEntity(new Monk());
+		AddEntity(new Hunter());
+		AddEntity(new Monk());
 		AddEntity(new Rogue());
 
 		sf::Texture* texture = new sf::Texture();

@@ -25,7 +25,7 @@ void MonkChargeParticle::update()
 	if (isCounterClockwise)
 	{
 		rotate(-720 * TimeManager::DeltaTime);
-		setOrigin(-sprite->getTextureRect().width / 2 * sprite->getScale().x, sprite->getTextureRect().height / 2 * sprite->getScale().y);
+		setOrigin(sprite->getTextureRect().width / 2 * sprite->getScale().x, sprite->getTextureRect().height / 2 * sprite->getScale().y);
 	}
 	else
 	{

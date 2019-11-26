@@ -13,15 +13,15 @@ Particle::~Particle()
 
 }
 
-void Particle::setOrigin(float x, float y)
+void Particle::parentMove(float newX, float newY)
 {
-	originX = x;
-	originY = y;
+	move((newX - parentPosX), (newY - parentPosY));
+	parentPosX = newX;
+	parentPosY = newY;
 }
 
-void Particle::MoveOrigin(float newX, float newY)
+void Particle::setParentPosition(float x, float y)
 {
-	move((newX - originX), (newY - originY));
-	originX = newX;
-	originY = newY;
+	parentPosX = x;
+	parentPosY = y;
 }

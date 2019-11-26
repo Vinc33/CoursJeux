@@ -14,6 +14,7 @@ RogueJump::RogueJump(Entity* e, bool jump, bool canRoll) : ActionEntity(e)
 	}
 	parent->gravityMult = 1;
 	this->canRoll = canRoll;
+	lastJumpInputTimer = 1;
 }
 
 RogueJump::~RogueJump()
