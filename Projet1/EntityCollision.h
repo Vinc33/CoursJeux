@@ -9,7 +9,7 @@ public:
 	~EntityCollision();
 
 	virtual void update();
-
+	virtual void init();
 	RectangleShape* GetCollider();
 	Collider* hitbox;
 
