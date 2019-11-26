@@ -13,7 +13,7 @@ Collider::~Collider()
 }
 
 
-bool Collider::checkCollision(RectangleShape* other,float push) {
+ bool Collider::checkCollision(RectangleShape* other,float push) {
 	sf::Vector2f otherPosition = other->getPosition();
 	sf::Vector2f otherHalfSize = GetHalfSize(other);
 	sf::Vector2f thisPosition = body->getPosition();

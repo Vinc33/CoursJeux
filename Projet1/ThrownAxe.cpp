@@ -64,3 +64,9 @@ ThrownAxe::ThrownAxe(int initialSpeed)
 ThrownAxe::~ThrownAxe()
 {
 }
+
+void ThrownAxe::update()
+{
+	EntityPhysic::update();
+	EntityCollision::update();
+}

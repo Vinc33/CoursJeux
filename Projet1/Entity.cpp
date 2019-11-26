@@ -34,3 +34,8 @@ void Entity::draw(sf::RenderTarget& target)
 	EntityParticleEmitter::draw(target);
 }
 
+Vector2f Entity::getDrawSize()
+{
+	return EntityAnimated::getDrawSize();
+}
+

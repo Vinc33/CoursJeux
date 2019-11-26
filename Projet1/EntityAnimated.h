@@ -9,7 +9,7 @@ public:
 	~EntityAnimated();
 
 	virtual void draw(sf::RenderTarget& target);
-
+	virtual Vector2f getDrawSize();
 	bool imageReversed;
 
 protected:

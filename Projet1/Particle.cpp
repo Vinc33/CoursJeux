@@ -25,3 +25,12 @@ void Particle::MoveOrigin(float newX, float newY)
 	originX = newX;
 	originY = newY;
 }
+
+sf::Vector2f Particle::getDrawSize()
+{
+	return sf::Vector2f();
+}
+
+void Particle::init()
+{
+}
