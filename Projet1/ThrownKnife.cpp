@@ -1,10 +1,10 @@
 #include "ThrownKnife.h"
 #include "TimeManager.h"
+#include "Manager\AssetManager.h"
 
 ThrownKnife::ThrownKnife(float speed) : StraightProjectile(speed)
 {
-	sf::Texture* texture = new sf::Texture();
-	texture->loadFromFile("Assets\\ToolAndMagic\\ThrownKnife.png");
+	sf::Texture* texture = &AssetManager::getTexture("knife");
 	SetSprite(texture, speed < 0);
 }
 

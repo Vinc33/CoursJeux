@@ -25,7 +25,7 @@ namespace GameView
 		string line;
 		while (getline(content, line))
 		{
-			int lineWidth = size(Utils::Split(line, '|')) - 1;
+			int lineWidth = size(Utils::split(line, '|')) - 1;
 			if (lineWidth > width)
 				width = lineWidth;
 			if (line.at(0) == '|')
@@ -52,19 +52,19 @@ namespace GameView
 		{
 			if (line[0] == '>')
 			{
-				vector<string> splittedLine = Utils::Split(line, '-');
-				int key = stoi(Utils::Split(splittedLine[0], '>')[1]);
+				vector<string> splittedLine = Utils::split(line, '-');
+				int key = stoi(Utils::split(splittedLine[0], '>')[1]);
 				string value = splittedLine[1];
 				tileTilesesNames.insert(make_pair(key, value));
 			}
 			else if (line[0] == '|')
 			{
-				vector<string> splittedLine = Utils::Split(line.substr(1), '|');
+				vector<string> splittedLine = Utils::split(line.substr(1), '|');
 				for (unsigned int j = 0; j < size(splittedLine); j++)
 				{
 
-					vector<string> splittedTilesInfo = Utils::Split(splittedLine[j], '+');
-					vector<string> animationSplit = Utils::Split(splittedTilesInfo[0], '>');
+					vector<string> splittedTilesInfo = Utils::split(splittedLine[j], '+');
+					vector<string> animationSplit = Utils::split(splittedTilesInfo[0], '>');
 
 					TileIdentity newTI = { };
 
@@ -74,7 +74,7 @@ namespace GameView
 					}
 					else
 					{
-						vector<string> splittedTileInfo = Utils::Split(animationSplit[0], ':');
+						vector<string> splittedTileInfo = Utils::split(animationSplit[0], ':');
 						newTI = { tileTilesesNames[0], { stoi(splittedTileInfo[1]) },{ stoi(splittedTileInfo[2]) } };
 					}
 
@@ -82,7 +82,7 @@ namespace GameView
 					{
 						backTI[j][i - startIndex] = newTI;
 
-						animationSplit = Utils::Split(splittedTilesInfo[1], '>');
+						animationSplit = Utils::split(splittedTilesInfo[1], '>');
 						if (size(animationSplit) > 1)
 						{
 
@@ -90,7 +90,7 @@ namespace GameView
 						}
 						else
 						{
-							vector<string> splittedTileInfo = Utils::Split(animationSplit[0], ':');
+							vector<string> splittedTileInfo = Utils::split(animationSplit[0], ':');
 							newTI.Tileset = tileTilesesNames[stoi(splittedTileInfo[0])];
 							newTI.IndexesX = { stoi(splittedTileInfo[1]) };
 							newTI.IndexesY = { stoi(splittedTileInfo[2]) };
@@ -105,14 +105,14 @@ namespace GameView
 
 					if (size(splittedTilesInfo) == 3)
 					{
-						animationSplit = Utils::Split(splittedTilesInfo[2], '>');
+						animationSplit = Utils::split(splittedTilesInfo[2], '>');
 						if (size(animationSplit) > 1)
 						{
 							newTI = GetAnimatedTileInfo(splittedTilesInfo[2]);
 						}
 						else
 						{
-							vector<string> splittedTileInfo = Utils::Split(animationSplit[0], ':');
+							vector<string> splittedTileInfo = Utils::split(animationSplit[0], ':');
 							newTI.Tileset = tileTilesesNames[stoi(splittedTileInfo[0])];
 							newTI.IndexesX = { stoi(splittedTileInfo[1]) };
 							newTI.IndexesY = { stoi(splittedTileInfo[2]) };
@@ -142,11 +142,11 @@ namespace GameView
 		ti.IndexesY = vector<int>();
 		ti.ShowTimesMS = vector<int>();
 
-		vector<string> splittedData = Utils::Split(data, '>');
+		vector<string> splittedData = Utils::split(data, '>');
 
 		for (unsigned int i = 0; i < size(splittedData) / 2; i++)
 		{
-			vector<string> splittedTileInfo = Utils::Split(splittedData[i * 2], ':');
+			vector<string> splittedTileInfo = Utils::split(splittedData[i * 2], ':');
 			if (size(splittedTileInfo) == 3)
 			{
 				ti.Tileset = tileTilesesNames[stoi(splittedTileInfo[0])];

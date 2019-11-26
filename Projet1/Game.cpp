@@ -35,8 +35,8 @@ namespace GameView
 	void Game::init()
 	{
 		data->window.setFramerateLimit(FPS);
-		data->assetManager.init();
-		level.init(data->assetManager);
+		AssetManager::init();
+		level.init();
 	}
 
 	void Game::updateEvent()
