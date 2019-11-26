@@ -18,6 +18,11 @@ void EntityInanimate::draw(sf::RenderTarget& target)
 	target.draw(*sprite, getTransform());
 }
 
+Vector2f EntityInanimate::getDrawSize()
+{
+	return {(float) sprite->getTextureRect().width,(float) sprite->getTextureRect().height };
+}
+
 void EntityInanimate::SetSprite(sf::Texture* t, bool reverseImage)
 {
 	sf::IntRect uvRect;

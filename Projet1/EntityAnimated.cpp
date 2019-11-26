@@ -18,3 +18,8 @@ void EntityAnimated::draw(sf::RenderTarget& target)
 	sf::Sprite* s = animator.GetSprite(imageReversed);
 	target.draw(*s, getTransform());
 }
+
+Vector2f EntityAnimated::getDrawSize()
+{
+	return {(float) animator.GetSprite()->getTextureRect().width, (float)animator.GetSprite()->getTextureRect().height };
+}

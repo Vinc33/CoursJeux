@@ -11,7 +11,7 @@ public:
 	~EntityInanimate();
 
 	virtual void draw(sf::RenderTarget& target);
-
+	virtual Vector2f getDrawSize();
 	void SetSprite(sf::Texture* t, bool reverseImage = false);
 
 protected:

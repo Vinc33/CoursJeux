@@ -33,7 +33,7 @@ namespace GameView
 
 		sf::Texture* texture = new sf::Texture();
 		texture->loadFromFile("Assets/ToolAndMagic/ThrownAxe.png");
-		test = new Platform(texture, Vector2f(100.0f, 30.0f), Vector2f(200.0f, 150.0f));
+		test = new Platform(texture, Vector2f(100.0f, 50.0f), Vector2f(200.0f, 300.0f));
 	}
 
 	Game::~Game()
@@ -64,8 +64,13 @@ namespace GameView
 
 	void Game::updateLogic()
 	{
-		/*if (test->hitbox->checkCollision(entities[0]->GetCollider(), 1.0f))
-			entities[0]->MoveOnHitBox();*/
+		for (EntityBase* e : entitiesForCollision) {
+			if (test->hitbox->checkCollision((dynamic_cast<EntityCollision*>(e))->GetCollider(), 1.0f))
+				cout << "collision" << endl;
+
+			cout << "pas de collision" << endl;
+		}
+		entitiesForCollision = vector<EntityBase*>();
 	}
 
 	void Game::update()
@@ -98,6 +103,7 @@ namespace GameView
 
 	void Game::AddEntity(EntityBase * e)
 	{
+		e->init();
 		newEntities.push_back(e);
 	}
 	void Game::AddForCheckCollision(EntityBase * e)
@@ -114,6 +120,7 @@ namespace GameView
 		for (EntityBase* e : entities)
 			e->draw(data->window);
 
+		test->draw(data->window);
 		data->window.display();
 	}
 }

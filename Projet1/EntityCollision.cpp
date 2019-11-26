@@ -4,8 +4,6 @@
 
 EntityCollision::EntityCollision()
 {
-	body = new sf::RectangleShape();
-	hitbox = new Collider(body);
 }
 
 
@@ -19,6 +17,14 @@ void EntityCollision::update()
 	GameView::Game::AddForCheckCollision(this);
 	body->setPosition(getPosition());
 }
+
+void EntityCollision::init()
+{
+	body = new sf::RectangleShape();
+	body->setSize(this->getDrawSize());
+	hitbox = new Collider(body);
+}
+
 
 RectangleShape * EntityCollision::GetCollider()
 {

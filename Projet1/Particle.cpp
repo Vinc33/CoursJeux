@@ -25,3 +25,12 @@ void Particle::setParentPosition(float x, float y)
 	parentPosX = x;
 	parentPosY = y;
 }
+
+sf::Vector2f Particle::getDrawSize()
+{
+	return sf::Vector2f();
+}
+
+void Particle::init()
+{
+}
