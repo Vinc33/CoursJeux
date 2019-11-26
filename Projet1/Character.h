@@ -26,14 +26,14 @@ public:
 	
 	///<summary>Return true if the character is still alive</summary>
 	bool ApplyDamage(short damage);
-	virtual DamageInfo GetDamage();
+	virtual DamageInfo getDamage();
 
-	virtual void ChangeAction(int enumIndex) = 0;
+	virtual void changeAction(int enumIndex) = 0;
 
 protected:
-	string UnitName;
-	short CurrentHP;
-	short MaxHP;
-	short BaseDamage;
+	string unitName;
+	short currentHP;
+	short maxHP;
+	short baseDamage;
 };
 

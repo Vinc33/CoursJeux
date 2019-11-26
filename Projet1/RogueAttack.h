@@ -1,13 +1,13 @@
 #pragma once
-#include "Action.h"
+#include "ActionEntity.h"
 class RogueAttack :
-	public Action
+	public ActionEntity
 {
 public:
 	RogueAttack(Entity* e);
 	~RogueAttack();
 
-	int Update();
+	int update();
 
 	float timeRemaining;
 };

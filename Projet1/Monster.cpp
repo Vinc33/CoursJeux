@@ -8,7 +8,7 @@ Monster::~Monster()
 {
 }
 
-void Monster::ChangeAction(int enumIndex)
+void Monster::changeAction(int enumIndex)
 {
 	
 }

@@ -12,7 +12,7 @@ Hero::~Hero()
 
 }
 
-void Hero::ChangeAction(int enumIndex)
+void Hero::changeAction(int enumIndex)
 {
 	
 }

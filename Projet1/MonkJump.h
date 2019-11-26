@@ -1,19 +1,18 @@
 #pragma once
-#include "Action.h"
+#include "ActionEntity.h"
 class MonkJump :
-	public Action
+	public ActionEntity
 {
 public:
-	MonkJump(Entity* e, bool canRoundhouse, bool canPunch, bool canDropkick, bool canDoubleJump);
+	MonkJump(Entity* e, bool canRoundhouse, bool canPunch, bool canDropkick, bool canJump);
 	~MonkJump();
 
-	int Update();
+	int update();
 private:
 	bool doubleJumpReady;
-
 	bool canPunch;
 	bool canDropkick;
-	bool canDoubleJump;
+	bool canJump;
 	bool canRoundhouse;
 };
 

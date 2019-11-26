@@ -7,14 +7,14 @@ class Monk : public Hero
 public:
 	Monk();
 	~Monk();
-	void ChangeAction(int enumPlaceholder) override;
-	void Draw(sf::RenderTarget& target);
+	void changeAction(int enumPlaceholder) override;
 private:
 	Animator animatorFX;
-	void AddAnimations();
+	void addAnimations();
 	bool hasRoundhoused;
 	bool hasPunched;
 	bool hasDropkicked;
-	bool hasDoubleJumped;
+	int jumpRemaining;
+	int maxNumberOfJumps;
 };
 

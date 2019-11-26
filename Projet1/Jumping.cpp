@@ -3,7 +3,7 @@
 #include "HeroActionsEnum.h"
 #include "Entity.h"
 
-Jumping::Jumping(Entity* e, bool canDoubleJump) : Action(e)
+Jumping::Jumping(Entity* e, bool canDoubleJump) : ActionEntity(e)
 {		
 	parent->isAirborne = true;
 	parent->velY = 0;
@@ -17,7 +17,7 @@ Jumping::~Jumping()
 
 }
 
-int Jumping::Update()
+int Jumping::update()
 {
 	bool right = InputManager::GetKeyState(Keys::RIGHT);
 	bool left = InputManager::GetKeyState(Keys::LEFT);
@@ -26,6 +26,7 @@ int Jumping::Update()
 
 	if (!parent->isAirborne)
 	{
+		parent->gravityMult = 1;
 		if (down)
 			return (int)PlayerAction::CROUNCH;
 
@@ -37,10 +38,20 @@ int Jumping::Update()
 	if (canDoubleJump)
 	{
 		if (!jump)
+		{
 			doubleJumpReady = true;
+		}
 		else if (jump && doubleJumpReady)
+		{
+			parent->gravityMult = 1;
 			return (int)PlayerAction::SECONDJUMP;
+		}
 	}
+
+	if (jump)
+		parent->gravityMult = 1;
+	else
+		parent->gravityMult = 2;
 
 	if (right && !left)
 		parent->accelerate(0.5);
@@ -48,7 +59,10 @@ int Jumping::Update()
 		parent->accelerate(-0.5);
 
 	if (InputManager::GetKeyState(X))
+	{
+		parent->gravityMult = 1;
 		return (int)PlayerAction::BASICATTACK;
+	}
 
 	return -1;
 }

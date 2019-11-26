@@ -5,7 +5,7 @@
 #include "Entity.h"
 
 
-Knockback::Knockback(int initialForceX, int initialForceY, Entity* e) : Action(e)
+Knockback::Knockback(int initialForceX, int initialForceY, Entity* e) : ActionEntity(e)
 {
 	parent->velX += initialForceX;
 	parent->velY += initialForceY;
@@ -17,7 +17,7 @@ Knockback::~Knockback()
 
 }
 
-int Knockback::Update()
+int Knockback::update()
 {
 	if (!(parent->isAirborne))
 		return (int)PlayerAction::STAND;

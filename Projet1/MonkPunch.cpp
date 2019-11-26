@@ -6,7 +6,7 @@
 
 
 
-MonkPunch::MonkPunch(Entity* e) : Action(e)
+MonkPunch::MonkPunch(Entity* e, bool canJump) : ActionEntity(e)
 {
 	timeRemaining = 0.375f;
 }
@@ -16,7 +16,7 @@ MonkPunch::~MonkPunch()
 	
 }
 
-int MonkPunch::Update()
+int MonkPunch::update()
 {
 	if (parent->isAirborne)
 	{
@@ -26,7 +26,7 @@ int MonkPunch::Update()
 	if (timeRemaining < .4f && timeRemaining > .3f)
 	{
 		parent->velY = 0;
-		if (parent->isFacingLeft)
+		if (parent->imageReversed)
 			parent->accelerate(-3);
 		else
 			parent->accelerate(3);
@@ -35,7 +35,9 @@ int MonkPunch::Update()
 	{
 		if (parent->isAirborne)
 		{
-			parent->velY = currentVelY;
+			parent->velY = 0;
+			if (canJump)
+				return (int)PlayerAction::SECONDJUMP;
 			return (int)PlayerAction::FALL;
 		}
 		bool right = InputManager::GetKeyState(Keys::RIGHT);

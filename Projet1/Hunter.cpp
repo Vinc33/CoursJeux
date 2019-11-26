@@ -16,62 +16,62 @@ Hunter::Hunter() : Hero("Hunter", 50, 100)
 	drag = 1200;
 	jumpingStrength = 600;
 	airdrag = 400;
-	gravity = 300;
+	gravity = 3000;
 
 	setPosition(50, 200);
 
-	AddAnimations();
-	CurrentAction = new Standing(this);
+	addAnimations();
+	currentAction = new Standing(this);
 }
-
 
 Hunter::~Hunter()
 {
+
 }
 
-void Hunter::ChangeAction(int enumIndex)
+void Hunter::changeAction(int enumIndex)
 {
 	switch ((PlayerAction)enumIndex)
 	{
 	case STAND:
 		animator.ChangeAnimation("Stand");
-		delete CurrentAction;
-		CurrentAction = new Standing(this);
+		delete currentAction;
+		currentAction = new Standing(this);
 		break;
 	case WALK:
 		animator.ChangeAnimation("Walk");
-		delete CurrentAction;
-		CurrentAction = new Walking(this);
+		delete currentAction;
+		currentAction = new Walking(this);
 		break;
 	case JUMP:
 		animator.ChangeAnimation("JumpRise");
-		delete CurrentAction;
-		CurrentAction = new HunterJump(this);
+		delete currentAction;
+		currentAction = new HunterJump(this);
 		break;
 	case SECONDJUMP:
 		animator.ChangeAnimation("JumpMid");
-		delete CurrentAction;
-		CurrentAction = new HunterJumpMid(this);
+		delete currentAction;
+		currentAction = new HunterJumpMid(this);
 		break;
 	case FALL:
 		animator.ChangeAnimation("Fall");
-		delete CurrentAction;
-		CurrentAction = new Falling(this);
+		delete currentAction;
+		currentAction = new Falling(this);
 		break;
 	case CROUNCH:
 		animator.ChangeAnimation("Crounch");
-		delete CurrentAction;
-		CurrentAction = new Crounching(this);
+		delete currentAction;
+		currentAction = new Crounching(this);
 		break;
 	case BASICATTACK:
 		animator.ChangeAnimation("Shoot");
-		delete CurrentAction;
-		CurrentAction = new HunterShoot(this);
+		delete currentAction;
+		currentAction = new HunterShoot(this);
 		break;
 	}
 }
 
-void Hunter::AddAnimations()
+void Hunter::addAnimations()
 {
 	sf::Texture* texture = new Texture();
 	texture->loadFromFile("Assets/SpriteSheet/Hunter.png");

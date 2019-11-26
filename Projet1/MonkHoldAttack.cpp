@@ -3,22 +3,26 @@
 #include "TimeManager.h"
 #include "InputManager.h"
 #include "Entity.h"
+#include "MonkChargeParticle.h"
 
 
-
-MonkHoldAttack::MonkHoldAttack(Entity* e) : Action(e)
+MonkHoldAttack::MonkHoldAttack(Entity* e) : ActionEntity(e)
 {
 	bool left = InputManager::GetKeyState(LEFT);
 	bool right = InputManager::GetKeyState(RIGHT);
 	if (left && !right)
-		parent->isFacingLeft = true;
+		parent->imageReversed = true;
 	else if (!left && right)
-		parent->isFacingLeft = false;
+		parent->imageReversed = false;
 
-	currentTime = 0.0f;
-	parent->gravityMult = 0.3f;
-	if (parent->velY < -200)
-		parent->velY = -200;
+	parent->gravityMult = .3f;
+	if (parent->velY > 200)
+		parent->velY = 200;
+
+	if (parent->imageReversed)
+		parent->AddParticle(new MonkChargeParticle(true, 128, 84));
+	else
+		parent->AddParticle(new MonkChargeParticle(false, 38, 84));
 }
 
 
@@ -26,7 +30,7 @@ MonkHoldAttack::~MonkHoldAttack()
 {
 }
 
-int MonkHoldAttack::Update()
+int MonkHoldAttack::update()
 {
 	if (!parent->isAirborne)
 		parent->gravityMult = 1;
@@ -38,15 +42,31 @@ int MonkHoldAttack::Update()
 			currentTime = 0;
 		}
 		else
-			parent->gravityMult = 0.4f + 0.8f * currentTime;
+			parent->gravityMult = .4f + .8f * currentTime;
 	}
-	if (currentTime > 0.1f)
+
+	if (currentTime > .1f)
 	{
 		if (!InputManager::GetKeyState(X))
+		{
+			parent->ResetEmitter();
 			return (int)PlayerAction::RELEASEATTACK;
+		}
 	}
 	if (currentTime < 1)
 		currentTime += TimeManager::DeltaTime;
+
+
+	//particles
+	particleTimer += TimeManager::DeltaTime;
+	if (particleTimer > .23f)
+	{
+		particleTimer -= .23f;
+		if (parent->imageReversed)
+			parent->AddParticle(new MonkChargeParticle(true, 128, 84));
+		else
+			parent->AddParticle(new MonkChargeParticle(false, 38, 84));
+	}
 	
 	return -1;
 }

@@ -12,7 +12,7 @@ TimeManager::~TimeManager()
 {
 }
 
-void TimeManager::Update() 
+void TimeManager::update() 
 {
 	DeltaTime = (restart()).asSeconds();
 }

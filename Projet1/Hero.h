@@ -9,6 +9,6 @@ class Hero :
 public:
 	Hero(string unitName, short baseDamage, short maxHP);
 	~Hero();
-	virtual void ChangeAction(int enumPlaceholder) = 0;
+	virtual void changeAction(int enumPlaceholder) = 0;
 };
 

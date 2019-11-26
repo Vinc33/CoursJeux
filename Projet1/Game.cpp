@@ -5,16 +5,19 @@
 #include "Monk.h"
 #include "Pingouin.h"
 #include "Rogue.h"
+#include "Hero.h"
 
+std::vector<EntityBase*> GameView::Game::newEntities = std::vector<EntityBase*>();
+std::vector<EntityBase*> GameView::Game::entitiesForCollision = std::vector<EntityBase*>();
 namespace GameView
 {
+
 	Game::Game(int width, int height, string titleScreen)
 	{
 		data->window.setVerticalSyncEnabled(true);
 		data->window.create(VideoMode(width, height), titleScreen, Style::Close | Style::Titlebar);
 		InputManager inputManager;
 		inputManager.Initiate();
-		//myTexture.loadFromFile("Image/Capture.png");
 
 		//myEntity = new MyEntity(&myTexture, sf::Vector2u(3, 2), 0.001f, 0.01f);
 		//Tileset entityTileset = {};
@@ -23,22 +26,29 @@ namespace GameView
 		//entities.push_back(new Monk());
 		//entities.push_back(new Rogue());
 		entities.push_back(new Pingouin());
+		
+		AddEntity(new Hunter());
+		AddEntity(new Monk());
+		AddEntity(new Rogue());
 
-		//test = new Platform(&myTexture, Vector2f(100.0f, 30.0f), Vector2f(200.0f, 150.0f));
-		//myEntity = new MyEntity(&myTexture,sf::Vector2f(20.0f,45.0f), sf::Vector2u(3, 2), 0.001f, 0.1f);
+		sf::Texture* texture = new sf::Texture();
+		texture->loadFromFile("Assets/ToolAndMagic/ThrownAxe.png");
+		test = new Platform(texture, Vector2f(100.0f, 30.0f), Vector2f(200.0f, 150.0f));
 	}
 
 	Game::~Game()
 	{
-		for (Entity* e : entities)
-			delete e;
+		for(auto ent : entities)
+		{
+			delete ent;
+		}
 	}
 
 	void Game::init()
 	{
 		data->window.setFramerateLimit(FPS);
-		data->assetManager.init();
-		level.init(data->assetManager);
+		AssetManager::init();
+		level.init();
 	}
 
 	void Game::updateEvent()
@@ -49,23 +59,20 @@ namespace GameView
 		{
 			if (event.type == Event::Closed)
 				data->window.close();
-
-			//data->inputManager.update(event);
-			//myEntity->updateInput((float)FPS,true);
 		}
 	}
 
 	void Game::updateLogic()
 	{
-		/*if (test->hitbox->checkCollision(myEntity->GetCollider(), 1.0f))
-			myEntity->moveOnHitBox();*/
+		/*if (test->hitbox->checkCollision(entities[0]->GetCollider(), 1.0f))
+			entities[0]->MoveOnHitBox();*/
 	}
+
 	void Game::update()
 	{
-		//float currentTime = 0, frameTime = 0.0, interpolation =0.0f;
 		while (data->window.isOpen())
 		{
-			timeManager.Update();
+			timeManager.update();
 
 			updateInput();
 			updateEvent();
@@ -77,10 +84,11 @@ namespace GameView
 
 	void Game::updateInput()
 	{
-		for (Entity* e : entities)
-		{
-			e->Update();
-		}
+		for (EntityBase* e : entities)
+			e->update();
+
+		entities.insert(entities.end(), newEntities.begin(), newEntities.end());
+		newEntities = std::vector<EntityBase*>();
 	}
 
 	void Game::startGame()
@@ -88,19 +96,23 @@ namespace GameView
 		update();
 	}
 
+	void Game::AddEntity(EntityBase * e)
+	{
+		newEntities.push_back(e);
+	}
+	void Game::AddForCheckCollision(EntityBase * e)
+	{
+		entitiesForCollision.push_back(e);
+	}
+
 	void Game::render()
 	{
 		data->window.clear(Color::Black);
-		
-		level.drawPlayGround(data->window);
-		
-		for (Entity* e : entities)
-		{
-			e->Draw(data->window);
-		}
 
-		/*myEntity->draw(data->window);
-		test->Draw(data->window);*/
+		level.drawPlayGround(data->window);
+
+		for (EntityBase* e : entities)
+			e->draw(data->window);
 
 		data->window.display();
 	}

@@ -1,13 +1,14 @@
 #pragma once
-#include "Action.h"
+#include "ActionEntity.h"
 class MonkHoldAttack :
-	public Action
+	public ActionEntity
 {
 public:
 	MonkHoldAttack(Entity* e);
 	~MonkHoldAttack();
-	int Update();
+	int update();
 private:
 	float currentTime;
+	float particleTimer;
 };
 

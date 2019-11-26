@@ -3,8 +3,9 @@
 #include "HeroActionsEnum.h"
 #include "InputManager.h"
 
-Falling::Falling(Entity* e) : Action(e)
+Falling::Falling(Entity* e) : ActionEntity(e)
 {
+
 }
 
 
@@ -12,7 +13,7 @@ Falling::~Falling()
 {
 }
 
-int Falling::Update()
+int Falling::update()
 {
 	bool left = InputManager::GetKeyState(LEFT);
 	bool right = InputManager::GetKeyState(RIGHT);

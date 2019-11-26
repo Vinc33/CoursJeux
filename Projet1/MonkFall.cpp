@@ -2,14 +2,13 @@
 
 
 
-MonkFall::MonkFall(Entity* e, bool canRoundhouse, bool canPunch, bool canDropkick, bool canDoubleJump, bool doubleJumpReady) : Action(e)
+MonkFall::MonkFall(Entity* e, bool canRoundhouse, bool canPunch, bool canDropkick, bool canJump) : ActionEntity(e)
 {
 	parent->gravityMult = 1;
-	this->canDoubleJump = canDoubleJump;
 	this->canDropkick = canDropkick;
 	this->canPunch = canPunch;
 	this->canRoundhouse = canRoundhouse;
-	this->doubleJumpReady = doubleJumpReady;
+	this->canJump = canJump;
 }
 
 
@@ -18,13 +17,12 @@ MonkFall::~MonkFall()
 
 }
 
-int MonkFall::Update()
+int MonkFall::update()
 {
 	bool right = InputManager::GetKeyState(Keys::RIGHT);
 	bool left = InputManager::GetKeyState(Keys::LEFT);
 	bool down = InputManager::GetKeyState(Keys::DOWN);
 	bool up = InputManager::GetKeyState(Keys::UP);
-	bool jump = InputManager::GetKeyState(Keys::A);
 	bool attack = InputManager::GetKeyState(Keys::X);
 
 	if (!parent->isAirborne)
@@ -32,34 +30,34 @@ int MonkFall::Update()
 		if (down)
 			return (int)PlayerAction::CROUNCH;
 
-		if (right || left)
+		if (right != left)
 			return (int)PlayerAction::WALK;
 		return ((int)PlayerAction::STAND);
 	}
 
-	if (jump)
+	if (right != left)
 	{
-		if (canDoubleJump && doubleJumpReady)
-			return (int)PlayerAction::SECONDJUMP;
+		if (right)
+			parent->accelerate(0.75);
+		else
+			parent->accelerate(-0.75);
 	}
-	else
-	{
-		doubleJumpReady = true;
-	}
+
+	if (InputManager::GetKeyState(Keys::A) && canJump)
+		return (int)PlayerAction::SECONDJUMP;
 
 	if (attack)
 	{
-		if (up && canRoundhouse)	return (int)PlayerAction::ROUNDHOUSE;
-		if (down && canDropkick) return (int)PlayerAction::DIVEKICK;
-		if (canPunch) return (int)PlayerAction::BASICATTACK;
+		if (up && canRoundhouse)
+			return (int)PlayerAction::ROUNDHOUSE;
+		if (down && canDropkick)
+		{
+			return (int)PlayerAction::DIVEKICK;
+		}
+		if (canPunch)
+			return (int)PlayerAction::BASICATTACK;
 	}
 
-	if (!jump)
-
-		if (right && !left)
-			parent->accelerate(0.75);
-		else if (left && !right)
-			parent->accelerate(-0.75);
 
 	return -1;
 }

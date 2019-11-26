@@ -1,7 +1,7 @@
 #pragma once
 #include "Hero.h"
 
-enum Bullet { NORMAL, FIERY, SHREDDING, EXPLOSIVE };
+enum Bullet { NORMAL, FIERY, MAGIC, EXPLOSIVE };
 
 class Hunter :
 	public Hero
@@ -9,9 +9,9 @@ class Hunter :
 public:
 	Hunter();
 	~Hunter();
-	//DamageInfo GetDamage() override;
-	void ChangeAction(int enumIndex);
+	//DamageInfo getDamage() override;
+	void changeAction(int enumIndex);
 private:
-	Bullet EquipedBullet;
-	void AddAnimations();
+	Bullet equipedBullet;
+	void addAnimations();
 };

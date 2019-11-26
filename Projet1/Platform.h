@@ -7,7 +7,7 @@ public:
 	Platform(sf::Texture* texture,sf::Vector2f size,sf::Vector2f position);
 	~Platform();
 
-	void Draw(sf::RenderWindow& window);
+	void draw(sf::RenderWindow& window);
 	RectangleShape* GetCollider() 
 	{ 
 		return body; 

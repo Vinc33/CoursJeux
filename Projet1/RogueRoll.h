@@ -1,13 +1,28 @@
 #pragma once
-#include "Action.h"
+#include "ActionEntity.h"
+enum direction;
 class RogueRoll :
-	public Action
+	public ActionEntity
 {
 public:
 	RogueRoll(Entity* e);
 	~RogueRoll();
-	int Update();
+	int update();
+
 private:
 	float timeRemaining;
+	bool jumpAtHalf;
+	bool releasedJump;
+
+	bool chainAttack;
+	bool chainItemUp;
+	bool chainItemDown;
+	bool chainItemFront;
+	bool chainItemStand;
+
+	bool canChainItem;
+	bool canChainAttack;
+
+	direction chainDirection;
 };
 

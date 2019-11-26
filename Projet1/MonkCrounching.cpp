@@ -5,16 +5,16 @@
 #include "Entity.h"
 
 
-MonkCrounching::MonkCrounching(Entity* e, float forceAction) : Action(e)
+MonkCrounching::MonkCrounching(Entity* e, float forceAction) : ActionEntity(e)
 {
 	this->forceAction = forceAction;
 	forceActionCounter = 0;
 	bool left = InputManager::GetKeyState(LEFT);
 	bool right = InputManager::GetKeyState(RIGHT);
 	if (left && !right)
-		parent->isFacingLeft = true;
+		parent->imageReversed = true;
 	else if (!left && right)
-		parent->isFacingLeft = false;
+		parent->imageReversed = false;
 }
 
 MonkCrounching::~MonkCrounching()
@@ -22,7 +22,7 @@ MonkCrounching::~MonkCrounching()
 
 }
 
-int MonkCrounching::Update()
+int MonkCrounching::update()
 {
 	forceActionCounter += TimeManager::DeltaTime;
 	if (forceActionCounter < 100 && InputManager::GetKeyState(UP) && InputManager::GetKeyState(A))

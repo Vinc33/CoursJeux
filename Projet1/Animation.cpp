@@ -2,7 +2,7 @@
 #include "TimeManager.h"
 #include <math.h>
 
-Animation::Animation(Spritesheet ss, vector<Coord> indexes, vector<int> showTimes, bool loop)
+Animation::Animation(Spritesheet ss, std::vector<Coord> indexes, std::vector<int> showTimes, bool loop)
 {
 	this->indexes = indexes;
 	currentFrame = 0;
@@ -19,7 +19,7 @@ Animation::Animation(Spritesheet ss, vector<Coord> indexes, vector<int> showTime
 	if (!loop)
 		this->showTimes[size(showTimes) - 1] = -1;
 
-	currentSprite = new Sprite();
+	currentSprite = new sf::Sprite();
 	currentSprite->setTexture(*spritesheet.texture);
 	currentSprite->setScale(2, 2);
 	spriteWidth = (int)floor((spritesheet.texture->getSize().x / float(spritesheet.nbColums)));
@@ -35,14 +35,14 @@ Animation::~Animation()
 	delete currentSprite;
 }
 
-void Animation::Update()
+void Animation::update()
 {
 	if (showTimes[currentFrame] != -1)
 	{
 		currentTime += TimeManager::DeltaTime;
-		if (currentTime >= (float)showTimes[currentFrame]/1000)
+		if (currentTime >= (float)showTimes[currentFrame]/1000.0f)
 		{
-			currentTime -= (float)showTimes[currentFrame]/1000;
+			currentTime -= (float)showTimes[currentFrame]/1000.0f;
 			currentFrame++;
 
 			if (currentFrame >= size(indexes)) 
@@ -51,7 +51,7 @@ void Animation::Update()
 	}
 }
 
-Sprite* Animation::GetSprite(bool reverse)
+sf::Sprite* Animation::GetSprite(bool reverse)
 {
 
 	if (reverse)
@@ -77,4 +77,10 @@ void Animation::Reset()
 	currentTime = 0;
 	uvRect.top = indexes[currentFrame].y * spriteHeight;
 	currentSprite->setTextureRect(uvRect);
+}
+
+void Animation::JumpToFrame(unsigned int index)
+{
+	if (index < size(indexes))
+		currentFrame = index;
 }

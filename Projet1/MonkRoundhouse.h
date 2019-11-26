@@ -1,19 +1,20 @@
 #pragma once
-#include "Action.h"
+#include "ActionEntity.h"
 class MonkRoundhouse :
-	public Action
+	public ActionEntity
 {
 public:
-	MonkRoundhouse(Entity* e, bool asDoubleJump, bool canPunch, bool canDropkick);
+	MonkRoundhouse(Entity* e, bool asDoubleJump, bool canPunch, bool canDropkick, bool canJump);
 	~MonkRoundhouse();
 
-	int Update();
+	int update();
 private:
 	float timeRemaining;
 	bool chainKick;
 	bool chainPunch;
 	bool canChainAttack;
 
+	bool canJump;
 	bool canPunch;
 	bool canDropkick;
 };

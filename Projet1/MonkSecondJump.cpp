@@ -3,7 +3,7 @@
 #include "HeroActionsEnum.h"
 #include "Entity.h"
 
-MonkSecondJump::MonkSecondJump(Entity* e, bool canRoundhouse, bool canPunch, bool canDropkick) : Action(e)
+MonkSecondJump::MonkSecondJump(Entity* e, bool canRoundhouse, bool canPunch, bool canDropkick) : ActionEntity(e)
 {
 	parent->gravityMult = 1.5;
 	parent->isAirborne = true;
@@ -19,7 +19,7 @@ MonkSecondJump::~MonkSecondJump()
 
 }
 
-int MonkSecondJump::Update()
+int MonkSecondJump::update()
 {
 	bool right = InputManager::GetKeyState(Keys::RIGHT);
 	bool left = InputManager::GetKeyState(Keys::LEFT);

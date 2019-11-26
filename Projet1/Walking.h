@@ -1,12 +1,12 @@
 #pragma once
-#include "Action.h"
+#include "ActionEntity.h"
 class Walking :
-	public Action
+	public ActionEntity
 {
 public:
 	Walking(Entity* e);
 	~Walking();
-	int Update();
+	int update();
 private:
 	float turnCharacter;
 };

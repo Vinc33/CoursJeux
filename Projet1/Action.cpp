@@ -1,9 +1,10 @@
 #include "Action.h"
 #include "Entity.h"
+#include "EntityBrain.h"
 
-Action::Action(Entity* e)
+Action::Action(EntityBrain* e)
 {
-	parent = e;
+	p = e;
 }
 
 Action::~Action()
@@ -12,7 +13,7 @@ Action::~Action()
 }
 
 
-int Action::Update()
+int Action::update()
 {
 	return -1;
 }

@@ -4,7 +4,7 @@
 #include "Entity.h"
 #include "Settings.h"
 
-Standing::Standing(Entity* e) : Action(e)
+Standing::Standing(Entity* e) : ActionEntity(e)
 {
 
 }
@@ -15,7 +15,7 @@ Standing::~Standing()
 
 }
 
-int Standing::Update()
+int Standing::update()
 {
 	bool right = InputManager::GetKeyState(Keys::RIGHT);
 	bool left = InputManager::GetKeyState(Keys::LEFT);

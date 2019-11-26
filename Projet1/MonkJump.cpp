@@ -5,15 +5,13 @@
 #include "Entity.h"
 #include "Settings.h"
 
-MonkJump::MonkJump(Entity* e, bool canRoundhouse, bool canPunch, bool canDropkick, bool canDoubleJump) : Action(e)
+MonkJump::MonkJump(Entity* e, bool canRoundhouse, bool canPunch, bool canDropkick, bool canJump) : ActionEntity(e)
 {
 	parent->gravityMult = 1;
-	doubleJumpReady = false;
-	parent->jump();
 
 	this->canPunch = canPunch;
 	this->canDropkick = canDropkick;
-	this->canDoubleJump = canDoubleJump;
+	this->canJump = canJump;
 	this->canRoundhouse = canRoundhouse;
 }
 
@@ -22,7 +20,7 @@ MonkJump::~MonkJump()
 
 }
 
-int MonkJump::Update()
+int MonkJump::update()
 {
 
 	bool right = InputManager::GetKeyState(Keys::RIGHT);
@@ -56,7 +54,7 @@ int MonkJump::Update()
 	if (jump)
 	{
 		parent->gravityMult = 1;
-		if (canDoubleJump && doubleJumpReady)
+		if (canJump && doubleJumpReady)
 			return (int)PlayerAction::SECONDJUMP;
 	}
 	else

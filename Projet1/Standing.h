@@ -1,11 +1,11 @@
 #pragma once
-#include "Action.h"
+#include "ActionEntity.h"
 class Standing :
-	public Action
+	public ActionEntity
 {
 public:
 	Standing(Entity* e);
 	~Standing();
-	int Update();
+	int update();
 };
 

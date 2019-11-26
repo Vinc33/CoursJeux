@@ -5,16 +5,21 @@
 #include "Entity.h"
 #include "Settings.h"
 
-MonkRisingKick::MonkRisingKick(Entity* e) : Action(e)
+MonkRisingKick::MonkRisingKick(Entity* e) : ActionEntity(e)
 {
 	bool right = InputManager::GetKeyState(Keys::RIGHT);
 	bool left = InputManager::GetKeyState(Keys::LEFT);
-	if (right)
-		parent->isFacingLeft = false;
-	else if (left)
-		parent->isFacingLeft = true;
+	if (right != left)
+	{
+		if (right)
+			parent->imageReversed = false;
+		else
+			parent->imageReversed = true;
+	}
 	parent->isAirborne = true;
 	timeRemaining = 0.350f;
+
+	parent->velY = -150.0f;
 }
 
 MonkRisingKick::~MonkRisingKick()
@@ -22,11 +27,11 @@ MonkRisingKick::~MonkRisingKick()
 
 }
 
-int MonkRisingKick::Update()
+int MonkRisingKick::update()
 {
 	timeRemaining -= TimeManager::DeltaTime;
 	parent->velY = -150.0f;
-	if (parent->isFacingLeft)
+	if (parent->imageReversed)
 		parent->velX = -1500.0f * timeRemaining - 200;
 	else
 		parent->velX = 1500.0f * timeRemaining + 200;
@@ -42,7 +47,7 @@ int MonkRisingKick::Update()
 		if (down)
 			return (int)PlayerAction::CROUNCH;
 
-		if (right || left)
+		if (right != left)
 			return (int)PlayerAction::WALK;
 		return ((int)PlayerAction::STAND);
 	}
@@ -50,16 +55,16 @@ int MonkRisingKick::Update()
 	if (timeRemaining < 0)
 	{
 		if (parent->isAirborne)
-			return (int)PlayerAction::FALLJUMPREADY;
-
-		bool right = InputManager::GetKeyState(Keys::RIGHT);
-		bool left = InputManager::GetKeyState(Keys::LEFT);
-		bool down = InputManager::GetKeyState(Keys::DOWN);
-		bool holdingJump = InputManager::GetKeyState(Keys::A);
+		{
+			if (InputManager::GetKeyState(Keys::A))
+				return (int)PlayerAction::SECONDJUMP;
+			else
+				return (int)PlayerAction::FALL;
+		}
 
 		if (down)
 			return (int)PlayerAction::CROUNCH;
-		if (right || left)
+		if (right != left)
 			return (int)PlayerAction::WALK;
 		return ((int)PlayerAction::STAND);
 	}

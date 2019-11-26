@@ -4,7 +4,7 @@
 #include "./Manager/AssetManager.h"
 #include "InputManager.h"
 #include "Level.h"
-#include "Entity.h"
+#include "EntityBase.h"
 #include "Platform.h"
 #include "TimeManager.h"
 
@@ -16,7 +16,6 @@ namespace GameView
 	{
 		StateManager stateManager;
 		sf::RenderWindow window;
-		AssetManager assetManager;
 	};
 
 	typedef std::shared_ptr<GameData> GameDataRef;
@@ -30,12 +29,14 @@ namespace GameView
 		void init();
 		void startGame();
 
+		static void AddEntity(EntityBase* e);
+		static void AddForCheckCollision(EntityBase* e);
 	private:
 		void update();
 		void updateInput();
 		void updateLogic();
-		void render();
 		void updateEvent();
+		void render();
 
 		TimeManager timeManager;
 
@@ -44,8 +45,9 @@ namespace GameView
 		GameDataRef data = std::make_shared<GameData>();
 		Platform* test;
 
-		vector<Entity*> entities;
-		Texture myTexture;
+		vector<EntityBase*> entities;
+		static vector<EntityBase*> newEntities;
+		static vector<EntityBase*> entitiesForCollision;
 		Level level;
 
 	};

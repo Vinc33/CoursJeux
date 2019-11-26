@@ -1,13 +1,13 @@
 #pragma once
-#include "Action.h"
+#include "ActionEntity.h"
 class Jumping : 
-	public Action
+	public ActionEntity
 {
 public:
 	Jumping(Entity* e, bool canDoubleJump = false);
 	~Jumping();
 
-	int Update();
+	int update();
 private:
 	bool canDoubleJump;
 	bool doubleJumpReady;

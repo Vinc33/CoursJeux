@@ -5,7 +5,7 @@
 #include "Entity.h"
 
 
-HunterShoot::HunterShoot(Entity* e) : Action(e)
+HunterShoot::HunterShoot(Entity* e) : ActionEntity(e)
 {
 	timeRemaining = .4f;
 }
@@ -15,7 +15,7 @@ HunterShoot::~HunterShoot()
 {
 }
 
-int HunterShoot::Update()
+int HunterShoot::update()
 {
 	timeRemaining -= TimeManager::DeltaTime;
 	if (timeRemaining < 0)

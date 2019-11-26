@@ -3,7 +3,6 @@
   <ItemGroup>
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LevelLoader.cpp" />
-    <ClCompile Include="Stage.cpp" />
     <ClCompile Include="Character.cpp">
       <Filter>Vania\Character</Filter>
     </ClCompile>
@@ -44,9 +43,6 @@
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="Collider.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Entity.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="EntityState.cpp">
@@ -136,13 +132,13 @@
     <ClCompile Include="Action.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="HunterShoot.cpp" />
     <ClCompile Include="RogueRoll.cpp">
       <Filter>Vania\Actions\Rogue</Filter>
     </ClCompile>
     <ClCompile Include="RogueCrounch.cpp">
       <Filter>Vania\Actions\Rogue</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Pingouin.cpp">
       <Filter>FightingGameXD\Personnage</Filter>
     </ClCompile>
@@ -151,12 +147,102 @@
     </ClCompile>
     <ClCompile Include="PingouinCrouch.cpp">
       <Filter>FightingGameXD\Actions\Pingouin</Filter>
+=======
+    <ClCompile Include="HunterShoot.cpp">
+      <Filter>Vania\Actions\Hunter</Filter>
+    </ClCompile>
+    <ClCompile Include="RogueJump.cpp">
+      <Filter>Vania\Actions\Rogue</Filter>
+    </ClCompile>
+    <ClCompile Include="RogueSomersault.cpp">
+      <Filter>Vania\Actions\Rogue</Filter>
+    </ClCompile>
+    <ClCompile Include="RogueWalk.cpp">
+      <Filter>Vania\Actions\Rogue</Filter>
+    </ClCompile>
+    <ClCompile Include="RogueStanding.cpp">
+      <Filter>Vania\Actions\Rogue</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Engine\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityBase.cpp">
+      <Filter>Engine\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityPhysic.cpp">
+      <Filter>Engine\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityAnimated.cpp">
+      <Filter>Engine\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityBrain.cpp">
+      <Filter>Engine\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="RogueThrowKnife.cpp">
+      <Filter>Vania\Actions\Rogue</Filter>
+    </ClCompile>
+    <ClCompile Include="EntitySpawner.cpp">
+      <Filter>Engine\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="ThrownKnife.cpp">
+      <Filter>Vania\Projectiles and magics</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityInanimate.cpp">
+      <Filter>Engine\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionEntity.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="StraightProjectile.cpp">
+      <Filter>Engine\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="ThrownAxe.cpp">
+      <Filter>Vania\Projectiles and magics</Filter>
+    </ClCompile>
+    <ClCompile Include="MonkChargeParticle.cpp">
+      <Filter>Vania\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle.cpp">
+      <Filter>Engine\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityParticleEmitter.cpp">
+      <Filter>Engine\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="RogueThrowAxe.cpp">
+      <Filter>Vania\Actions\Rogue</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\ViewManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="RogueItemUse.cpp">
+      <Filter>Vania\Actions\Rogue</Filter>
+    </ClCompile>
+    <ClCompile Include="Caltrops.cpp">
+      <Filter>Vania\Projectiles and magics</Filter>
+    </ClCompile>
+    <ClCompile Include="RogueThrowCaltrops.cpp">
+      <Filter>Vania\Actions\Rogue</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityCollision.cpp">
+      <Filter>Engine\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="RogueThrowSpear.cpp">
+      <Filter>Vania\Actions\Rogue</Filter>
+    </ClCompile>
+    <ClCompile Include="Spear.cpp">
+      <Filter>Vania\Projectiles and magics</Filter>
+    </ClCompile>
+    <ClCompile Include="HandBomb.cpp">
+      <Filter>Vania\Projectiles and magics</Filter>
+    </ClCompile>
+    <ClCompile Include="RogueThrowSmallBomb.cpp">
+      <Filter>Vania\Actions\Rogue</Filter>
+>>>>>>> 26ccc5f9f9456e06bb3ffb0581e59b9b366514ee
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelLoader.h" />
-    <ClInclude Include="Stage.h" />
     <ClInclude Include="Character.h">
       <Filter>Vania\Character</Filter>
     </ClInclude>
@@ -200,9 +286,6 @@
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="Collider.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity.h">
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="EntityState.h">
@@ -289,7 +372,6 @@
     <ClInclude Include="Action.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="HunterShoot.h" />
     <ClInclude Include="RogueRoll.h">
       <Filter>Vania\Actions\Rogue</Filter>
     </ClInclude>
@@ -304,17 +386,101 @@
     </ClInclude>
     <ClInclude Include="PingouinCrouch.h">
       <Filter>FightingGameXD\Actions\Pingouin</Filter>
+    <ClInclude Include="HunterShoot.h">
+      <Filter>Vania\Actions\Hunter</Filter>
+    </ClInclude>
+    <ClInclude Include="RogueJump.h">
+      <Filter>Vania\Actions\Rogue</Filter>
+    </ClInclude>
+    <ClInclude Include="RogueSomersault.h">
+      <Filter>Vania\Actions\Rogue</Filter>
+    </ClInclude>
+    <ClInclude Include="RogueWalk.h">
+      <Filter>Vania\Actions\Rogue</Filter>
+    </ClInclude>
+    <ClInclude Include="RogueStanding.h">
+      <Filter>Vania\Actions\Rogue</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Engine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityBase.h">
+      <Filter>Engine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityPhysic.h">
+      <Filter>Engine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityAnimated.h">
+      <Filter>Engine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityBrain.h">
+      <Filter>Engine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="RogueThrowKnife.h">
+      <Filter>Vania\Actions\Rogue</Filter>
+    </ClInclude>
+    <ClInclude Include="EntitySpawner.h">
+      <Filter>Engine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="ThrownKnife.h">
+      <Filter>Vania\Projectiles and magics</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityInanimate.h">
+      <Filter>Engine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionEntity.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="StraightProjectile.h">
+      <Filter>Engine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="ThrownAxe.h">
+      <Filter>Vania\Projectiles and magics</Filter>
+    </ClInclude>
+    <ClInclude Include="MonkChargeParticle.h">
+      <Filter>Vania\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle.h">
+      <Filter>Engine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityParticleEmitter.h">
+      <Filter>Engine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="RogueThrowAxe.h">
+      <Filter>Vania\Actions\Rogue</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\ViewManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="RogueItemUse.h">
+      <Filter>Vania\Actions\Rogue</Filter>
+    </ClInclude>
+    <ClInclude Include="Caltrops.h">
+      <Filter>Vania\Projectiles and magics</Filter>
+    </ClInclude>
+    <ClInclude Include="RogueThrowCaltrops.h">
+      <Filter>Vania\Actions\Rogue</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityCollision.h">
+      <Filter>Engine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="RogueThrowSpear.h">
+      <Filter>Vania\Actions\Rogue</Filter>
+    </ClInclude>
+    <ClInclude Include="Spear.h">
+      <Filter>Vania\Projectiles and magics</Filter>
+    </ClInclude>
+    <ClInclude Include="HandBomb.h">
+      <Filter>Vania\Projectiles and magics</Filter>
+    </ClInclude>
+    <ClInclude Include="RogueThrowSmallBomb.h">
+      <Filter>Vania\Actions\Rogue</Filter>
+>>>>>>> 26ccc5f9f9456e06bb3ffb0581e59b9b366514ee
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Vania">
       <UniqueIdentifier>{c9881e65-a1f1-492a-8df0-0bc037bf2e47}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Vania\Actions">
-      <UniqueIdentifier>{6280326f-4c9d-4d88-aff9-bfce854029c0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Vania\Actions\Monk">
-      <UniqueIdentifier>{1c5e7cdb-acb2-4410-8bf3-b2f1a21ecd69}</UniqueIdentifier>
     </Filter>
     <Filter Include="Vania\Character">
       <UniqueIdentifier>{99ad025d-3d9d-48d9-91e5-5b0d0b8e64ba}</UniqueIdentifier>
@@ -327,6 +493,24 @@
     </Filter>
     <Filter Include="Vania\Character\Hero">
       <UniqueIdentifier>{dbd5cb87-b1f2-447d-84cb-19dc2847ad55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GenericAction - player">
+      <UniqueIdentifier>{10e34f31-691b-46f2-a69c-328207d86bad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Entity">
+      <UniqueIdentifier>{58c83756-3989-42ee-b7f2-9aab3ecf3ecb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vania\Projectiles and magics">
+      <UniqueIdentifier>{27386859-4d34-4c2f-9c0a-f6af3f094d8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vania\Particles">
+      <UniqueIdentifier>{09051635-d053-44d2-9f92-9700967e34cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vania\Actions">
+      <UniqueIdentifier>{6280326f-4c9d-4d88-aff9-bfce854029c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vania\Actions\Monk">
+      <UniqueIdentifier>{1c5e7cdb-acb2-4410-8bf3-b2f1a21ecd69}</UniqueIdentifier>
     </Filter>
     <Filter Include="Vania\Actions\Hunter">
       <UniqueIdentifier>{6a0382bb-5ea2-4517-9536-3f2c4bfd36af}</UniqueIdentifier>
@@ -349,5 +533,6 @@
     <Filter Include="FightingGameXD\Actions\Pingouin">
       <UniqueIdentifier>{423f9678-f7b5-4a59-9013-11b573c99fa7}</UniqueIdentifier>
     </Filter>
+>>>>>>> 26ccc5f9f9456e06bb3ffb0581e59b9b366514ee
   </ItemGroup>
 </Project>

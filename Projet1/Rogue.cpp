@@ -1,27 +1,51 @@
 #include "Rogue.h"
+#include "TimeManager.h"
 #include "Animation.h"
-#include "HeroActionsEnum.h"
-#include "Standing.h"
-#include "Walking.h"
+
+#include "RogueStanding.h"
+#include "RogueWalk.h"
 #include "RogueCrounch.h"
-#include "Jumping.h"
+#include "RogueJump.h"
 #include "RogueAttack.h"
 #include "RogueRoll.h"
+#include "RogueSomersault.h"
+
+#include "RogueThrowKnife.h"
+#include "RogueThrowAxe.h"
+#include "RogueThrowCaltrops.h"
+#include "RogueThrowSpear.h"
+#include "RogueThrowSmallBomb.h"
 
 Rogue::Rogue() : Hero("Rogue", 20, 40)
 {
 
 	acc = 1000;
 	maxVelX = 500;
-	drag = 1200;
+	drag = 1600;
 	jumpingStrength = 700;
 	airdrag = 400;
-	gravity = 150;
+	gravity = 2000;
+	//gravity = 1000;
 
 	setPosition(50, 200);
 
 	addAnimations();
-	CurrentAction = new Standing(this);
+	currentAction = new RogueStanding(this);
+	delayedActionTimer = 0.0f;
+	nextAction = PlayerAction::STAND;
+
+
+	attackCooldown = 0.75f;
+	itemCooldown = 0.2f;
+	downToolCooldown = 0.75f;
+	upToolCooldown = 0.75f;
+	frontToolCooldown = 0.75f;
+	standToolCooldown = 0.75f;
+
+	equipedUp = AXE;
+	equipedDown = SPEAR;
+	equipedFront = HANDBOMB;
+	equipedStand = CALTROPS;
 }
 
 Rogue::~Rogue()
@@ -29,40 +53,148 @@ Rogue::~Rogue()
 
 }
 
-void Rogue::ChangeAction(int enumIndex)
+void Rogue::update()
+{
+	Entity::update();
+	downToolTimer -= TimeManager::DeltaTime;
+	upToolTimer -= TimeManager::DeltaTime;
+	frontToolTimer -= TimeManager::DeltaTime;
+	standToolTimer -= TimeManager::DeltaTime;
+	itemTimer -= TimeManager::DeltaTime;
+	attackTimer -= TimeManager::DeltaTime;
+	if (checkForDelayedAction)
+	{
+		delayedActionTimer -= TimeManager::DeltaTime;
+		if (delayedActionTimer < 0)
+		{
+			checkForDelayedAction = false;
+			changeAction(nextAction);
+		}
+	}
+}
+
+void Rogue::changeAction(int enumIndex)
 {
 	switch ((PlayerAction)enumIndex)
 	{
 	case STAND:
 		animator.ChangeAnimation("Stand");
-		delete CurrentAction;
-		CurrentAction = new Standing(this);
+		delete currentAction;
+		currentAction = new RogueStanding(this);
 		break;
 	case WALK:
 		animator.ChangeAnimation("Walk");
-		delete CurrentAction;
-		CurrentAction = new Walking(this);
+		delete currentAction;
+		currentAction = new RogueWalk(this);
 		break;
 	case CROUNCH:
 		animator.ChangeAnimation("Crounch");
-		delete CurrentAction;
-		CurrentAction = new RogueCrounch(this);
+		delete currentAction;
+		currentAction = new RogueCrounch(this);
 		break;
 	case JUMP:
 		animator.ChangeAnimation("Jump");
-		delete CurrentAction;
-		CurrentAction = new Jumping(this);
+		delete currentAction;
+		currentAction = new RogueJump(this);
+		break;
+	case FALL:
+		animator.ChangeAnimation("Jump");
+		delete currentAction;
+		currentAction = new RogueJump(this, false, false);
+		break;
+	case FALLMAYROLL:
+		animator.ChangeAnimation("Jump");
+		delete currentAction;
+		currentAction = new RogueJump(this, false);
 		break;
 	case BASICATTACK:
-		animator.ChangeAnimation("Attack");
-		delete CurrentAction;
-		CurrentAction = new RogueAttack(this);
+		if (attackTimer < 0)
+		{
+			attackTimer = attackCooldown;
+			animator.ChangeAnimation("Attack");
+			delete currentAction;
+			currentAction = new RogueAttack(this);
+		}
 		break;
 	case ROLL:
 		animator.ChangeAnimation("Roll");
-		delete CurrentAction;
-		CurrentAction = new RogueRoll(this);
+		delete currentAction;
+		currentAction = new RogueRoll(this);
 		break;
+	case SOMERSAULT:
+		animator.ChangeAnimation("Roll");
+		delete currentAction;
+		currentAction = new RogueSomersault(this);
+		break;
+	case CHAINEDJUMP:
+		animator.ChangeAnimation("Walk");
+		delete currentAction;
+		currentAction = new RogueWalk(this);
+		nextAction = PlayerAction::JUMP;
+		delayedActionTimer = .12f;
+		checkForDelayedAction = true;
+		break;
+	case ITEMDOWN:
+		if (downToolTimer < 0)
+		{
+			downToolTimer = downToolCooldown;
+			useWeapon(equipedDown);
+		}
+		break;
+	case ITEMUP:
+		if (upToolTimer < 0)
+		{
+			upToolTimer = upToolCooldown;
+			useWeapon(equipedUp);
+		}
+		break;
+	case ITEMFRONT:
+		if (frontToolTimer < 0)
+		{
+			frontToolTimer = frontToolCooldown;
+			useWeapon(equipedFront);
+		}
+		break;
+	case ITEMSTAND:
+		if (standToolTimer < 0)
+		{
+			standToolTimer = standToolCooldown;
+			useWeapon(equipedStand);
+		}
+		break;
+	}
+}
+
+void Rogue::useWeapon(RogueWeapon rw)
+{
+	if (itemTimer < 0)
+	{
+		itemTimer = itemCooldown;
+		attackTimer = attackCooldown / 2;
+		delete currentAction;
+		animator.ChangeAnimation("Item");
+		switch (rw)
+		{
+		case NONE:
+			break;
+		case KNIFE:
+			currentAction = new RogueThrowKnife(this);
+			break;
+		case AXE:
+			currentAction = new RogueThrowAxe(this);
+			break;
+		case CALTROPS:
+			currentAction = new RogueThrowCaltrops(this);
+			break;
+		case SPEAR:
+			currentAction = new RogueThrowSpear(this);
+			break;
+		case HANDBOMB:
+			currentAction = new RogueThrowSmallBomb(this);
+			break;
+		default:
+			break;
+		}
 	}
 }
 
@@ -78,17 +210,17 @@ void Rogue::addAnimations()
 	vector<int> showTimes;
 
 	indexes.push_back({ 0, 2 });
-	showTimes.push_back(200);
+	showTimes.push_back(150);
 	indexes.push_back({ 1, 2 });
-	showTimes.push_back(200);
+	showTimes.push_back(150);
 	indexes.push_back({ 2, 2 });
-	showTimes.push_back(200);
+	showTimes.push_back(150);
 	indexes.push_back({ 3, 2 });
-	showTimes.push_back(200);
+	showTimes.push_back(150);
 	indexes.push_back({ 4, 2 });
-	showTimes.push_back(200);
+	showTimes.push_back(150);
 	indexes.push_back({ 5, 2 });
-	showTimes.push_back(200);
+	showTimes.push_back(150);
 
 	animator.AddAnimation(new Animation(spritesheet, indexes, showTimes), "Stand");
 
@@ -111,6 +243,20 @@ void Rogue::addAnimations()
 	indexes = vector<Coord>();
 	showTimes = vector<int>();
 
+	indexes.push_back({ 1, 0 });
+	showTimes.push_back(100);
+	indexes.push_back({ 2, 0 });
+	showTimes.push_back(75);
+	indexes.push_back({ 3, 0 });
+	showTimes.push_back(75);
+	indexes.push_back({ 4, 0 });
+	showTimes.push_back(75);
+
+	animator.AddAnimation(new Animation(spritesheet, indexes, showTimes, false), "Item");
+
+	indexes = vector<Coord>();
+	showTimes = vector<int>();
+
 	indexes.push_back({ 5, 0 });
 	showTimes.push_back(100);
 	indexes.push_back({ 6, 0 });
@@ -124,15 +270,15 @@ void Rogue::addAnimations()
 	showTimes = vector<int>();
 
 	indexes.push_back({ 0, 1 });
-	showTimes.push_back(100);
+	showTimes.push_back(25);
 	indexes.push_back({ 1, 1 });
-	showTimes.push_back(100);
+	showTimes.push_back(200);
 	indexes.push_back({ 2, 1 });
-	showTimes.push_back(100);
+	showTimes.push_back(175);
 	indexes.push_back({ 3, 1 });
-	showTimes.push_back(100);
+	showTimes.push_back(150);
 	indexes.push_back({ 4, 1 });
-	showTimes.push_back(100);
+	showTimes.push_back(125);
 	indexes.push_back({ 5, 1 });
 	showTimes.push_back(100);
 	indexes.push_back({ 6, 1 });

@@ -17,6 +17,6 @@ Platform::~Platform()
 {
 }
 
-void Platform::Draw(sf::RenderWindow& window) {
+void Platform::draw(sf::RenderWindow& window) {
 	window.draw(*body);
 }

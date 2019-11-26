@@ -1,12 +1,12 @@
 #pragma once
-#include "Action.h"
+#include "ActionEntity.h"
 class MonkCrounching :
-	public Action
+	public ActionEntity
 {
 public:
 	MonkCrounching(Entity* e, float forceAction);
 	~MonkCrounching();
-	int Update();
+	int update();
 private:
 	float forceAction;
 	float forceActionCounter;
