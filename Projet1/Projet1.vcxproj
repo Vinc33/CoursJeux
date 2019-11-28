@@ -179,7 +179,11 @@
     <ClCompile Include="MonkWalking.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="Pingouin.cpp" />
+    <ClCompile Include="PingouinAttack.cpp" />
+    <ClCompile Include="PingouinCrouch.cpp" />
     <ClCompile Include="Particle.cpp" />
+>>>>>>> 26ccc5f9f9456e06bb3ffb0581e59b9b366514ee
     <ClCompile Include="Platform.cpp" />
     <ClCompile Include="RogueItemUse.cpp" />
     <ClCompile Include="RogueThrowAxe.cpp" />
@@ -258,7 +262,11 @@
     <ClInclude Include="MonkWalking.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="pingouin.h" />
+    <ClInclude Include="PingouinAttack.h" />
+    <ClInclude Include="PingouinCrouch.h" />
     <ClInclude Include="Particle.h" />
+>>>>>>> 26ccc5f9f9456e06bb3ffb0581e59b9b366514ee
     <ClInclude Include="Platform.h" />
     <ClInclude Include="RogueItemUse.h" />
     <ClInclude Include="RogueThrowAxe.h" />
