@@ -26,6 +26,14 @@ void Particle::setParentPosition(float x, float y)
 	parentPosY = y;
 }
 
+void Particle::setOrigin(float x, float y)
+{
+}
+
+void Particle::MoveOrigin(float newX, float newY)
+{
+}
+
 sf::Vector2f Particle::getDrawSize()
 {
 	return sf::Vector2f();

@@ -109,7 +109,12 @@ namespace GameView
 		level.drawPlayGround(data->window);
 
 		for (EntityBase* e : entities)
+		{
 			e->draw(data->window);
+			dynamic_cast<EntityCollision*>(e)->drawCollisionShape(data->window);
+		}
+
+		
 
 		test->draw(data->window);
 		data->window.display();

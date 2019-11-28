@@ -10,6 +10,10 @@ public:
 
 	virtual void update();
 	virtual void init();
+
+	void drawCollisionShape(sf::RenderTarget& target);
+
+
 	RectangleShape* GetCollider();
 	Collider* hitbox;
 

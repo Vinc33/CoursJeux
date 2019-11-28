@@ -4,8 +4,6 @@
 #include "../Utils.h"
 #include "AssetManager.h"
 
-
-
 map<string, Texture> AssetManager::textureInfo = map<string, Texture>();
 map<string, Font> AssetManager::fontInfo = map<string, Font>();
 

@@ -9,7 +9,6 @@ public:
 
 	void update();
 private:
-	bool rotatingLeft;
 	bool isCounterClockwise;
 };
 

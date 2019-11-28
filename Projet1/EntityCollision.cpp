@@ -12,12 +12,6 @@ EntityCollision::~EntityCollision()
 	delete body;
 }
 
-void EntityCollision::update()
-{
-	GameView::Game::AddForCheckCollision(this);
-	body->setPosition(getPosition());
-}
-
 void EntityCollision::init()
 {
 	body = new sf::RectangleShape();
@@ -25,8 +19,21 @@ void EntityCollision::init()
 	hitbox = new Collider(body);
 }
 
+void EntityCollision::update()
+{
+	GameView::Game::AddForCheckCollision(this);
+	body->setPosition(getPosition());
+}
+
 
 RectangleShape * EntityCollision::GetCollider()
 {
 	 return body; 
 }
+
+void EntityCollision::drawCollisionShape(sf::RenderTarget& target)
+{
+	target.draw(*body);
+}
+
+
