@@ -11,8 +11,8 @@ public:
 	virtual ~EntityBase();
 
 	virtual void update() = 0;
-	virtual void draw(sf::RenderTarget& target) = 0;
-	virtual Vector2f getDrawSize() = 0;
+	virtual void draw(sf::RenderTarget& target);
+	virtual Vector2f getDrawSize();
 	virtual void init();
 };
 

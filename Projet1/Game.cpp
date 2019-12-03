@@ -18,13 +18,14 @@ namespace GameView
 		InputManager inputManager;
 		inputManager.Initiate();
 
-		AddEntity(new Hunter());
+		//AddEntity(new Hunter());
 		AddEntity(new Monk());
-		AddEntity(new Rogue());
+		//AddEntity(new Rogue());
 
 		sf::Texture* texture = new sf::Texture();
 		texture->loadFromFile("Assets/ToolAndMagic/ThrownAxe.png");
-		test = new Platform(texture, Vector2f(100.0f, 50.0f), Vector2f(200.0f, 300.0f));
+		test = new Platform(texture, Vector2f(50.0f, 200.0f), Vector2f(200.0f, 300.0f));
+
 	}
 
 	Game::~Game()
@@ -56,10 +57,12 @@ namespace GameView
 	void Game::updateLogic()
 	{
 		for (EntityBase* e : entitiesForCollision) {
-			if (test->hitbox->checkCollision((dynamic_cast<EntityCollision*>(e))->GetCollider(), 1.0f))
+			if (test->hitbox->checkCollision((dynamic_cast<EntityCollision*>(e))->GetCollider(), 1.0f,e)) {
 				cout << "collision" << endl;
-
-			cout << "pas de collision" << endl;
+			}
+			else {
+				cout << "pas de collision" << endl;
+			}
 		}
 		entitiesForCollision = vector<EntityBase*>();
 	}
