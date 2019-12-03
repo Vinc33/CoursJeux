@@ -25,7 +25,7 @@ namespace GameView
 		//entities.push_back(new Hunter());
 		//entities.push_back(new Monk());
 		//entities.push_back(new Rogue());
-		entities.push_back(new Pingouin());
+		
 		
 		AddEntity(new Hunter());
 		AddEntity(new Monk());

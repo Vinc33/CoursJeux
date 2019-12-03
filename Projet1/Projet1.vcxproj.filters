@@ -138,16 +138,6 @@
     <ClCompile Include="RogueCrounch.cpp">
       <Filter>Vania\Actions\Rogue</Filter>
     </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="Pingouin.cpp">
-      <Filter>FightingGameXD\Personnage</Filter>
-    </ClCompile>
-    <ClCompile Include="PingouinAttack.cpp">
-      <Filter>FightingGameXD\Actions\Pingouin</Filter>
-    </ClCompile>
-    <ClCompile Include="PingouinCrouch.cpp">
-      <Filter>FightingGameXD\Actions\Pingouin</Filter>
-=======
     <ClCompile Include="HunterShoot.cpp">
       <Filter>Vania\Actions\Hunter</Filter>
     </ClCompile>
@@ -237,7 +227,6 @@
     </ClCompile>
     <ClCompile Include="RogueThrowSmallBomb.cpp">
       <Filter>Vania\Actions\Rogue</Filter>
->>>>>>> 26ccc5f9f9456e06bb3ffb0581e59b9b366514ee
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -378,14 +367,6 @@
     <ClInclude Include="RogueCrounch.h">
       <Filter>Vania\Actions\Rogue</Filter>
     </ClInclude>
-    <ClInclude Include="pingouin.h">
-      <Filter>FightingGameXD\Personnage</Filter>
-    </ClInclude>
-    <ClInclude Include="PingouinAttack.h">
-      <Filter>FightingGameXD\Actions\Pingouin</Filter>
-    </ClInclude>
-    <ClInclude Include="PingouinCrouch.h">
-      <Filter>FightingGameXD\Actions\Pingouin</Filter>
     <ClInclude Include="HunterShoot.h">
       <Filter>Vania\Actions\Hunter</Filter>
     </ClInclude>
@@ -475,7 +456,6 @@
     </ClInclude>
     <ClInclude Include="RogueThrowSmallBomb.h">
       <Filter>Vania\Actions\Rogue</Filter>
->>>>>>> 26ccc5f9f9456e06bb3ffb0581e59b9b366514ee
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -518,21 +498,5 @@
     <Filter Include="Vania\Actions\Rogue">
       <UniqueIdentifier>{b621f45d-b28a-4bf7-9d9b-9b37b8a9e1a2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\GenericAction - player">
-      <UniqueIdentifier>{10e34f31-691b-46f2-a69c-328207d86bad}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="FightingGameXD">
-      <UniqueIdentifier>{9261a9d8-c8d8-47a2-b89c-b7b534f36db9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="FightingGameXD\Personnage">
-      <UniqueIdentifier>{2b62e4e5-d94a-444d-9dd6-a5ce74a3ca84}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="FightingGameXD\Actions">
-      <UniqueIdentifier>{aa48b1c6-39d7-4810-952a-e7209dd5bf32}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="FightingGameXD\Actions\Pingouin">
-      <UniqueIdentifier>{423f9678-f7b5-4a59-9013-11b573c99fa7}</UniqueIdentifier>
-    </Filter>
->>>>>>> 26ccc5f9f9456e06bb3ffb0581e59b9b366514ee
   </ItemGroup>
 </Project>

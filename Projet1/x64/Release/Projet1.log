@@ -1,0 +1,59 @@
+﻿  Action.cpp
+  Animator.cpp
+  Character.cpp
+  Collider.cpp
+  Animation.cpp
+  Crounching.cpp
+  Entity.cpp
+  EntityState.cpp
+  Falling.cpp
+  Game.cpp
+  Hero.cpp
+  HunterShoot.cpp
+  MonkHoldAttack.cpp
+  Hunter.cpp
+  HunterJump.cpp
+  HunterJumpMid.cpp
+  InputManager.cpp
+  Jumping.cpp
+  Knockback.cpp
+  Level.cpp
+Level.cpp(43): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+  Compilation en cours...
+  LevelLoader.cpp
+LevelLoader.cpp(28): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
+  Main.cpp
+  AssetManager.cpp
+Manager\AssetManager.cpp(69): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
+  StateManager.cpp
+  Monk.cpp
+  MonkCrounching.cpp
+  MonkDiveKick.cpp
+  MonkFall.cpp
+  MonkJump.cpp
+  MonkPunch.cpp
+  MonkRisingKick.cpp
+  MonkRoundhouse.cpp
+  MonkSecondJump.cpp
+  MonkWalking.cpp
+  Monster.cpp
+  Object.cpp
+  Platform.cpp
+  Rogue.cpp
+  RogueAttack.cpp
+  RogueCrounch.cpp
+  Compilation en cours...
+  RogueRoll.cpp
+  Standing.cpp
+  Settings.cpp
+  Stage.cpp
+  State.cpp
+  TimeManager.cpp
+  Walking.cpp
+  World.cpp
+  StateMachine.cpp
+  Utils.cpp
+  Génération de code en cours
+  All 1843 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Fin de la génération du code
+  Projet1.vcxproj -> C:\Users\VincentMorin\Desktop\Cegep\Cours\Automne2019\ProgJeuVideo\Game\GameProject\x64\Release\Projet1.exe
