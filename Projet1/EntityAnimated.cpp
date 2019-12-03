@@ -21,5 +21,5 @@ void EntityAnimated::draw(sf::RenderTarget& target)
 
 Vector2f EntityAnimated::getDrawSize()
 {
-	return {(float) animator.GetSprite()->getTextureRect().width, (float)animator.GetSprite()->getTextureRect().height };
+	return {(float)animator.GetSprite()->getTextureRect().height,(float)animator.GetSprite()->getTextureRect().width };
 }

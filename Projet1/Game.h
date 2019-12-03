@@ -44,7 +44,6 @@ namespace GameView
 		
 		GameDataRef data = std::make_shared<GameData>();
 		Platform* test;
-
 		vector<EntityBase*> entities;
 		static vector<EntityBase*> newEntities;
 		static vector<EntityBase*> entitiesForCollision;

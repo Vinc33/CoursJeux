@@ -28,6 +28,7 @@ void Particle::setParentPosition(float x, float y)
 
 void Particle::setOrigin(float x, float y)
 {
+
 }
 
 void Particle::MoveOrigin(float newX, float newY)
