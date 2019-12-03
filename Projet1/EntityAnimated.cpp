@@ -4,6 +4,7 @@
 
 EntityAnimated::EntityAnimated()
 {
+	isFacingLeft = true;
 }
 
 

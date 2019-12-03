@@ -5,7 +5,7 @@
 EntityParticleEmitter::EntityParticleEmitter()
 {
 	particles = std::vector<Particle*>();
-	particlesMoveWithParent = false;
+	particlesMoveWithParent = true;
 }
 
 

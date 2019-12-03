@@ -1,0 +1,3 @@
+﻿  MagicBullet.cpp
+C:\Users\jean_\source\repos\CoursJeux\Projet1\MagicBullet.cpp(31,12): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+  Projet1.vcxproj -> C:\Users\jean_\source\repos\CoursJeux\x64\Debug\Projet1.exe

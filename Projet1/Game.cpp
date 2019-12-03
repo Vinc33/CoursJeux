@@ -4,6 +4,7 @@
 #include "Hunter.h"
 #include "Monk.h"
 #include "Rogue.h"
+#include "MagicBullet.h"
 
 std::vector<EntityBase*> GameView::Game::newEntities = std::vector<EntityBase*>();
 namespace GameView
@@ -19,6 +20,7 @@ namespace GameView
 		//AddEntity(new Hunter());
 		AddEntity(new Monk());
 		AddEntity(new Rogue());
+		AddEntity(new MagicBullet());
 
 		//test = new Platform(&myTexture, Vector2f(100.0f, 30.0f), Vector2f(200.0f, 150.0f));
 	}

@@ -203,6 +203,10 @@
       <Filter>Vania\Actions\Rogue</Filter>
     </ClCompile>
     <ClCompile Include="RogueItemUse.cpp" />
+    <ClCompile Include="MagicBullet.cpp" />
+    <ClCompile Include="MagicBulletCandy.cpp">
+      <Filter>Vania\Particles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Level.h" />
@@ -407,6 +411,10 @@
       <Filter>Vania\Actions\Rogue</Filter>
     </ClInclude>
     <ClInclude Include="RogueItemUse.h" />
+    <ClInclude Include="MagicBullet.h" />
+    <ClInclude Include="MagicBulletCandy.h">
+      <Filter>Vania\Particles</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Vania">
