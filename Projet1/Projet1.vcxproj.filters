@@ -39,9 +39,6 @@
     <ClCompile Include="Animation.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Animator.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="Collider.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
@@ -67,9 +64,6 @@
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="Utils.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Platform.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="MonkJump.cpp">
@@ -165,9 +159,6 @@
     <ClCompile Include="EntityAnimated.cpp">
       <Filter>Engine\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="EntityBrain.cpp">
-      <Filter>Engine\Entity</Filter>
-    </ClCompile>
     <ClCompile Include="RogueThrowKnife.cpp">
       <Filter>Vania\Actions\Rogue</Filter>
     </ClCompile>
@@ -228,6 +219,19 @@
     <ClCompile Include="RogueThrowSmallBomb.cpp">
       <Filter>Vania\Actions\Rogue</Filter>
     </ClCompile>
+    <ClCompile Include="SawBlade.cpp">
+      <Filter>Vania\Projectiles and magics</Filter>
+    </ClCompile>
+    <ClCompile Include="RogueThrowSawBlade.cpp">
+      <Filter>Vania\Actions\Rogue</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityStateMachine.cpp">
+      <Filter>Engine\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Platform.cpp">
+      <Filter>Engine\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="GameVania.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Level.h" />
@@ -271,9 +275,6 @@
     <ClInclude Include="Animation.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Animator.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
     <ClInclude Include="Collider.h">
       <Filter>Engine</Filter>
     </ClInclude>
@@ -296,9 +297,6 @@
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="Utils.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Platform.h">
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="MonkJump.h">
@@ -394,9 +392,6 @@
     <ClInclude Include="EntityAnimated.h">
       <Filter>Engine\Entity</Filter>
     </ClInclude>
-    <ClInclude Include="EntityBrain.h">
-      <Filter>Engine\Entity</Filter>
-    </ClInclude>
     <ClInclude Include="RogueThrowKnife.h">
       <Filter>Vania\Actions\Rogue</Filter>
     </ClInclude>
@@ -457,6 +452,19 @@
     <ClInclude Include="RogueThrowSmallBomb.h">
       <Filter>Vania\Actions\Rogue</Filter>
     </ClInclude>
+    <ClInclude Include="SawBlade.h">
+      <Filter>Vania\Projectiles and magics</Filter>
+    </ClInclude>
+    <ClInclude Include="RogueThrowSawBlade.h">
+      <Filter>Vania\Actions\Rogue</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityStateMachine.h">
+      <Filter>Engine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Platform.h">
+      <Filter>Engine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="GameVania.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Vania">

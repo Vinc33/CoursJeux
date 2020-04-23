@@ -133,7 +133,6 @@
   <ItemGroup>
     <ClCompile Include="Action.cpp" />
     <ClCompile Include="ActionEntity.cpp" />
-    <ClCompile Include="Animator.cpp" />
     <ClCompile Include="Caltrops.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Collider.cpp" />
@@ -141,7 +140,7 @@
     <ClCompile Include="Crounching.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="EntityAnimated.cpp" />
-    <ClCompile Include="EntityBrain.cpp" />
+    <ClCompile Include="EntityStateMachine.cpp" />
     <ClCompile Include="EntityCollision.cpp" />
     <ClCompile Include="EntityInanimate.cpp" />
     <ClCompile Include="EntityParticleEmitter.cpp" />
@@ -150,6 +149,7 @@
     <ClCompile Include="EntityState.cpp" />
     <ClCompile Include="Falling.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameVania.cpp" />
     <ClCompile Include="HandBomb.cpp" />
     <ClCompile Include="Hero.cpp" />
     <ClCompile Include="HunterShoot.cpp" />
@@ -184,8 +184,10 @@
     <ClCompile Include="RogueItemUse.cpp" />
     <ClCompile Include="RogueThrowAxe.cpp" />
     <ClCompile Include="RogueThrowCaltrops.cpp" />
+    <ClCompile Include="RogueThrowSawBlade.cpp" />
     <ClCompile Include="RogueThrowSmallBomb.cpp" />
     <ClCompile Include="RogueThrowSpear.cpp" />
+    <ClCompile Include="SawBlade.cpp" />
     <ClCompile Include="Spear.cpp" />
     <ClCompile Include="StraightProjectile.cpp" />
     <ClCompile Include="Rogue.cpp" />
@@ -212,7 +214,6 @@
   <ItemGroup>
     <ClInclude Include="Action.h" />
     <ClInclude Include="ActionEntity.h" />
-    <ClInclude Include="Animator.h" />
     <ClInclude Include="Caltrops.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Collider.h" />
@@ -220,7 +221,7 @@
     <ClInclude Include="Crounching.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityAnimated.h" />
-    <ClInclude Include="EntityBrain.h" />
+    <ClInclude Include="EntityStateMachine.h" />
     <ClInclude Include="EntityCollision.h" />
     <ClInclude Include="EntityInanimate.h" />
     <ClInclude Include="EntityParticleEmitter.h" />
@@ -229,6 +230,7 @@
     <ClInclude Include="EntityState.h" />
     <ClInclude Include="Falling.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameVania.h" />
     <ClInclude Include="HandBomb.h" />
     <ClInclude Include="Hero.h" />
     <ClInclude Include="HeroActionsEnum.h" />
@@ -263,8 +265,10 @@
     <ClInclude Include="RogueItemUse.h" />
     <ClInclude Include="RogueThrowAxe.h" />
     <ClInclude Include="RogueThrowCaltrops.h" />
+    <ClInclude Include="RogueThrowSawBlade.h" />
     <ClInclude Include="RogueThrowSmallBomb.h" />
     <ClInclude Include="RogueThrowSpear.h" />
+    <ClInclude Include="SawBlade.h" />
     <ClInclude Include="Spear.h" />
     <ClInclude Include="StraightProjectile.h" />
     <ClInclude Include="Rogue.h" />
