@@ -1,8 +1,8 @@
 #include "ActionEntity.h"
-#include "EntityBrain.h"
+#include "EntityStateMachine.h"
 
 
-ActionEntity::ActionEntity(Entity* e) : Action((EntityBrain*)e)
+ActionEntity::ActionEntity(Entity* e) : Action((EntityStateMachine*)e)
 {
 	parent = e;
 }

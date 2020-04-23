@@ -1,5 +1,6 @@
 #include "Spear.h"
 #include "TimeManager.h"
+#include "Manager\AssetManager.h"
 #include <cmath>
 
 #define PI 3.14159265
@@ -15,9 +16,8 @@ Spear::Spear(float initialSpeed)
 
 	jump();
 
-	sf::Texture* texture = new sf::Texture();
-	texture->loadFromFile("Assets\\ToolAndMagic\\Spear.png");
-	SetSprite(texture, initialSpeed < 0);
+	sf::Texture* texture = &AssetManager::getTexture("spear");
+	setSprite(texture, initialSpeed < 0);
 
 	if (initialSpeed < 0)
 		setRotation(10);

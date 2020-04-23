@@ -11,12 +11,12 @@ RogueThrowSmallBomb::RogueThrowSmallBomb(Entity* e) : RogueItemUse(e, .15f)
 	if (parent->imageReversed)
 	{
 		parent->accelerate(-.5f);
-		parent->Spawn(new HandBomb(-475 + (int)(parent->velX / 2)), 88, 50);
+		parent->Spawn(new HandBomb(-475.0f + (int)(parent->velX / 2)), 88, 50);
 	}
 	else
 	{
 		parent->accelerate(.5f);
-		parent->Spawn(new HandBomb(475 + (int)(parent->velX / 2)), 146, 50);
+		parent->Spawn(new HandBomb(475.0f + (int)(parent->velX / 2)), 146, 50);
 	}
 }
 

@@ -2,10 +2,10 @@
 #include <string>
 #include "./Manager/StateManager.h"
 #include "./Manager/AssetManager.h"
+#include "./Manager/ViewManager.h"
 #include "InputManager.h"
 #include "Level.h"
 #include "EntityBase.h"
-#include "Platform.h"
 #include "TimeManager.h"
 
 using namespace sf;
@@ -26,28 +26,43 @@ namespace GameView
 		Game(int width, int height, string titleScreen);
 		~Game();
 
-		void init();
+		virtual void init();
 		void startGame();
 
-		static void AddEntity(EntityBase* e);
-		static void AddForCheckCollision(EntityBase* e);
+		static void AddEntity(EntityBase* e, unsigned int layer = 0);
+		
+		void ResetCollision();
+		void AddCollisionBetweenLayers(unsigned int layer1, unsigned int layer2);
+
+		EntityBase* getEntity(unsigned layer, unsigned index);
+
 	private:
 		void update();
 		void updateInput();
 		void updateLogic();
 		void updateEvent();
 		void render();
+		void SATCollision(EntityBase * eb1, EntityBase * eb2);
 
 		TimeManager timeManager;
 
 		const unsigned int FPS = 60;
+		const unsigned int NBOFCOLLISIONLAYER = 3;
 		
 		GameDataRef data = std::make_shared<GameData>();
-		Platform* test;
-		vector<EntityBase*> entities;
-		static vector<EntityBase*> newEntities;
-		static vector<EntityBase*> entitiesForCollision;
+		vector<vector<EntityBase*>> entities;
+		static vector<vector<EntityBase*>> newEntities;
+
+		struct CollisionRule
+		{
+			unsigned int layer1;
+			unsigned int layer2;
+		};
+		vector<CollisionRule> collisionRules;
+
 		Level level;
 
+	protected:
+		ViewManager* camera;
 	};
 }

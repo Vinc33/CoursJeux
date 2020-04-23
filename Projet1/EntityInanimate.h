@@ -10,11 +10,15 @@ public:
 	EntityInanimate();
 	~EntityInanimate();
 
+	virtual void setSprite(sf::Texture* t, bool reverseImage = false);
+
 	virtual void draw(sf::RenderTarget& target);
-	virtual Vector2f getDrawSize();
-	void SetSprite(sf::Texture* t, bool reverseImage = false);
+	virtual void drawHitBox(sf::RenderTarget& target);
+	virtual FloatRect * getHitBox();
+	virtual FloatRect * getDrawLocation();
 
 protected:
 	sf::Sprite* sprite;
+	sf::FloatRect hitbox;
 };
 

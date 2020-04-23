@@ -1,75 +1,43 @@
 #include "Caltrops.h"
+#include "Manager\AssetManager.h"
 
 
 
 Caltrops::Caltrops(float initialSpeed)
 {
-	sf::Texture* texture = new sf::Texture();
-	texture->loadFromFile("Assets/ToolAndMagic/Caltrops.png");
+
+	sf::Texture* texture = &AssetManager::getTexture("caltrops");
 	Spritesheet spritesheet = { texture, 4, 3 };
-
-	std::vector<Coord> indexes;
-	std::vector<int> showTimes;
-
-	indexes.push_back({ 0, 0 });
-	showTimes.push_back(31);
-	indexes.push_back({ 1, 0 });
-	showTimes.push_back(31);
-	indexes.push_back({ 2, 0 });
-	showTimes.push_back(31);
-
-	indexes.push_back({ 0, 1 });
-	showTimes.push_back(31);
-	indexes.push_back({ 1, 1 });
-	showTimes.push_back(31);
-	indexes.push_back({ 2, 1 });
-	showTimes.push_back(31);
-
-	indexes.push_back({ 0, 2 });
-	showTimes.push_back(31);
-	indexes.push_back({ 1, 2 });
-	showTimes.push_back(31);
-	indexes.push_back({ 2, 2 });
-	showTimes.push_back(31);
-
-	indexes.push_back({ 0, 3 });
-	showTimes.push_back(31);
-	indexes.push_back({ 1, 3 });
-	showTimes.push_back(31);
-	indexes.push_back({ 2, 3 });
-	showTimes.push_back(31);
-
-	animator.AddAnimation(new Animation(spritesheet, indexes, showTimes), "Roll");
-	animator.JumpToFrame(rand() % 12);
-
-	sf::Texture* texture2 = new sf::Texture();
-	texture2->loadFromFile("Assets/ToolAndMagic/Caltrops_Deployed.png");
-	Spritesheet spritesheet2 = { texture2, 3, 3 };
+	Animation * anim = new Animation(spritesheet);
+	anim->addFrame({ 0, 0 }, 31);
+	anim->addFrame({ 1, 0 }, 31);
+	anim->addFrame({ 2, 0 }, 31);
+	anim->addFrame({ 0, 1 }, 31);
+	anim->addFrame({ 1, 1 }, 31);
+	anim->addFrame({ 2, 1 }, 31);
+	anim->addFrame({ 0, 2 }, 31);
+	anim->addFrame({ 1, 2 }, 31);
+	anim->addFrame({ 2, 2 }, 31);
+	anim->addFrame({ 0, 3 }, 31);
+	anim->addFrame({ 1, 3 }, 31);
+	anim->addFrame({ 2, 3 }, 31);
+	addAnimation(anim, "Roll");
+	jumpToFrame(rand() % 12);
 
 
-	indexes = std::vector<Coord>();
-	showTimes = std::vector<int>();
-
-	indexes.push_back({ 0, 0 });
-	showTimes.push_back(-1);
-	indexes.push_back({ 1, 0 });
-	showTimes.push_back(-1);
-	indexes.push_back({ 2, 0 });
-	showTimes.push_back(-1);
-	indexes.push_back({ 0, 1 });
-	showTimes.push_back(-1);
-	indexes.push_back({ 1, 1 });
-	showTimes.push_back(-1);
-	indexes.push_back({ 2, 1 });
-	showTimes.push_back(-1);
-	indexes.push_back({ 0, 2 });
-	showTimes.push_back(-1);
-	indexes.push_back({ 1, 2 });
-	showTimes.push_back(-1);
-	indexes.push_back({ 2, 2 });
-	showTimes.push_back(-1);
-
-	animator.AddAnimation(new Animation(spritesheet2, indexes, showTimes), "Land");
+	texture = &AssetManager::getTexture("caltrops_deployed");
+	spritesheet = { texture, 3, 3 };
+	anim = new Animation(spritesheet);
+	anim->addFrame({ 0, 0 }, -1);
+	anim->addFrame({ 1, 0 }, -1);
+	anim->addFrame({ 2, 0 }, -1);
+	anim->addFrame({ 0, 1 }, -1);
+	anim->addFrame({ 1, 1 }, -1);
+	anim->addFrame({ 2, 1 }, -1);
+	anim->addFrame({ 0, 2 }, -1);
+	anim->addFrame({ 1, 2 }, -1);
+	anim->addFrame({ 2, 2 }, -1);
+	addAnimation(anim, "Land");
 
 
 	maxVelX = 10000;
@@ -88,15 +56,17 @@ Caltrops::~Caltrops()
 
 void Caltrops::update()
 {
+	EntityAnimated::update();
 	EntityPhysic::update();
+
 	//temporary ground
 	if (velY > 0 && getPosition().y > 440)
 	{
 		isAirborne = false;
 		setPosition(getPosition().x, 440);
 		velY = 0;
-		animator.ChangeAnimation("Land");
-		animator.JumpToFrame(rand() % 9);
+		changeAnimation("Land");
+		jumpToFrame(rand() % 9);
 	}
 	//end temporary ground
 }

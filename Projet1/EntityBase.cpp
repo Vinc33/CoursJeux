@@ -15,11 +15,32 @@ void EntityBase::draw(sf::RenderTarget & target)
 {
 }
 
-Vector2f EntityBase::getDrawSize()
+void EntityBase::drawHitBox(sf::RenderTarget & target)
 {
-	return Vector2f();
 }
 
-void EntityBase::init()
+FloatRect * EntityBase::getHitBox()
+{
+	return nullptr;
+}
+
+FloatRect * EntityBase::getDrawLocation()
+{
+	return nullptr;
+}
+
+void EntityBase::onCollision(EntityBase * e)
 {
 }
+
+EntityBase::COLLISIONEFFECT * EntityBase::getCollisionEffects()
+{
+	return nullptr;
+}
+
+std::string EntityBase::toString()
+{
+	return "EntityBase";
+}
+
+

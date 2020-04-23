@@ -1,13 +1,13 @@
 #include "MonkChargeParticle.h"
 #include "TimeManager.h"
 #include <ctime>
+#include "Manager\AssetManager.h"
 
 MonkChargeParticle::MonkChargeParticle(bool reversed, float originX, float originY) : Particle(0.6f, originX, originY)
 {
-	sf::Texture* texture = new sf::Texture();
-	texture->loadFromFile("Assets\\Particle\\MonkCharge.png");
+	sf::Texture* texture = &AssetManager::getTexture("monk_charge_particle");
 
-	SetSprite(texture, reversed);
+	setSprite(texture, reversed);
 	setOrigin(sprite->getTextureRect().width / 2.0f, sprite->getTextureRect().height / 2.0f);
 
 	isCounterClockwise = reversed;

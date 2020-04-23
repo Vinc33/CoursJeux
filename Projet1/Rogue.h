@@ -9,7 +9,8 @@ enum RogueWeapon
 	AXE,
 	CALTROPS,
 	SPEAR,
-	HANDBOMB
+	HANDBOMB,
+	SAWBLADE
 };
 
 class Rogue :
@@ -21,6 +22,8 @@ public:
 
 	void changeAction(int enumIndex);
 	void update();
+
+	std::string toString();
 private:
 	void addAnimations();
 	void useWeapon(RogueWeapon weapon);

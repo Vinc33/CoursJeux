@@ -5,6 +5,7 @@
 EntityInanimate::EntityInanimate()
 {
 	sprite = new sf::Sprite();
+	hitbox = sprite->getGlobalBounds();
 }
 
 
@@ -16,14 +17,20 @@ EntityInanimate::~EntityInanimate()
 void EntityInanimate::draw(sf::RenderTarget& target)
 {
 	target.draw(*sprite, getTransform());
+	hitbox = sprite->getGlobalBounds();
+	hitbox.left = getPosition().x;
+	hitbox.top = getPosition().y;
 }
 
-Vector2f EntityInanimate::getDrawSize()
+void EntityInanimate::drawHitBox(sf::RenderTarget & target)
 {
-	return {(float) sprite->getTextureRect().width,(float) sprite->getTextureRect().height };
+	RectangleShape rs({ hitbox.width, hitbox.height });
+	rs.setFillColor(Color(10, 100, 0, 100));
+	rs.setPosition({ hitbox.left, hitbox.top });
+	target.draw(rs);
 }
 
-void EntityInanimate::SetSprite(sf::Texture* t, bool reverseImage)
+void EntityInanimate::setSprite(sf::Texture* t, bool reverseImage)
 {
 	sf::IntRect uvRect;
 
@@ -33,7 +40,7 @@ void EntityInanimate::SetSprite(sf::Texture* t, bool reverseImage)
 
 	if (reverseImage)
 	{
-		sprite->setOrigin( 0, 0 );
+		sprite->setOrigin(0, 0);
 		setOrigin(0, 0);
 		sprite->setScale({ -2, 2 });
 	}
@@ -43,4 +50,15 @@ void EntityInanimate::SetSprite(sf::Texture* t, bool reverseImage)
 		setOrigin(0, 0);
 		sprite->setScale({ 2, 2 });
 	}
+}
+
+FloatRect * EntityInanimate::getHitBox()
+{
+	return &hitbox;
+}
+
+FloatRect * EntityInanimate::getDrawLocation()
+{
+	//TODO
+	return nullptr;
 }

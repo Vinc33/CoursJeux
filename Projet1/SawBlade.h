@@ -3,14 +3,14 @@
 #include "EntityPhysic.h"
 
 
-class ThrownAxe :
+class SawBlade :
 	public EntityAnimated,
 	public EntityPhysic
-
 {
 public:
-	ThrownAxe(int initialSpeed);
-	~ThrownAxe();
+	SawBlade(int initialSpeed);
+	~SawBlade();
+
 	void update();
 };
 

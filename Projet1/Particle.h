@@ -14,10 +14,6 @@ public:
 
 	void setOrigin(float x, float y);
 	void MoveOrigin(float newX, float newY);
-	Vector2f getDrawSize();
-
-	void init();
-
 
 	float lifeTime;
 private:

@@ -1,2 +1,15 @@
-../MetroidVania/Church.png Church|Assets/SpriteSheet/bat.png bat|
-Assets/ToolAndMagic/ThrownKnife.png knife|Assets/ToolAndMagic/ThrownAxe.png axe|
+../MetroidVania/Church.png Church|
+Assets/SpriteSheet/Hunter.png hunter|
+Assets/SpriteSheet/Monk.png monk|
+Assets/SpriteSheet/MonkFX_Blue.png monkfx_blue|
+Assets/SpriteSheet/MonkFX_Fiery.png monkfx_fiery|
+Assets/SpriteSheet/MonkFX_Yellow.png monkfx_yellow|
+Assets/SpriteSheet/Rogue.png rogue|
+Assets/ToolAndMagic/Caltrops.png caltrops|
+Assets/ToolAndMagic/Caltrops_Deployed.png caltrops_deployed|
+Assets/ToolAndMagic/SawBlade.png sawblade|
+Assets/ToolAndMagic/SmallBomb.png handbomb|
+Assets/ToolAndMagic/Spear.png spear|
+Assets/ToolAndMagic/ThrownAxe.png axe|
+Assets/ToolAndMagic/ThrownKnife.png knife|
+Assets/Particle/MonkCharge.png monk_charge_particle|

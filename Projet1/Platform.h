@@ -1,20 +1,20 @@
 #pragma once
 #include <SFML\Graphics.hpp>
-#include "Collider.h"
-class Platform
+#include "EntityInanimate.h"
+
+class Platform :
+	public EntityInanimate
 {
 public:
-	Platform(sf::Texture* texture,sf::Vector2f size,sf::Vector2f position);
+	Platform(sf::Texture* texture, sf::Vector2f position);
 	~Platform();
 
-	void draw(sf::RenderWindow& window);
-	RectangleShape* GetCollider() 
-	{ 
-		return body; 
-	}
+	void update(){}
 
-	Collider* hitbox;
+	virtual void draw(sf::RenderTarget& target);
+
+	virtual std::string toString();
+
 private:
-	sf::RectangleShape* body;
 };
 

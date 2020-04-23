@@ -1,59 +1,38 @@
 #include "Game.h"
 
-//for tests
-#include "Hunter.h"
-#include "Monk.h"
-#include "Pingouin.h"
-#include "Rogue.h"
-#include "Hero.h"
+//assignation de variables statiques
+std::vector<vector<EntityBase*>> GameView::Game::newEntities = std::vector<vector<EntityBase*>>();
 
-std::vector<EntityBase*> GameView::Game::newEntities = std::vector<EntityBase*>();
-std::vector<EntityBase*> GameView::Game::entitiesForCollision = std::vector<EntityBase*>();
 namespace GameView
 {
-
 	Game::Game(int width, int height, string titleScreen)
 	{
 		data->window.setVerticalSyncEnabled(true);
 		data->window.create(VideoMode(width, height), titleScreen, Style::Close | Style::Titlebar);
-		InputManager inputManager;
-		inputManager.Initiate();
-
-
-		//myEntity = new MyEntity(&myTexture, sf::Vector2u(3, 2), 0.001f, 0.01f);
-		//Tileset entityTileset = {};
-		//entity = new Entity();
-		//entities.push_back(new Hunter());
-		//entities.push_back(new Monk());
-		//entities.push_back(new Rogue());
-		
-		
-		AddEntity(new Hunter());
-
-		//AddEntity(new Hunter());
-
-		AddEntity(new Monk());
-		//AddEntity(new Rogue());
-
-		sf::Texture* texture = new sf::Texture();
-		texture->loadFromFile("Assets/ToolAndMagic/ThrownAxe.png");
-		test = new Platform(texture, Vector2f(50.0f, 200.0f), Vector2f(200.0f, 300.0f));
-
 	}
 
 	Game::~Game()
 	{
-		for(auto ent : entities)
-		{
-			delete ent;
-		}
+		for (auto a : entities)
+			for (auto e : a)
+				delete e;
+		delete camera;
 	}
 
 	void Game::init()
 	{
 		data->window.setFramerateLimit(FPS);
 		AssetManager::init();
+		InputManager::init();
 		level.init();
+
+		for (unsigned int i = 0; i < NBOFCOLLISIONLAYER; i++)
+		{
+			entities.push_back({});
+			newEntities.push_back({});
+		}
+
+		camera = new ViewManager({ (float)data->window.getSize().x,(float)data->window.getSize().y });
 	}
 
 	void Game::updateEvent()
@@ -69,21 +48,29 @@ namespace GameView
 
 	void Game::updateLogic()
 	{
-		for (EntityBase* e : entitiesForCollision) {
-			if (test->hitbox->checkCollision((dynamic_cast<EntityCollision*>(e))->GetCollider(), 1.0f,e)) {
-				cout << "collision" << endl;
-			}
-			else {
-				cout << "pas de collision" << endl;
+
+		//Collision Logic
+		for (CollisionRule cr : collisionRules)
+		{
+			for (EntityBase* e1 : entities[cr.layer1])
+			{
+				for (EntityBase* e2 : entities[cr.layer2])
+				{
+					if (e1->getHitBox()->intersects(*(e2->getHitBox())))
+					{
+						e1->onCollision(e2);
+						e2->onCollision(e1);
+					}
+				}
 			}
 		}
-		entitiesForCollision = vector<EntityBase*>();
 	}
 
 	void Game::update()
 	{
 		while (data->window.isOpen())
 		{
+			cout << endl;
 			timeManager.update();
 
 			updateInput();
@@ -96,11 +83,19 @@ namespace GameView
 
 	void Game::updateInput()
 	{
-		for (EntityBase* e : entities)
-			e->update();
+		//Update chaque "Entity"
+		for (auto a : entities)
+			for (EntityBase* e : a)
+				e->update();
 
-		entities.insert(entities.end(), newEntities.begin(), newEntities.end());
-		newEntities = std::vector<EntityBase*>();
+		//Rajoute a "entities" celles spawner pendant l'Update
+		int i = 0;
+		for (auto a : entities)
+		{
+			entities[i].insert(entities[i].end(), newEntities[i].begin(), newEntities[i].end());
+			newEntities[i] = vector<EntityBase*>();
+			i++;
+		}
 	}
 
 	void Game::startGame()
@@ -108,26 +103,48 @@ namespace GameView
 		update();
 	}
 
-	void Game::AddEntity(EntityBase * e)
+	//statique, permet d'ajouter de nouvelles "Entity" à partir de n'importe quelle classe.  GameView::Game::AddEntity(myEntity);
+	void Game::AddEntity(EntityBase * e, unsigned int layer)
 	{
-		e->init();
-		newEntities.push_back(e);
+		newEntities[layer].push_back(e);
 	}
-	void Game::AddForCheckCollision(EntityBase * e)
+
+	void Game::ResetCollision()
 	{
-		entitiesForCollision.push_back(e);
+		collisionRules = vector<CollisionRule>();
+	}
+
+	void Game::AddCollisionBetweenLayers(unsigned int layer1, unsigned int layer2)
+	{
+		collisionRules.push_back({ layer1, layer2 });
+	}
+
+	EntityBase * Game::getEntity(unsigned layer, unsigned index)
+	{
+		return entities[layer][index];
 	}
 
 	void Game::render()
 	{
 		data->window.clear(Color::Black);
 
+		data->window.setView(*camera->getView());
+		camera->update();
+
 		level.drawPlayGround(data->window);
 
-		for (EntityBase* e : entities)
-			e->draw(data->window);
+		for (auto a : entities)
+			for (EntityBase* e : a)
+			{
+				e->draw(data->window);
+				//e->drawHitBox(data->window);
+			}
 
-		test->draw(data->window);
 		data->window.display();
+	}
+
+	void Game::SATCollision(EntityBase * eb1, EntityBase * eb2)
+	{
+
 	}
 }

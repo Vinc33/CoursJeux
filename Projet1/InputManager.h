@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include <SFML/Graphics.hpp>
+//#include <SFML/Graphics.hpp>
 #include <SFML/Window/Event.hpp>
 #include <vector>
 
@@ -15,7 +15,7 @@ public:
 	InputManager();
 	~InputManager();
 
-	void Initiate();
+	static void init();
 
 	static float GetAxis(Keys K);
 	static bool GetKeyState(Keys K);

@@ -1,10 +1,10 @@
 #include "Action.h"
 #include "Entity.h"
-#include "EntityBrain.h"
+#include "EntityStateMachine.h"
 
-Action::Action(EntityBrain* e)
+Action::Action(EntityStateMachine* e)
 {
-	p = e;
+	stateMachine = e;
 }
 
 Action::~Action()

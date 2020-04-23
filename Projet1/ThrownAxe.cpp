@@ -5,48 +5,27 @@
 ThrownAxe::ThrownAxe(int initialSpeed)
 {
 	sf::Texture* texture = &AssetManager::getTexture("axe");
-	int nbRows = 2;
-	int nbColums = 8;
-	Spritesheet spritesheet = { texture, nbRows, nbColums };
+	Spritesheet spritesheet = { texture, 2, 8 };
+	Animation * anim = new Animation(spritesheet);
+	anim->addFrame({ 0, 0 }, 31);
+	anim->addFrame({ 1, 0 }, 31);
+	anim->addFrame({ 2, 0 }, 31);
+	anim->addFrame({ 3, 0 }, 31);
+	anim->addFrame({ 4, 0 }, 31);
+	anim->addFrame({ 5, 0 }, 31);
+	anim->addFrame({ 6, 0 }, 31);
+	anim->addFrame({ 7, 0 }, 31);
+	anim->addFrame({ 0, 1 }, 31);
+	anim->addFrame({ 1, 1 }, 31);
+	anim->addFrame({ 2, 1 }, 31);
+	anim->addFrame({ 3, 1 }, 31);
+	anim->addFrame({ 4, 1 }, 31);
+	anim->addFrame({ 5, 1 }, 31);
+	anim->addFrame({ 6, 1 }, 31);
+	anim->addFrame({ 7, 1 }, 31);
+	addAnimation(anim, "Roll");
 
-	std::vector<Coord> indexes;
-	std::vector<int> showTimes;
-
-	indexes.push_back({ 0, 0 });
-	showTimes.push_back(31);
-	indexes.push_back({ 1, 0 });
-	showTimes.push_back(31);
-	indexes.push_back({ 2, 0 });
-	showTimes.push_back(31);
-	indexes.push_back({ 3, 0 });
-	showTimes.push_back(31);
-	indexes.push_back({ 4, 0 });
-	showTimes.push_back(31);
-	indexes.push_back({ 5, 0 });
-	showTimes.push_back(31);
-	indexes.push_back({ 6, 0 });
-	showTimes.push_back(31);
-	indexes.push_back({ 7, 0 });
-	showTimes.push_back(31);
-	indexes.push_back({ 0, 1 });
-	showTimes.push_back(31);
-	indexes.push_back({ 1, 1 });
-	showTimes.push_back(31);
-	indexes.push_back({ 2, 1 });
-	showTimes.push_back(31);
-	indexes.push_back({ 3, 1 });
-	showTimes.push_back(31);
-	indexes.push_back({ 4, 1 });
-	showTimes.push_back(31);
-	indexes.push_back({ 5, 1 });
-	showTimes.push_back(31);
-	indexes.push_back({ 6, 1 });
-	showTimes.push_back(31);
-	indexes.push_back({ 7, 1 });
-	showTimes.push_back(31);
-
-	animator.AddAnimation(new Animation(spritesheet, indexes, showTimes), "Roll");
-	animator.JumpToFrame(14);
+	jumpToFrame(14);
 
 	maxVelX = 10000;
 	velX = (float)initialSpeed;
@@ -66,6 +45,6 @@ ThrownAxe::~ThrownAxe()
 
 void ThrownAxe::update()
 {
+	EntityAnimated::update();
 	EntityPhysic::update();
-	EntityCollision::update();
 }

@@ -2,21 +2,23 @@
 
 
 
-Platform::Platform(sf::Texture* texture, sf::Vector2f size, sf::Vector2f position)
+Platform::Platform(sf::Texture* texture, sf::Vector2f position)
 {
-	body = new RectangleShape();
-	body->setSize(size);
-	//body->setOrigin(size / 2.0f);
-	body->setTexture(texture);
-	body->setPosition(position);
-	hitbox = new Collider(body);
+	setPosition(position);
+	setSprite(texture);
 }
-
 
 Platform::~Platform()
 {
+
 }
 
-void Platform::draw(sf::RenderWindow& window) {
-	window.draw(*body);
+void Platform::draw(sf::RenderTarget & target)
+{
+	EntityInanimate::draw(target);
+}
+
+std::string Platform::toString()
+{
+	return "Platform";
 }

@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-#include "Game.h"
+#include "GameVania.h"
 #include "Manager/AssetManager.h"
 #include "LevelLoader.h"
 
@@ -8,11 +8,11 @@ using namespace GameView;
 
 int main()
 {
-	string egineName = "My game";
-	Game myEngine(800,600,egineName);
+	string gameName = "UNNAMED VANIA GAME";
+	GameVania game(800,600, gameName);
 
-	myEngine.init();
-	myEngine.startGame();
+	game.init();
+	game.startGame();
 
 	return EXIT_SUCCESS;
 }

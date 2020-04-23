@@ -7,24 +7,28 @@
 #include <SFML\Graphics.hpp>
 #include "../Collider.h"
 #include <time.h>
+#include "../EntityBase.h"
+
+
 
 class ViewManager
 {
+public:
+	ViewManager(sf::Vector2f size);
+	~ViewManager();
+
+	void update();
+	View* getView();
+	void ShakeView(int intensity, sf::Vector2f positionInitial);
+	void ZoomView(float zoomRaport);
+	void RotateView(float angle);
+	void setTarget(EntityBase* e);
 private:
-	sf::Vector2f center;
-	sf::Vector2f halfSize;
 	View* myView;
 	View* minimap;
 	bool shakeRight;
+	EntityBase* target;
 
-public:
-	ViewManager(sf::Vector2f center, sf::Vector2f hlafSize);
-	~ViewManager();
+	float lerp(float v0, float v1, float t);
 
-	void Viewupdate(sf::Vector2f position);
-	View* getView();
-	void ShakeView(int intensity,sf::Vector2f positionInitial);
-	void ZoomView(float zoomRaport);
-	void RotateView(float angle);
 };
-

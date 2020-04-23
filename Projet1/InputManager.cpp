@@ -46,7 +46,7 @@ InputManager::~InputManager()
 
 }
 
-void InputManager::Initiate()
+void InputManager::init()
 {
 	keysUP.push_back(Keyboard::Up);
 	keysDOWN.push_back(Keyboard::Down);

@@ -15,6 +15,9 @@
 #include "RogueThrowCaltrops.h"
 #include "RogueThrowSpear.h"
 #include "RogueThrowSmallBomb.h"
+#include "RogueThrowSawBlade.h"
+
+#include "Manager\AssetManager.h"
 
 Rogue::Rogue() : Hero("Rogue", 20, 40)
 {
@@ -42,9 +45,9 @@ Rogue::Rogue() : Hero("Rogue", 20, 40)
 	frontToolCooldown = 0.75f;
 	standToolCooldown = 0.75f;
 
-	equipedUp = AXE;
+	equipedUp = SAWBLADE;
 	equipedDown = SPEAR;
-	equipedFront = HANDBOMB;
+	equipedFront = KNIFE;
 	equipedStand = CALTROPS;
 }
 
@@ -73,37 +76,42 @@ void Rogue::update()
 	}
 }
 
+std::string Rogue::toString()
+{
+	return "Rogue";
+}
+
 void Rogue::changeAction(int enumIndex)
 {
 	switch ((PlayerAction)enumIndex)
 	{
 	case STAND:
-		animator.ChangeAnimation("Stand");
+		changeAnimation("Stand");
 		delete currentAction;
 		currentAction = new RogueStanding(this);
 		break;
 	case WALK:
-		animator.ChangeAnimation("Walk");
+		changeAnimation("Walk");
 		delete currentAction;
 		currentAction = new RogueWalk(this);
 		break;
 	case CROUNCH:
-		animator.ChangeAnimation("Crounch");
+		changeAnimation("Crounch");
 		delete currentAction;
 		currentAction = new RogueCrounch(this);
 		break;
 	case JUMP:
-		animator.ChangeAnimation("Jump");
+		changeAnimation("Jump");
 		delete currentAction;
 		currentAction = new RogueJump(this);
 		break;
 	case FALL:
-		animator.ChangeAnimation("Jump");
+		changeAnimation("Jump");
 		delete currentAction;
 		currentAction = new RogueJump(this, false, false);
 		break;
 	case FALLMAYROLL:
-		animator.ChangeAnimation("Jump");
+		changeAnimation("Jump");
 		delete currentAction;
 		currentAction = new RogueJump(this, false);
 		break;
@@ -111,23 +119,23 @@ void Rogue::changeAction(int enumIndex)
 		if (attackTimer < 0)
 		{
 			attackTimer = attackCooldown;
-			animator.ChangeAnimation("Attack");
+			changeAnimation("Attack");
 			delete currentAction;
 			currentAction = new RogueAttack(this);
 		}
 		break;
 	case ROLL:
-		animator.ChangeAnimation("Roll");
+		changeAnimation("Roll");
 		delete currentAction;
 		currentAction = new RogueRoll(this);
 		break;
 	case SOMERSAULT:
-		animator.ChangeAnimation("Roll");
+		changeAnimation("Roll");
 		delete currentAction;
 		currentAction = new RogueSomersault(this);
 		break;
 	case CHAINEDJUMP:
-		animator.ChangeAnimation("Walk");
+		changeAnimation("Walk");
 		delete currentAction;
 		currentAction = new RogueWalk(this);
 		nextAction = PlayerAction::JUMP;
@@ -172,7 +180,7 @@ void Rogue::useWeapon(RogueWeapon rw)
 		itemTimer = itemCooldown;
 		attackTimer = attackCooldown / 2;
 		delete currentAction;
-		animator.ChangeAnimation("Item");
+		changeAnimation("Item");
 		switch (rw)
 		{
 		case NONE:
@@ -192,6 +200,9 @@ void Rogue::useWeapon(RogueWeapon rw)
 		case HANDBOMB:
 			currentAction = new RogueThrowSmallBomb(this);
 			break;
+		case SAWBLADE:
+			currentAction = new RogueThrowSawBlade(this);
+			break;
 		default:
 			break;
 		}
@@ -200,139 +211,71 @@ void Rogue::useWeapon(RogueWeapon rw)
 
 void Rogue::addAnimations()
 {
-	sf::Texture* texture = new Texture();
-	texture->loadFromFile("Assets/SpriteSheet/Rogue.png");
-	int nbRows = 5;
-	int nbColums = 8;
-	Spritesheet spritesheet = { texture, nbRows, nbColums };
+	sf::Texture* texture = &AssetManager::getTexture("rogue");
+	Spritesheet spritesheet = { texture, 5, 8 };
 
-	vector<Coord> indexes;
-	vector<int> showTimes;
+	Animation * anim = new Animation(spritesheet);
+	anim->addFrame({ 0, 2 }, 150);
+	anim->addFrame({ 1, 2 }, 150);
+	anim->addFrame({ 2, 2 }, 150);
+	anim->addFrame({ 3, 2 }, 150);
+	anim->addFrame({ 4, 2 }, 150);
+	anim->addFrame({ 5, 2 }, 150);
+	addAnimation(anim, "Stand");
 
-	indexes.push_back({ 0, 2 });
-	showTimes.push_back(150);
-	indexes.push_back({ 1, 2 });
-	showTimes.push_back(150);
-	indexes.push_back({ 2, 2 });
-	showTimes.push_back(150);
-	indexes.push_back({ 3, 2 });
-	showTimes.push_back(150);
-	indexes.push_back({ 4, 2 });
-	showTimes.push_back(150);
-	indexes.push_back({ 5, 2 });
-	showTimes.push_back(150);
+	anim = new Animation(spritesheet);
+	anim->addFrame({ 0, 0 }, 75);
+	anim->addFrame({ 1, 0 }, 50);
+	anim->addFrame({ 2, 0 }, 50);
+	anim->addFrame({ 3, 0 }, 75);
+	anim->addFrame({ 4, 0 }, 100);
+	addAnimation(anim, "Attack");
 
-	animator.AddAnimation(new Animation(spritesheet, indexes, showTimes), "Stand");
+	anim = new Animation(spritesheet);
+	anim->addFrame({ 1, 0 }, 100);
+	anim->addFrame({ 2, 0 }, 75);
+	anim->addFrame({ 3, 0 }, 75);
+	anim->addFrame({ 4, 0 }, 75);
+	addAnimation(anim, "Item");
 
-	indexes = vector<Coord>();
-	showTimes = vector<int>();
+	anim = new Animation(spritesheet);
+	anim->addFrame({ 5, 0 }, 100);
+	anim->addFrame({ 6, 0 }, 100);
+	anim->addFrame({ 7, 0 }, 100);
+	addAnimation(anim, "Knockback");
 
-	indexes.push_back({ 0, 0 });
-	showTimes.push_back(75);
-	indexes.push_back({ 1, 0 });
-	showTimes.push_back(50);
-	indexes.push_back({ 2, 0 });
-	showTimes.push_back(50);
-	indexes.push_back({ 3, 0 });
-	showTimes.push_back(75);
-	indexes.push_back({ 4, 0 });
-	showTimes.push_back(100);
+	anim = new Animation(spritesheet);
+	anim->addFrame({ 0, 1 }, 25);
+	anim->addFrame({ 1, 1 }, 200);
+	anim->addFrame({ 2, 1 }, 175);
+	anim->addFrame({ 3, 1 }, 150);
+	anim->addFrame({ 4, 1 }, 125);
+	anim->addFrame({ 5, 1 }, 100);
+	anim->addFrame({ 6, 1 }, 100);
+	anim->addFrame({ 7, 1 }, 100);
+	addAnimation(anim, "Roll");
 
-	animator.AddAnimation(new Animation(spritesheet, indexes, showTimes, false), "Attack");
+	anim = new Animation(spritesheet);
+	anim->addFrame({ 6, 2 }, 100);
+	anim->addFrame({ 7, 2 }, 100);
+	addAnimation(anim, "Jump");
 
-	indexes = vector<Coord>();
-	showTimes = vector<int>();
+	anim = new Animation(spritesheet);
+	anim->addFrame({ 6, 3 }, 100);
+	anim->addFrame({ 7, 3 }, -1);
+	addAnimation(anim, "Crounch");
 
-	indexes.push_back({ 1, 0 });
-	showTimes.push_back(100);
-	indexes.push_back({ 2, 0 });
-	showTimes.push_back(75);
-	indexes.push_back({ 3, 0 });
-	showTimes.push_back(75);
-	indexes.push_back({ 4, 0 });
-	showTimes.push_back(75);
+	anim = new Animation(spritesheet);
+	anim->addFrame({ 0, 3 }, 100);
+	anim->addFrame({ 1, 3 }, 100);
+	anim->addFrame({ 2, 3 }, 100);
+	anim->addFrame({ 3, 3 }, 100);
+	anim->addFrame({ 4, 3 }, 100);
+	anim->addFrame({ 5, 3 }, 100);
+	addAnimation(anim, "Walk");
 
-	animator.AddAnimation(new Animation(spritesheet, indexes, showTimes, false), "Item");
-
-	indexes = vector<Coord>();
-	showTimes = vector<int>();
-
-	indexes.push_back({ 5, 0 });
-	showTimes.push_back(100);
-	indexes.push_back({ 6, 0 });
-	showTimes.push_back(100);
-	indexes.push_back({ 7, 0 });
-	showTimes.push_back(100);
-
-	animator.AddAnimation(new Animation(spritesheet, indexes, showTimes, false), "Knockback");
-
-	indexes = vector<Coord>();
-	showTimes = vector<int>();
-
-	indexes.push_back({ 0, 1 });
-	showTimes.push_back(25);
-	indexes.push_back({ 1, 1 });
-	showTimes.push_back(200);
-	indexes.push_back({ 2, 1 });
-	showTimes.push_back(175);
-	indexes.push_back({ 3, 1 });
-	showTimes.push_back(150);
-	indexes.push_back({ 4, 1 });
-	showTimes.push_back(125);
-	indexes.push_back({ 5, 1 });
-	showTimes.push_back(100);
-	indexes.push_back({ 6, 1 });
-	showTimes.push_back(100);
-	indexes.push_back({ 7, 1 });
-	showTimes.push_back(100);
-
-	animator.AddAnimation(new Animation(spritesheet, indexes, showTimes, false), "Roll");
-
-	indexes = vector<Coord>();
-	showTimes = vector<int>();
-
-	indexes.push_back({ 6, 2 });
-	showTimes.push_back(100);
-	indexes.push_back({ 7, 2 });
-	showTimes.push_back(100);
-
-	animator.AddAnimation(new Animation(spritesheet, indexes, showTimes), "Jump");
-
-	indexes = vector<Coord>();
-	showTimes = vector<int>();
-
-	indexes.push_back({ 6, 3 });
-	showTimes.push_back(100);
-	indexes.push_back({ 7, 3 });
-	showTimes.push_back(100);
-
-	animator.AddAnimation(new Animation(spritesheet, indexes, showTimes, false), "Crounch");
-
-	indexes = vector<Coord>();
-	showTimes = vector<int>();
-
-	indexes.push_back({ 0, 3 });
-	showTimes.push_back(100);
-	indexes.push_back({ 1, 3 });
-	showTimes.push_back(100);
-	indexes.push_back({ 2, 3 });
-	showTimes.push_back(100);
-	indexes.push_back({ 3, 3 });
-	showTimes.push_back(100);
-	indexes.push_back({ 4, 3 });
-	showTimes.push_back(100);
-	indexes.push_back({ 5, 3 });
-	showTimes.push_back(100);
-
-	animator.AddAnimation(new Animation(spritesheet, indexes, showTimes), "Walk");
-
-	indexes = vector<Coord>();
-	showTimes = vector<int>();
-
-	indexes.push_back({ 0, 4 });
-	showTimes.push_back(100);
-	indexes.push_back({ 1, 4 });
-	showTimes.push_back(100);
-
-	animator.AddAnimation(new Animation(spritesheet, indexes, showTimes), "Fall");
+	anim = new Animation(spritesheet);
+	anim->addFrame({ 0, 4 }, 100);
+	anim->addFrame({ 1, 4 }, 100);
+	addAnimation(anim, "Fall");
 }

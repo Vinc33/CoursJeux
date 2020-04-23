@@ -1,5 +1,6 @@
 #include "HandBomb.h"
 #include "InputManager.h"
+#include "Manager\AssetManager.h"
 
 
 HandBomb::HandBomb(float initialSpeed)
@@ -25,6 +26,7 @@ HandBomb::~HandBomb()
 
 void HandBomb::update()
 {
+	EntityAnimated::update();
 	EntityPhysic::update();
 
 	if (!InputManager::GetKeyState(B))
@@ -32,51 +34,31 @@ void HandBomb::update()
 		isAirborne = false;
 		velY = 0;
 		velX = 0;
-		animator.ChangeAnimation("Explode");
+		changeAnimation("Explode");
 	}
 }
 
 void HandBomb::addAnimations()
 {
-	sf::Texture* texture = new sf::Texture();
-	texture->loadFromFile("Assets/ToolAndMagic/SmallBomb.png");
-	int nbRows = 4;
-	int nbColums = 3;
-	Spritesheet spritesheet = { texture, nbRows, nbColums };
 
-	std::vector<Coord> indexes;
-	std::vector<int> showTimes;
+	sf::Texture* texture = &AssetManager::getTexture("handbomb");
+	Spritesheet spritesheet = { texture, 4, 3 };
+	Animation * anim = new Animation(spritesheet);
+	anim->addFrame({ 0, 0 }, 45);
+	anim->addFrame({ 1, 0 }, 45);
+	anim->addFrame({ 2, 0 }, 45);
+	anim->addFrame({ 0, 1 }, 45);
+	anim->addFrame({ 1, 1 }, 45);
+	anim->addFrame({ 2, 1 }, 45);
+	anim->addFrame({ 0, 2 }, 45);
+	anim->addFrame({ 1, 2 }, 45);
+	anim->addFrame({ 2, 2 }, 45);
+	anim->addFrame({ 0, 3 }, 45);
+	anim->addFrame({ 1, 3 }, 45);
+	anim->addFrame({ 2, 3 }, 45);
+	addAnimation(anim, "Roll");
 
-	indexes.push_back({ 0, 0 });
-	showTimes.push_back(45);
-	indexes.push_back({ 1, 0 });
-	showTimes.push_back(45);
-	indexes.push_back({ 2, 0 });
-	showTimes.push_back(45);
-
-	indexes.push_back({ 0, 1 });
-	showTimes.push_back(45);
-	indexes.push_back({ 1, 1 });
-	showTimes.push_back(45);
-	indexes.push_back({ 2, 1 });
-	showTimes.push_back(45);
-
-	indexes.push_back({ 0, 2 });
-	showTimes.push_back(45);
-	indexes.push_back({ 1, 2 });
-	showTimes.push_back(45);
-	indexes.push_back({ 2, 2 });
-	showTimes.push_back(45);
-
-	indexes.push_back({ 0, 3 });
-	showTimes.push_back(45);
-	indexes.push_back({ 1, 3 });
-	showTimes.push_back(45);
-	indexes.push_back({ 2, 3 });
-	showTimes.push_back(45);
-
-	animator.AddAnimation(new Animation(spritesheet, indexes, showTimes), "Roll");
 
 	//TODO ADD THIS
-	animator.AddAnimation(new Animation(spritesheet, indexes, showTimes), "Explode");
+	addAnimation(anim, "Explode");
 }

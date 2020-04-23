@@ -1,19 +1,16 @@
 #pragma once
 #include "EntityAnimated.h"
-#include "EntityBrain.h"
+#include "EntityStateMachine.h"
 #include "EntityPhysic.h"
 #include "EntitySpawner.h"
-#include "EntityCollision.h"
 #include "EntityParticleEmitter.h"
 
 class Entity :
 	public EntityAnimated,
-	public EntityBrain,
+	public EntityStateMachine,
 	public EntityPhysic,
 	public EntitySpawner,
-	public EntityParticleEmitter,
-	public EntityCollision
-
+	public EntityParticleEmitter
 {
 public:
 	Entity();
@@ -21,7 +18,6 @@ public:
 
 	virtual void update();
 	virtual void draw(sf::RenderTarget& target);
-	Vector2f getDrawSize();
 
 };
 

@@ -13,10 +13,10 @@ Entity::~Entity()
 
 void Entity::update()
 {
-	EntityBrain::update();
+	EntityStateMachine::update();
 	EntityPhysic::update();
+	EntityAnimated::update();
 	EntityParticleEmitter::update();
-	EntityCollision::update();
 
 	//temporary ground
 	if (velY > 0 && getPosition().y > 321 - velY * TimeManager::DeltaTime)
@@ -33,9 +33,3 @@ void Entity::draw(sf::RenderTarget& target)
 	EntityAnimated::draw(target);
 	EntityParticleEmitter::draw(target);
 }
-
-Vector2f Entity::getDrawSize()
-{
-	return EntityAnimated::getDrawSize();
-}
-

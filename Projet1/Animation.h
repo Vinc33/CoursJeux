@@ -19,13 +19,16 @@ struct Spritesheet {
 class Animation
 {
 public:
-	Animation(Spritesheet ss, std::vector<Coord> indexes, std::vector<int> showTimes, bool loop = true);
+	Animation(Spritesheet ss);
 	~Animation();
-	void update();
-	sf::Sprite* GetSprite(bool reverse = false);
-	void Reset();
 
+	void addFrame(Coord index, int showTime = 250);
+
+	void update();
+	void restart();
 	void JumpToFrame(unsigned int index);
+
+	sf::Sprite* GetSprite(bool reverse = false);
 
 private:
 	int currentFrame;

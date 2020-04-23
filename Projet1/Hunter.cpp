@@ -8,6 +8,7 @@
 #include "Falling.h"
 #include "Crounching.h"
 #include "HunterShoot.h"
+#include "Manager\AssetManager.h"
 
 Hunter::Hunter() : Hero("Hunter", 50, 100)
 {
@@ -34,37 +35,37 @@ void Hunter::changeAction(int enumIndex)
 	switch ((PlayerAction)enumIndex)
 	{
 	case STAND:
-		animator.ChangeAnimation("Stand");
+		changeAnimation("Stand");
 		delete currentAction;
 		currentAction = new Standing(this);
 		break;
 	case WALK:
-		animator.ChangeAnimation("Walk");
+		changeAnimation("Walk");
 		delete currentAction;
 		currentAction = new Walking(this);
 		break;
 	case JUMP:
-		animator.ChangeAnimation("JumpRise");
+		changeAnimation("JumpRise");
 		delete currentAction;
 		currentAction = new HunterJump(this);
 		break;
 	case SECONDJUMP:
-		animator.ChangeAnimation("JumpMid");
+		changeAnimation("JumpMid");
 		delete currentAction;
 		currentAction = new HunterJumpMid(this);
 		break;
 	case FALL:
-		animator.ChangeAnimation("Fall");
+		changeAnimation("Fall");
 		delete currentAction;
 		currentAction = new Falling(this);
 		break;
 	case CROUNCH:
-		animator.ChangeAnimation("Crounch");
+		changeAnimation("Crounch");
 		delete currentAction;
 		currentAction = new Crounching(this);
 		break;
 	case BASICATTACK:
-		animator.ChangeAnimation("Shoot");
+		changeAnimation("Shoot");
 		delete currentAction;
 		currentAction = new HunterShoot(this);
 		break;
@@ -73,113 +74,58 @@ void Hunter::changeAction(int enumIndex)
 
 void Hunter::addAnimations()
 {
-	sf::Texture* texture = new Texture();
-	texture->loadFromFile("Assets/SpriteSheet/Hunter.png");
-	int nbRows = 2;
-	int nbColums = 16;
-	Spritesheet spritesheet = { texture, nbRows, nbColums };
+	sf::Texture* texture = &AssetManager::getTexture("hunter.png");
+	Spritesheet spritesheet = { texture, 2, 16 };
 
-	vector<Coord> indexes;
-	vector<int> showTimes;
+	Animation * anim = new Animation(spritesheet);
+	anim->addFrame({ 15, 0 }, -1);
+	addAnimation(anim, "Stand");
 
-	indexes.push_back({ 15, 0 });
-	showTimes.push_back(100);
+	anim = new Animation(spritesheet);
+	anim->addFrame({ 0, 1 }, 25);
+	anim->addFrame({ 1, 1 }, 25);
+	anim->addFrame({ 2, 1 }, 25);
+	anim->addFrame({ 3, 1 }, 25);
+	anim->addFrame({ 4, 1 }, 25);
+	anim->addFrame({ 5, 1 }, 25);
+	anim->addFrame({ 6, 1 }, 25);
+	anim->addFrame({ 7, 1 }, 25);
+	anim->addFrame({ 8, 1 }, 25);
+	anim->addFrame({ 9, 1 }, 25);
+	anim->addFrame({ 10, 1 }, 25);
+	anim->addFrame({ 11, 1 }, 25);
+	anim->addFrame({ 12, 1 }, 25);
+	anim->addFrame({ 13, 1 }, 25);
+	addAnimation(anim, "Walk");
 
-	animator.AddAnimation(new Animation(spritesheet, indexes, showTimes, false), "Stand");
+	anim = new Animation(spritesheet);
+	anim->addFrame({ 5, 0 }, 150);
+	anim->addFrame({ 6, 0 }, 100);
+	anim->addFrame({ 7, 0 }, -1);
+	addAnimation(anim, "Crounch");
 
-	indexes = vector<Coord>();
-	showTimes = vector<int>();
+	anim = new Animation(spritesheet);
+	anim->addFrame({ 2, 0 }, 100);
+	anim->addFrame({ 3, 0 }, 50);
+	anim->addFrame({ 4, 0 }, 100);
+	addAnimation(anim, "CrounchShoot");
 
-	indexes.push_back({ 0, 1 });
-	showTimes.push_back(25);
-	indexes.push_back({ 1, 1 });
-	showTimes.push_back(25);
-	indexes.push_back({ 2, 1 });
-	showTimes.push_back(25);
-	indexes.push_back({ 3, 1 });
-	showTimes.push_back(25);
-	indexes.push_back({ 4, 1 });
-	showTimes.push_back(25);
-	indexes.push_back({ 5, 1 });
-	showTimes.push_back(25);
-	indexes.push_back({ 6, 1 });
-	showTimes.push_back(25);
-	indexes.push_back({ 7, 1 });
-	showTimes.push_back(25);
-	indexes.push_back({ 8, 1 });
-	showTimes.push_back(25);
-	indexes.push_back({ 9, 1 });
-	showTimes.push_back(25);
-	indexes.push_back({ 10, 1 });
-	showTimes.push_back(25);
-	indexes.push_back({ 11, 1 });
-	showTimes.push_back(25);
-	indexes.push_back({ 12, 1 });
-	showTimes.push_back(25);
-	indexes.push_back({ 13, 1 });
-	showTimes.push_back(25);
+	anim = new Animation(spritesheet);
+	anim->addFrame({ 12, 0 }, 100);
+	anim->addFrame({ 13, 0 }, 50);
+	anim->addFrame({ 14, 0 }, 100);
+	addAnimation(anim, "Shoot");
 
-	animator.AddAnimation(new Animation(spritesheet, indexes, showTimes), "Walk");
+	anim = new Animation(spritesheet);
+	anim->addFrame({ 10, 0 }, -1);
+	addAnimation(anim, "JumpRise");
 
-	indexes = vector<Coord>();
-	showTimes = vector<int>();
+	anim = new Animation(spritesheet);
+	anim->addFrame({ 11, 0 }, -1);
+	addAnimation(anim, "JumpMid");
 
-	indexes.push_back({ 5, 0 });
-	showTimes.push_back(150);
-	indexes.push_back({ 6, 0 });
-	showTimes.push_back(100);
-	indexes.push_back({ 7, 0 });
-	showTimes.push_back(100);
-
-	animator.AddAnimation(new Animation(spritesheet, indexes, showTimes, false), "Crounch");
-
-	indexes = vector<Coord>();
-	showTimes = vector<int>();
-
-	indexes.push_back({ 2, 0 });
-	showTimes.push_back(100);
-	indexes.push_back({ 3, 0 });
-	showTimes.push_back(50);
-	indexes.push_back({ 4, 0 });
-	showTimes.push_back(100);
-
-	animator.AddAnimation(new Animation(spritesheet, indexes, showTimes, false), "CrounchShoot");
-
-	indexes = vector<Coord>();
-	showTimes = vector<int>();
-
-	indexes.push_back({ 12, 0 });
-	showTimes.push_back(100);
-	indexes.push_back({ 13, 0 });
-	showTimes.push_back(50);
-	indexes.push_back({ 14, 0 });
-	showTimes.push_back(100);
-
-	animator.AddAnimation(new Animation(spritesheet, indexes, showTimes, false), "Shoot");
-
-	indexes = vector<Coord>();
-	showTimes = vector<int>();
-
-	indexes.push_back({ 10, 0 });
-	showTimes.push_back(500);
-
-	animator.AddAnimation(new Animation(spritesheet, indexes, showTimes, false), "JumpRise");
-
-	indexes = vector<Coord>();
-	showTimes = vector<int>();
-
-	indexes.push_back({ 11, 0 });
-	showTimes.push_back(500);
-
-	animator.AddAnimation(new Animation(spritesheet, indexes, showTimes, false), "JumpMid");
-
-	indexes = vector<Coord>();
-	showTimes = vector<int>();
-
-	indexes.push_back({ 8, 0 });
-	showTimes.push_back(150);
-	indexes.push_back({ 9, 0 });
-	showTimes.push_back(150);
-
-	animator.AddAnimation(new Animation(spritesheet, indexes, showTimes, false), "Fall");
+	anim = new Animation(spritesheet);
+	anim->addFrame({ 8, 0 }, 150);
+	anim->addFrame({ 9, 0 }, 150);
+	addAnimation(anim, "Fall");
 }

@@ -13,6 +13,7 @@
 #include "MonkRisingKick.h"
 #include "MonkSecondJump.h"
 #include "MonkDiveKick.h"
+#include "Manager\AssetManager.h"
 
 Monk::Monk() : Hero("Monk", 50, 30)
 {
@@ -48,17 +49,17 @@ void Monk::changeAction(int enumIndex)
 	switch ((PlayerAction)enumIndex)
 	{
 	case STAND:
-		animator.ChangeAnimation("Stand");
+		changeAnimation("Stand");
 		delete currentAction;
 		currentAction = new Standing(this);
 		break;
 	case WALK:
-		animator.ChangeAnimation("Walk");
+		changeAnimation("Walk");
 		delete currentAction;
 		currentAction = new MonkWalking(this);
 		break;
 	case CROUNCH:
-		animator.ChangeAnimation("Crounch");
+		changeAnimation("Crounch");
 		delete currentAction;
 		currentAction = new MonkCrounching(this, 0.0f);
 		break;
@@ -66,14 +67,14 @@ void Monk::changeAction(int enumIndex)
 		hasRoundhoused = false;
 		hasPunched = false;
 		hasDropkicked = false;
-		animator.ChangeAnimation("Jump");
+		changeAnimation("Jump");
 		delete currentAction;
 		jump();
 		jumpRemaining = maxNumberOfJumps - 1;
 		currentAction = new MonkJump(this, !hasRoundhoused, !hasPunched, !hasDropkicked, jumpRemaining > 0);
 		break;
 	case SECONDJUMP:
-		animator.ChangeAnimation("Fall");
+		changeAnimation("Fall");
 		delete currentAction;
 		jumpRemaining--;
 		velY = 0;
@@ -82,31 +83,31 @@ void Monk::changeAction(int enumIndex)
 		break;
 	case FALL:
 		if (jumpRemaining > 0)
-			animator.ChangeAnimation("Jump");
+			changeAnimation("Jump");
 		else
-			animator.ChangeAnimation("Fall");
+			changeAnimation("Fall");
 		delete currentAction;
 		currentAction = new MonkFall(this, !hasRoundhoused, !hasPunched, !hasDropkicked, jumpRemaining > 0);
 		break;
 	case ROUNDHOUSE:
 		hasRoundhoused = true;
-		animator.ChangeAnimation("Roundhouse kick");
+		changeAnimation("Roundhouse kick");
 		delete currentAction;
 		currentAction = new MonkRoundhouse(this, true, !hasPunched, !hasDropkicked, jumpRemaining > 0);
 		break;
 	case NOJUMPROUNDHOUSE:
-		animator.ChangeAnimation("Roundhouse kick");
+		changeAnimation("Roundhouse kick");
 		delete currentAction;
 		currentAction = new MonkRoundhouse(this, false, !hasPunched, !hasDropkicked, jumpRemaining > 0);
 		break;
 	case BASICATTACK:
 		hasPunched = true;
-		animator.ChangeAnimation("ChargePunch");
+		changeAnimation("ChargePunch");
 		delete currentAction;
 		currentAction = new MonkHoldAttack(this);
 		break;
 	case RELEASEATTACK:
-		animator.ChangeAnimation("Punch");
+		changeAnimation("Punch");
 		delete currentAction;
 		currentAction = new MonkPunch(this, jumpRemaining > 0);
 		break;
@@ -114,166 +115,97 @@ void Monk::changeAction(int enumIndex)
 		hasRoundhoused = false;
 		hasPunched = false;
 		hasDropkicked = false;
-		animator.ChangeAnimation("Low kick");
+		changeAnimation("Low kick");
 		delete currentAction;
 		currentAction = new MonkRisingKick(this);
 		break;
 	case DIVEKICK:
 		hasDropkicked = true;
-		animator.ChangeAnimation("Flying kick");
+		changeAnimation("Flying kick");
 		delete currentAction;
 		currentAction = new MonkDiveKick(this);
 		break;
 	}
 }
 
+std::string Monk::toString()
+{
+	return "Monk";
+}
+
 void Monk::addAnimations()
 {
-	sf::Texture* texture = new Texture();
-	texture->loadFromFile("Assets\\SpriteSheet\\Monk.png");
-	int nbRows = 4;
-	int nbColums = 10;
-	Spritesheet spritesheet = { texture, nbRows, nbColums};
+	sf::Texture* texture = &AssetManager::getTexture("monk");
+	Spritesheet spritesheet = { texture, 4, 10 };
 
-	vector<Coord> indexes;
-	vector<int> showTimes;
+	Animation * anim = new Animation(spritesheet);
+	anim->addFrame({ 0, 0 }, 100);
+	anim->addFrame({ 1, 0 }, 150);
+	anim->addFrame({ 2, 0 }, 150);
+	anim->addFrame({ 3, 0 }, 100);
+	anim->addFrame({ 2, 0 }, 150);
+	anim->addFrame({ 1, 0 }, 150);
+	addAnimation(anim, "Stand");
 
-	indexes.push_back({ 0, 0 });
-	showTimes.push_back(100);
-	indexes.push_back({ 1, 0 });
-	showTimes.push_back(150);
-	indexes.push_back({ 2, 0 });
-	showTimes.push_back(150);
-	indexes.push_back({ 3, 0 });
-	showTimes.push_back(100);
-	indexes.push_back({ 2, 0 });
-	showTimes.push_back(150);
-	indexes.push_back({ 1, 0 });
-	showTimes.push_back(150);
+	anim = new Animation(spritesheet);
+	anim->addFrame({ 5, 0 }, 100);
+	anim->addFrame({ 6, 0 }, 100);
+	anim->addFrame({ 7, 0 }, 75);
+	anim->addFrame({ 8, 0 }, 50);
+	anim->addFrame({ 9, 0 }, 50);
+	addAnimation(anim, "Punch");
 
-	animator.AddAnimation(new Animation(spritesheet, indexes, showTimes), "Stand");
+	anim = new Animation(spritesheet);
+	anim->addFrame({ 4, 0 }, 200);
+	addAnimation(anim, "ChargePunch");
 
-	indexes = vector<Coord>();
-	showTimes = vector<int>();
+	anim = new Animation(spritesheet);
+	anim->addFrame({ 0, 1 }, 100);
+	anim->addFrame({ 1, 1 }, 100);
+	anim->addFrame({ 2, 1 }, 100);
+	anim->addFrame({ 3, 1 }, 100);
+	anim->addFrame({ 4, 1 }, 100);
+	anim->addFrame({ 5, 1 }, 150);
+	addAnimation(anim, "Walk");
 
-	indexes.push_back({ 5, 0 });
-	showTimes.push_back(100);
-	indexes.push_back({ 6, 0 });
-	showTimes.push_back(100);
-	indexes.push_back({ 7, 0 });
-	showTimes.push_back(75);
-	indexes.push_back({ 8, 0 });
-	showTimes.push_back(50);
-	indexes.push_back({ 9, 0 });
-	showTimes.push_back(50);
+	anim = new Animation(spritesheet);
+	anim->addFrame({ 6, 1 }, 150);
+	anim->addFrame({ 7, 1 }, 150);
+	addAnimation(anim, "Jump");
 
-	animator.AddAnimation(new Animation(spritesheet, indexes, showTimes, false), "Punch");
+	anim = new Animation(spritesheet);
+	anim->addFrame({ 8, 1 }, 100);
+	anim->addFrame({ 9, 1 }, 100);
+	addAnimation(anim, "Fall");
 
-	indexes = vector<Coord>();
-	showTimes = vector<int>();
+	anim = new Animation(spritesheet);
+	anim->addFrame({ 0, 2 }, 100);
+	anim->addFrame({ 1, 2 }, 100);
+	addAnimation(anim, "Flying kick");
 
-	indexes.push_back({ 4, 0 });
-	showTimes.push_back(200);
+	anim = new Animation(spritesheet);
+	anim->addFrame({ 2, 2 }, 175);
+	anim->addFrame({ 3, 2 }, -1);
+	addAnimation(anim, "Crounch");
 
-	animator.AddAnimation(new Animation(spritesheet, indexes, showTimes, false), "ChargePunch");
+	anim = new Animation(spritesheet);
+	anim->addFrame({ 4, 2 }, 50);
+	anim->addFrame({ 5, 2 }, 75);
+	anim->addFrame({ 6, 2 }, 75);
+	anim->addFrame({ 7, 2 }, 50);
+	anim->addFrame({ 8, 2 }, 25);
+	addAnimation(anim, "Low kick");
 
-	indexes = vector<Coord>();
-	showTimes = vector<int>();
+	anim = new Animation(spritesheet);
+	anim->addFrame({ 0, 3 }, 50);
+	anim->addFrame({ 1, 3 }, 75);
+	anim->addFrame({ 2, 3 }, 75);
+	anim->addFrame({ 3, 3 }, 100);
+	anim->addFrame({ 4, 3 }, 150);
+	addAnimation(anim, "Roundhouse kick");
 
-	indexes.push_back({ 0, 1 });
-	showTimes.push_back(100);
-	indexes.push_back({ 1, 1 });
-	showTimes.push_back(100);
-	indexes.push_back({ 2, 1 });
-	showTimes.push_back(150);
-	indexes.push_back({ 3, 1 });
-	showTimes.push_back(100);
-	indexes.push_back({ 4, 1 });
-	showTimes.push_back(100);
-	indexes.push_back({ 5, 1 });
-	showTimes.push_back(150);
-
-	animator.AddAnimation(new Animation(spritesheet, indexes, showTimes), "Walk");
-
-	indexes = vector<Coord>();
-	showTimes = vector<int>();
-
-	indexes.push_back({ 6, 1 });
-	showTimes.push_back(150);
-	indexes.push_back({ 7, 1 });
-	showTimes.push_back(150);
-
-	animator.AddAnimation(new Animation(spritesheet, indexes, showTimes), "Jump");
-
-	indexes = vector<Coord>();
-	showTimes = vector<int>();
-
-	indexes.push_back({ 8, 1 });
-	showTimes.push_back(100);
-	indexes.push_back({ 9, 1 });
-	showTimes.push_back(100);
-
-	animator.AddAnimation(new Animation(spritesheet, indexes, showTimes), "Fall");
-
-	indexes = vector<Coord>();
-	showTimes = vector<int>();
-
-	indexes.push_back({ 0, 2 });
-	showTimes.push_back(100);
-	indexes.push_back({ 1, 2 });
-	showTimes.push_back(100);
-
-	animator.AddAnimation(new Animation(spritesheet, indexes, showTimes), "Flying kick");
-
-	indexes = vector<Coord>();
-	showTimes = vector<int>();
-
-	indexes.push_back({ 2, 2 });
-	showTimes.push_back(175);
-	indexes.push_back({ 3, 2 });
-	showTimes.push_back(150);
-
-	animator.AddAnimation(new Animation(spritesheet, indexes, showTimes, false), "Crounch");
-
-	indexes = vector<Coord>();
-	showTimes = vector<int>();
-
-	indexes.push_back({ 4, 2 });
-	showTimes.push_back(50);
-	indexes.push_back({ 5, 2 });
-	showTimes.push_back(75);
-	indexes.push_back({ 6, 2 });
-	showTimes.push_back(75);
-	indexes.push_back({ 7, 2 });
-	showTimes.push_back(50);
-	indexes.push_back({ 8, 2 });
-	showTimes.push_back(25);
-
-	animator.AddAnimation(new Animation(spritesheet, indexes, showTimes, false), "Low kick");
-
-	indexes = vector<Coord>();
-	showTimes = vector<int>();
-
-	indexes.push_back({ 0, 3 });
-	showTimes.push_back(50);
-	indexes.push_back({ 1, 3 });
-	showTimes.push_back(75);
-	indexes.push_back({ 2, 3 });
-	showTimes.push_back(75);
-	indexes.push_back({ 3, 3 });
-	showTimes.push_back(100);
-	indexes.push_back({ 4, 3 });
-	showTimes.push_back(150);
-
-	animator.AddAnimation(new Animation(spritesheet, indexes, showTimes, false), "Roundhouse kick");
-
-	indexes = vector<Coord>();
-	showTimes = vector<int>();
-
-	indexes.push_back({ 5, 3 });
-	showTimes.push_back(150);
-	indexes.push_back({ 6, 3 });
-	showTimes.push_back(150);
-
-	animator.AddAnimation(new Animation(spritesheet, indexes, showTimes), "Knockback");
+	anim = new Animation(spritesheet);
+	anim->addFrame({ 5, 3 }, 150);
+	anim->addFrame({ 6, 3 }, 150);
+	addAnimation(anim, "Knockback");
 }
