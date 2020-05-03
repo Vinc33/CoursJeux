@@ -19,6 +19,7 @@ Animation::Animation(Spritesheet ss)
 	uvRect.width = spriteWidth;
 	uvRect.height = spriteHeight;
 	currentSprite->setTextureRect(uvRect);
+	currentSprite->setOrigin({ uvRect.width / 2.0f, uvRect.height / 2.0f });
 }
 
 Animation::~Animation()
@@ -49,9 +50,9 @@ void Animation::update()
 	}
 }
 
-sf::Sprite* Animation::GetSprite(bool reverse)
+void Animation::updateHitbox()
 {
-	if (reverse)
+	if (reversed)
 	{
 		uvRect.width = -spriteWidth;
 		uvRect.left = (indexes[currentFrame].x + 1) * spriteWidth;
@@ -62,9 +63,11 @@ sf::Sprite* Animation::GetSprite(bool reverse)
 		uvRect.left = indexes[currentFrame].x * spriteWidth;
 	}
 	uvRect.top = indexes[currentFrame].y * spriteHeight;
-
 	currentSprite->setTextureRect(uvRect);
+}
 
+sf::Sprite* Animation::GetSprite()
+{
 	return currentSprite;
 }
 

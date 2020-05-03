@@ -1,4 +1,6 @@
 #include "Game.h"
+#include <cstdlib>
+#include <vector>
 
 //assignation de variables statiques
 std::vector<vector<EntityBase*>> GameView::Game::newEntities = std::vector<vector<EntityBase*>>();
@@ -56,8 +58,9 @@ namespace GameView
 			{
 				for (EntityBase* e2 : entities[cr.layer2])
 				{
-					if (e1->getHitBox()->intersects(*(e2->getHitBox())))
+					if (SATCollision(e1, e2))
 					{
+						cout << "Contact";
 						e1->onCollision(e2);
 						e2->onCollision(e1);
 					}
@@ -70,7 +73,7 @@ namespace GameView
 	{
 		while (data->window.isOpen())
 		{
-			cout << endl;
+			//cout << endl;
 			timeManager.update();
 
 			updateInput();
@@ -104,7 +107,7 @@ namespace GameView
 	}
 
 	//statique, permet d'ajouter de nouvelles "Entity" à partir de n'importe quelle classe.  GameView::Game::AddEntity(myEntity);
-	void Game::AddEntity(EntityBase * e, unsigned int layer)
+	void Game::AddEntity(EntityBase* e, unsigned int layer)
 	{
 		newEntities[layer].push_back(e);
 	}
@@ -119,7 +122,7 @@ namespace GameView
 		collisionRules.push_back({ layer1, layer2 });
 	}
 
-	EntityBase * Game::getEntity(unsigned layer, unsigned index)
+	EntityBase* Game::getEntity(unsigned layer, unsigned index)
 	{
 		return entities[layer][index];
 	}
@@ -143,8 +146,78 @@ namespace GameView
 		data->window.display();
 	}
 
-	void Game::SATCollision(EntityBase * eb1, EntityBase * eb2)
+	bool Game::SATCollision(EntityBase* eb1, EntityBase* eb2)
 	{
 
+		//extracting the points
+		vector<Vector2f> points1;
+		vector<Vector2f> points2;
+
+		FloatRect* hitbox1 = eb1->getHitBox();
+		FloatRect* hitbox2 = eb2->getHitBox();
+
+		Transform t = eb1->getTransform();
+		points1.push_back(t.transformPoint({ 0, 0 }));
+		points1.push_back(t.transformPoint({ hitbox1->width, 0 }));
+		points1.push_back(t.transformPoint({ 0, hitbox1->height }));
+		points1.push_back(t.transformPoint({ hitbox1->width, hitbox1->height }));
+
+		t = eb2->getTransform();
+		points2.push_back(t.transformPoint({ 0, 0 }));
+		points2.push_back(t.transformPoint({ hitbox2->width, 0 }));
+		points2.push_back(t.transformPoint({ 0, hitbox2->height }));
+		points2.push_back(t.transformPoint({ hitbox2->width, hitbox2->height }));
+
+
+		//Calculating the normals used for projection
+		vector<Vector2f> normals;
+
+		normals.push_back({ points1[1].x - points1[0].x, points1[1].y - points1[0].y });
+		normals.push_back({ points1[2].x - points1[0].x, points1[2].y - points1[0].y });
+
+		if (eb1->getRotation() != eb2->getRotation())
+		{
+			normals.push_back({ points2[1].x - points2[0].x, points2[1].y - points2[0].y });
+			normals.push_back({ points2[2].x - points2[0].x, points2[2].y - points2[0].y });
+		}
+
+
+		//projecting each points on each axis
+		for (Vector2f axis : normals)
+		{
+			float minProj1 = DotProduct(points1[0], axis);
+			float maxProj1 = DotProduct(points1[0], axis);
+
+			float minProj2 = DotProduct(points2[0], axis);;
+			float maxProj2 = DotProduct(points2[0], axis);;
+
+			for (int i = 1; i < 4; i++)
+			{
+				float currentProjection = DotProduct(points1[i], axis);
+
+				if (minProj1 > currentProjection)
+					minProj1 = currentProjection;
+				else if (currentProjection > maxProj1)
+					maxProj1 = currentProjection;
+
+				currentProjection = DotProduct(points2[i], axis);
+
+				if (minProj2 > currentProjection)
+					minProj2 = currentProjection;
+				else if (currentProjection > maxProj2)
+					maxProj2 = currentProjection;
+			}
+
+			//return if non-collition is proven
+			if (maxProj2 < minProj1 || maxProj1 < minProj2)
+				return false;
+		}
+
+		return true;
+	}
+
+	float Game::DotProduct(Vector2f v1, Vector2f v2)
+	{
+		return v1.x * v2.x + v1.y * v2.y;
 	}
 }

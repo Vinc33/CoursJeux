@@ -2,7 +2,6 @@
 #include "Action.h"
 
 
-
 EntityStateMachine::EntityStateMachine()
 {
 	currentAction = new Action(this);
@@ -11,7 +10,7 @@ EntityStateMachine::EntityStateMachine()
 
 EntityStateMachine::~EntityStateMachine()
 {
-
+	
 }
 
 void EntityStateMachine::update()

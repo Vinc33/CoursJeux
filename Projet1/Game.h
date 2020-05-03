@@ -42,7 +42,9 @@ namespace GameView
 		void updateLogic();
 		void updateEvent();
 		void render();
-		void SATCollision(EntityBase * eb1, EntityBase * eb2);
+		bool SATCollision(EntityBase * eb1, EntityBase * eb2);
+
+		float DotProduct(Vector2f v1, Vector2f v2);
 
 		TimeManager timeManager;
 

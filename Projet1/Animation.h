@@ -22,13 +22,16 @@ public:
 	Animation(Spritesheet ss);
 	~Animation();
 
+	bool reversed = false;
+
 	void addFrame(Coord index, int showTime = 250);
 
 	void update();
+	void updateHitbox();
 	void restart();
 	void JumpToFrame(unsigned int index);
 
-	sf::Sprite* GetSprite(bool reverse = false);
+	sf::Sprite* GetSprite();
 
 private:
 	int currentFrame;
