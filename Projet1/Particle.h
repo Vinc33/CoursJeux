@@ -12,9 +12,6 @@ public:
 	void parentMove(float newX, float newY);
 	void setParentPosition(float newX, float newY);
 
-	void setOrigin(float x, float y);
-	void MoveOrigin(float newX, float newY);
-
 	float lifeTime;
 private:
 	float parentPosX;

@@ -22,7 +22,7 @@ void Entity::update()
 	if (velY > 0 && getPosition().y > 321 - velY * TimeManager::DeltaTime)
 	{
 		isAirborne = false;
-		setPosition(getPosition().x, 320);
+		setPosition({ getPosition().x, 320 });
 		velY = 0;
 	}
 	//end temporary ground

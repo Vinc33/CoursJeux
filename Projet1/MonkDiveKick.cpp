@@ -17,7 +17,7 @@ MonkDiveKick::MonkDiveKick(Entity* e) : ActionEntity(e)
 		parent->imageReversed = true;
 	parent->isAirborne = true;
 	countDown = 0.350f;
-		parent->velY += 50;
+	parent->velY += 50;
 }
 
 
@@ -30,9 +30,9 @@ int MonkDiveKick::update()
 
 	//if (countDown = )
 	if (parent->imageReversed)
-		parent->velX = (-1300.0f * countDown - parent->maxVelX * 1.8f) ;
+		parent->velX = (-650.0f * countDown - parent->maxVelX * 1.8f);
 	else
-		parent->velX = (1300.0f * countDown + parent->maxVelX * 1.8f) ;
+		parent->velX = (650.0f * countDown + parent->maxVelX * 1.8f);
 
 	countDown -= TimeManager::DeltaTime;
 

@@ -8,6 +8,9 @@
 
 MonkHoldAttack::MonkHoldAttack(Entity* e) : ActionEntity(e)
 {
+	currentTime = .0f;
+	particleTimer = .0f;
+
 	bool left = InputManager::GetKeyState(LEFT);
 	bool right = InputManager::GetKeyState(RIGHT);
 	if (left && !right)

@@ -29,18 +29,18 @@ public:
 	void update();
 	void updateHitbox();
 	void restart();
-	void JumpToFrame(unsigned int index);
+	void jumpToFrame(unsigned int index);
 
-	sf::Sprite* GetSprite();
+	void init(sf::Sprite* s);
 
 private:
 	int currentFrame;
 	float currentTime;
 
-	sf::Sprite* currentSprite;
+	Spritesheet spritesheet;
+	sf::Sprite* sprite;
 	sf::IntRect uvRect;
 
-	Spritesheet spritesheet;
 	std::vector<Coord> indexes;
 	std::vector<int> showTimes;
 

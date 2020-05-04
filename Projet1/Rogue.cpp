@@ -22,17 +22,16 @@
 Rogue::Rogue() : Hero("Rogue", 20, 40)
 {
 
-	acc = 1000;
-	maxVelX = 500;
-	drag = 1600;
-	jumpingStrength = 700;
-	airdrag = 400;
-	gravity = 2000;
-	//gravity = 1000;
-
-	setPosition(50, 200);
+	acc = 500;
+	maxVelX = 250;
+	drag = 800;
+	jumpingStrength = 350;
+	airdrag = 200;
+	gravity = 1000;
 
 	addAnimations();
+	setPosition(50, 200);
+
 	currentAction = new RogueStanding(this);
 	delayedActionTimer = 0.0f;
 	nextAction = PlayerAction::STAND;

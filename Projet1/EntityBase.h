@@ -5,13 +5,14 @@
 #include <SFML\Graphics.hpp>
 using namespace sf;
 
-class EntityBase : public Transformable
+class EntityBase //: public Transformable
 {
 protected:
+	enum EFFECT {DAMAGE, KNOCKBACK};
 	struct COLLISIONEFFECT
 	{
 	public:
-		int id;
+		EFFECT effect;
 		int variance;
 	};
 
@@ -22,13 +23,24 @@ public:
 
 	virtual void update() = 0;
 
-	virtual void draw(sf::RenderTarget& target);
-
-	virtual void drawHitBox(sf::RenderTarget& target);
+	virtual void draw(RenderTarget& target);
+	virtual void drawHitBox(RenderTarget& target);
 
 	virtual FloatRect* getHitBox();
 
-	virtual FloatRect* getDrawLocation();
+	virtual Transform getTransform() = 0;
+
+	virtual Vector2f getOrigin() = 0;
+	virtual void setOrigin(Vector2f origin) = 0;
+
+	virtual Vector2f getPosition() = 0;
+	virtual void setPosition(Vector2f origin) = 0;
+	virtual void setPosition(float x, float y) = 0;
+	virtual void move(float x, float y) = 0;
+
+	virtual float getRotation() = 0;
+	virtual void setRotation(float angle) = 0;
+	virtual void rotate(float angle) = 0;
 
 	virtual void onCollision(EntityBase* e);
 

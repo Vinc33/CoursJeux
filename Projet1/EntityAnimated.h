@@ -17,16 +17,31 @@ public:
 	virtual void update();
 	virtual void draw(sf::RenderTarget& target);
 	virtual void drawHitBox(sf::RenderTarget& target);
-	virtual FloatRect* getHitBox();
-	virtual FloatRect* getDrawLocation();
 
-	void addAnimation(Animation * a, std::string name);
+	void addAnimation(Animation* a, std::string name);
 	void changeAnimation(std::string name);
 	void jumpToFrame(unsigned int index);
 
+
+	virtual FloatRect* getHitBox();
+
+	virtual Transform getTransform();
+
+	virtual Vector2f getOrigin();
+	virtual void setOrigin(Vector2f origin);
+
+	virtual Vector2f getPosition();
+	virtual void setPosition(Vector2f origin);
+	virtual void setPosition(float x, float y);
+	virtual void move(float x, float y);
+
+	virtual float getRotation();
+	virtual void setRotation(float angle);
+	virtual void rotate(float angle);
 protected:
 	Animation * currentAnimation;
 	std::map<std::string, Animation *> animations;
 	sf::FloatRect hitbox;
+	sf::Sprite* sprite;
 };
 

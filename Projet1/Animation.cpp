@@ -6,26 +6,16 @@ Animation::Animation(Spritesheet ss)
 {
 	currentFrame = 0;
 	currentTime = 0;
+	spriteHeight = 0;
+	spriteWidth = 0;
 
 	spritesheet = ss;
 
-	currentSprite = new sf::Sprite();
-	currentSprite->setTexture(*spritesheet.texture);
-	currentSprite->setScale(2, 2);
-
-	spriteWidth = (int)floor((spritesheet.texture->getSize().x / float(spritesheet.nbColums)));
-	spriteHeight = (int)floor((spritesheet.texture->getSize().y / float(spritesheet.nbRows)));
-
-	uvRect.width = spriteWidth;
-	uvRect.height = spriteHeight;
-	currentSprite->setTextureRect(uvRect);
-	currentSprite->setOrigin({ uvRect.width / 2.0f, uvRect.height / 2.0f });
+	sprite = new sf::Sprite();
 }
 
 Animation::~Animation()
 {
-	//delete spritesheet.texture;
-	delete currentSprite;
 }
 
 void Animation::addFrame(Coord index, int showTime)
@@ -63,12 +53,7 @@ void Animation::updateHitbox()
 		uvRect.left = indexes[currentFrame].x * spriteWidth;
 	}
 	uvRect.top = indexes[currentFrame].y * spriteHeight;
-	currentSprite->setTextureRect(uvRect);
-}
-
-sf::Sprite* Animation::GetSprite()
-{
-	return currentSprite;
+	sprite->setTextureRect(uvRect);
 }
 
 void Animation::restart()
@@ -76,11 +61,27 @@ void Animation::restart()
 	currentFrame = 0;
 	currentTime = 0;
 	uvRect.top = indexes[currentFrame].y * spriteHeight;
-	currentSprite->setTextureRect(uvRect);
+	sprite->setTextureRect(uvRect);
 }
 
-void Animation::JumpToFrame(unsigned int index)
+void Animation::jumpToFrame(unsigned int index)
 {
 	if (index < size(indexes))
 		currentFrame = index;
+}
+
+void Animation::init(sf::Sprite* s)
+{
+	delete sprite;
+	sprite = s;
+
+	sprite->setTexture(*spritesheet.texture);
+
+	spriteWidth = (int)floor((spritesheet.texture->getSize().x / float(spritesheet.nbColums)));
+	spriteHeight = (int)floor((spritesheet.texture->getSize().y / float(spritesheet.nbRows)));
+
+	uvRect.width = spriteWidth;
+	uvRect.height = spriteHeight;
+	sprite->setTextureRect(uvRect);
+	sprite->setOrigin({ uvRect.width / 2.0f, uvRect.height / 2.0f });
 }

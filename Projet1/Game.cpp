@@ -140,7 +140,7 @@ namespace GameView
 			for (EntityBase* e : a)
 			{
 				e->draw(data->window);
-				//e->drawHitBox(data->window);
+				e->drawHitBox(data->window);
 			}
 
 		data->window.display();
@@ -148,7 +148,6 @@ namespace GameView
 
 	bool Game::SATCollision(EntityBase* eb1, EntityBase* eb2)
 	{
-
 		//extracting the points
 		vector<Vector2f> points1;
 		vector<Vector2f> points2;
@@ -180,7 +179,13 @@ namespace GameView
 			normals.push_back({ points2[1].x - points2[0].x, points2[1].y - points2[0].y });
 			normals.push_back({ points2[2].x - points2[0].x, points2[2].y - points2[0].y });
 		}
-
+		else
+		{
+			points1.erase(points1.begin());
+			points1.pop_back();
+			points2.erase(points2.begin());
+			points2.pop_back();
+		}
 
 		//projecting each points on each axis
 		for (Vector2f axis : normals)
@@ -191,7 +196,8 @@ namespace GameView
 			float minProj2 = DotProduct(points2[0], axis);;
 			float maxProj2 = DotProduct(points2[0], axis);;
 
-			for (int i = 1; i < 4; i++)
+			int pointsLength = size(points1);
+			for (int i = 1; i < pointsLength; i++)
 			{
 				float currentProjection = DotProduct(points1[i], axis);
 
@@ -208,15 +214,14 @@ namespace GameView
 					maxProj2 = currentProjection;
 			}
 
-			//return if non-collition is proven
+			//return false if non-collition is proven
 			if (maxProj2 < minProj1 || maxProj1 < minProj2)
 				return false;
 		}
-
 		return true;
 	}
 
-	float Game::DotProduct(Vector2f v1, Vector2f v2)
+	float Game::DotProduct(Vector2f v2, Vector2f v1)
 	{
 		return v1.x * v2.x + v1.y * v2.y;
 	}

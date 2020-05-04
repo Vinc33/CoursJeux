@@ -63,7 +63,7 @@ void Caltrops::update()
 	if (velY > 0 && getPosition().y > 440)
 	{
 		isAirborne = false;
-		setPosition(getPosition().x, 440);
+		setPosition({ getPosition().x, 440 });
 		velY = 0;
 		changeAnimation("Land");
 		jumpToFrame(rand() % 9);

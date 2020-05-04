@@ -17,16 +17,16 @@
 
 Monk::Monk() : Hero("Monk", 50, 30)
 {
-	acc = 700;
-	maxVelX = 200;
-	drag = 600;
-	jumpingStrength = 700;
-	airdrag = 200;
-	gravity = 1500;
-
-	setPosition(50, 200);
+	acc = 350;
+	maxVelX = 100;
+	drag = 300;
+	jumpingStrength = 350;
+	airdrag = 100;
+	gravity = 750;
 
 	addAnimations();
+	setPosition(50, 200);
+
 	currentAction = new Standing(this);
 
 	hasRoundhoused = false;

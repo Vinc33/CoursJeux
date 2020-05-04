@@ -19,7 +19,7 @@ MonkRisingKick::MonkRisingKick(Entity* e) : ActionEntity(e)
 	parent->isAirborne = true;
 	timeRemaining = 0.350f;
 
-	parent->velY = -150.0f;
+	parent->velY = -75.0f;
 }
 
 MonkRisingKick::~MonkRisingKick()
@@ -30,11 +30,11 @@ MonkRisingKick::~MonkRisingKick()
 int MonkRisingKick::update()
 {
 	timeRemaining -= TimeManager::DeltaTime;
-	parent->velY = -150.0f;
+	parent->velY = -75.0f;
 	if (parent->imageReversed)
-		parent->velX = -1500.0f * timeRemaining - 200;
+		parent->velX = -750.0f * timeRemaining - 100;
 	else
-		parent->velX = 1500.0f * timeRemaining + 200;
+		parent->velX = 750.0f * timeRemaining + 100;
 
 	bool right = InputManager::GetKeyState(Keys::RIGHT);
 	bool left = InputManager::GetKeyState(Keys::LEFT);

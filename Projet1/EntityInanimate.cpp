@@ -14,22 +14,6 @@ EntityInanimate::~EntityInanimate()
 	delete sprite;
 }
 
-void EntityInanimate::draw(sf::RenderTarget& target)
-{
-	target.draw(*sprite, getTransform());
-	hitbox = sprite->getGlobalBounds();
-	hitbox.left = getPosition().x;
-	hitbox.top = getPosition().y;
-}
-
-void EntityInanimate::drawHitBox(sf::RenderTarget & target)
-{
-	RectangleShape rs({ hitbox.width, hitbox.height });
-	rs.setFillColor(Color(10, 100, 0, 100));
-	rs.setPosition({ hitbox.left, hitbox.top });
-	target.draw(rs);
-}
-
 void EntityInanimate::setSprite(sf::Texture* t, bool reverseImage)
 {
 	sf::IntRect uvRect;
@@ -41,15 +25,35 @@ void EntityInanimate::setSprite(sf::Texture* t, bool reverseImage)
 	if (reverseImage)
 	{
 		sprite->setOrigin(0, 0);
-		setOrigin(0, 0);
+		//setOrigin({ 0, 0 });
 		sprite->setScale({ -2, 2 });
 	}
 	else
 	{
 		sprite->setOrigin(0, 0);
-		setOrigin(0, 0);
+		//setOrigin(0, 0);
 		sprite->setScale({ 2, 2 });
 	}
+}
+
+void EntityInanimate::draw(sf::RenderTarget& target)
+{
+	target.draw(*sprite);
+
+	hitbox = sprite->getLocalBounds();
+	hitbox.left = getPosition().x;
+	hitbox.top = getPosition().y;
+}
+
+void EntityInanimate::drawHitBox(sf::RenderTarget & target)
+{
+	RectangleShape rs({ getHitBox()->width, getHitBox()->height });
+	rs.setFillColor(Color(10, 100, 0, 100));
+	rs.setOrigin(getOrigin());
+	rs.setPosition(getPosition());
+	rs.setRotation(getRotation());
+	rs.setScale(sprite->getScale());
+	target.draw(rs);
 }
 
 FloatRect * EntityInanimate::getHitBox()
@@ -57,8 +61,52 @@ FloatRect * EntityInanimate::getHitBox()
 	return &hitbox;
 }
 
-FloatRect * EntityInanimate::getDrawLocation()
+Transform EntityInanimate::getTransform()
 {
-	//TODO
-	return nullptr;
+	return sprite->getTransform();
+}
+
+Vector2f EntityInanimate::getOrigin()
+{
+	return sprite->getOrigin();
+}
+
+void EntityInanimate::setOrigin(Vector2f origin)
+{
+	sprite->setOrigin(origin);
+}
+
+Vector2f EntityInanimate::getPosition()
+{
+	return sprite->getPosition();
+}
+
+void EntityInanimate::setPosition(Vector2f origin)
+{
+	sprite->setPosition(origin);
+}
+
+void EntityInanimate::setPosition(float x, float y)
+{
+	sprite->setPosition(x, y);
+}
+
+void EntityInanimate::move(float x, float y)
+{
+	sprite->move(x, y);
+}
+
+float EntityInanimate::getRotation()
+{
+	return sprite->getRotation();
+}
+
+void EntityInanimate::setRotation(float angle)
+{
+	sprite->setRotation(angle);
+}
+
+void EntityInanimate::rotate(float angle)
+{
+	sprite->rotate(angle);
 }

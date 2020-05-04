@@ -8,7 +8,7 @@ MonkChargeParticle::MonkChargeParticle(bool reversed, float originX, float origi
 	sf::Texture* texture = &AssetManager::getTexture("monk_charge_particle");
 
 	setSprite(texture, reversed);
-	setOrigin(sprite->getTextureRect().width / 2.0f, sprite->getTextureRect().height / 2.0f);
+	setOrigin({ sprite->getTextureRect().width / 2.0f, sprite->getTextureRect().height / 2.0f });
 
 	isCounterClockwise = reversed;
 }
@@ -25,11 +25,11 @@ void MonkChargeParticle::update()
 	if (isCounterClockwise)
 	{
 		rotate(-720 * TimeManager::DeltaTime);
-		setOrigin(sprite->getTextureRect().width / 2 * sprite->getScale().x, sprite->getTextureRect().height / 2 * sprite->getScale().y);
+		setOrigin({ sprite->getTextureRect().width / 2 * sprite->getScale().x, sprite->getTextureRect().height / 2 * sprite->getScale().y });
 	}
 	else
 	{
 		rotate(720 * TimeManager::DeltaTime);
-		setOrigin(sprite->getTextureRect().width / 2 * sprite->getScale().x, sprite->getTextureRect().height / 2 * sprite->getScale().y);
+		setOrigin({sprite->getTextureRect().width / 2 * sprite->getScale().x, sprite->getTextureRect().height / 2 * sprite->getScale().y });
 	}
 }
