@@ -19,10 +19,10 @@ void Entity::update()
 	EntityParticleEmitter::update();
 
 	//temporary ground
-	if (velY > 0 && getPosition().y > 321 - velY * TimeManager::DeltaTime)
+	if (velY > 0 && getPosition().y > 200 - velY * TimeManager::DeltaTime)
 	{
 		isAirborne = false;
-		setPosition({ getPosition().x, 320 });
+		setPosition({ getPosition().x, 200 });
 		velY = 0;
 	}
 	//end temporary ground

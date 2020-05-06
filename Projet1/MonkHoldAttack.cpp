@@ -21,13 +21,9 @@ MonkHoldAttack::MonkHoldAttack(Entity* e) : ActionEntity(e)
 	parent->gravityMult = .3f;
 	if (parent->velY > 200)
 		parent->velY = 200;
-
-	if (parent->imageReversed)
-		parent->AddParticle(new MonkChargeParticle(true, 128, 84));
-	else
-		parent->AddParticle(new MonkChargeParticle(false, 38, 84));
+	
+	spawnParticle();
 }
-
 
 MonkHoldAttack::~MonkHoldAttack()
 {
@@ -59,17 +55,21 @@ int MonkHoldAttack::update()
 	if (currentTime < 1)
 		currentTime += TimeManager::DeltaTime;
 
-
 	//particles
 	particleTimer += TimeManager::DeltaTime;
 	if (particleTimer > .23f)
 	{
 		particleTimer -= .23f;
-		if (parent->imageReversed)
-			parent->AddParticle(new MonkChargeParticle(true, 128, 84));
-		else
-			parent->AddParticle(new MonkChargeParticle(false, 38, 84));
+		spawnParticle();
 	}
 	
 	return -1;
+}
+
+void MonkHoldAttack::spawnParticle()
+{
+	if (parent->imageReversed)
+		parent->AddParticle(new MonkChargeParticle(parent, true, 22, 12));
+	else
+		parent->AddParticle(new MonkChargeParticle(parent, false, -22, 12));
 }

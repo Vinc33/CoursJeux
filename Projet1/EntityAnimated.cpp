@@ -91,9 +91,9 @@ Vector2f EntityAnimated::getPosition()
 	return sprite->getPosition();
 }
 
-void EntityAnimated::setPosition(Vector2f origin)
+void EntityAnimated::setPosition(Vector2f position)
 {
-	return sprite->setPosition(origin);
+	return sprite->setPosition(position);
 }
 
 void EntityAnimated::setPosition(float x, float y)

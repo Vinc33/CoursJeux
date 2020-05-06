@@ -35,7 +35,7 @@ Monk::Monk() : Hero("Monk", 50, 30)
 	maxNumberOfJumps = 4;
 	jumpRemaining = maxNumberOfJumps;
 
-	particlesMoveWithParent = true;
+	particlesMoveWithParent = false;
 
 	srand((unsigned)time(NULL));
 }

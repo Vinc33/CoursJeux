@@ -18,6 +18,8 @@ MonkDiveKick::MonkDiveKick(Entity* e) : ActionEntity(e)
 	parent->isAirborne = true;
 	countDown = 0.350f;
 	parent->velY += 50;
+	if (parent->velY > 0)
+		parent->velY *= 2;
 }
 
 

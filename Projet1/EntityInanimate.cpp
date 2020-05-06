@@ -5,7 +5,7 @@
 EntityInanimate::EntityInanimate()
 {
 	sprite = new sf::Sprite();
-	hitbox = sprite->getGlobalBounds();
+	hitbox = sprite->getLocalBounds();
 }
 
 
@@ -16,23 +16,15 @@ EntityInanimate::~EntityInanimate()
 
 void EntityInanimate::setSprite(sf::Texture* t, bool reverseImage)
 {
-	sf::IntRect uvRect;
-
-	delete sprite;
-	sprite = new sf::Sprite();
 	sprite->setTexture(*t);
 
 	if (reverseImage)
 	{
-		sprite->setOrigin(0, 0);
-		//setOrigin({ 0, 0 });
-		sprite->setScale({ -2, 2 });
+		sprite->setScale({ -1, 1 });
 	}
 	else
 	{
-		sprite->setOrigin(0, 0);
-		//setOrigin(0, 0);
-		sprite->setScale({ 2, 2 });
+		sprite->setScale({ 1, 1 });
 	}
 }
 

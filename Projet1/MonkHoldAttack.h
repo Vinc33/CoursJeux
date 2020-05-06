@@ -8,6 +8,7 @@ public:
 	~MonkHoldAttack();
 	int update();
 private:
+	void spawnParticle();
 	float currentTime;
 	float particleTimer;
 };

@@ -2,9 +2,12 @@
 
 
 
-Particle::Particle(float lifeTime, float offsetX, float offsetY)
+Particle::Particle(EntityBase* parent, float lifeTime, float offsetX, float offsetY)
 {
-	setPosition(offsetX, offsetY);
+	lastParentPosX = parent->getPosition().x;
+	lastParentPosY = parent->getPosition().y;
+	this->parent = parent;
+	setPosition(lastParentPosX + offsetX, lastParentPosY + offsetY);
 	this->lifeTime = lifeTime;
 }
 
@@ -13,15 +16,9 @@ Particle::~Particle()
 
 }
 
-void Particle::parentMove(float newX, float newY)
+void Particle::onParentMove()
 {
-	move((newX - parentPosX), (newY - parentPosY));
-	parentPosX = newX;
-	parentPosY = newY;
-}
-
-void Particle::setParentPosition(float x, float y)
-{
-	parentPosX = x;
-	parentPosY = y;
+	move((parent->getPosition().x - lastParentPosX), (parent->getPosition().y - lastParentPosY));
+	lastParentPosX = parent->getPosition().x;
+	lastParentPosY = parent->getPosition().y;
 }

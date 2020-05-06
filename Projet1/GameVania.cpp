@@ -10,6 +10,7 @@ namespace GameView
 {
 	GameVania::GameVania(int width, int height, string titleScreen) : Game(width, height, titleScreen)
 	{
+
 	}
 
 
@@ -25,6 +26,8 @@ namespace GameView
 
 		Monk * monk = new Monk();
 		camera->setTarget(monk);
+
+		camera->getView()->zoom(0.5);
 
 		AddEntity(monk, 1);
 		AddEntity(new Rogue(), 2);

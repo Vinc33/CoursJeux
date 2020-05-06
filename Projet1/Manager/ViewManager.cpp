@@ -8,7 +8,7 @@ ViewManager::ViewManager(sf::Vector2f size)
 {
 	myView = new View({0,0}, { size.x, size.y });
 	minimap = new View();
-	shakeRight = true;
+	//shakeRight = true;
 	myView->setViewport(sf::FloatRect(0, 0, 1, 1));
 }
 

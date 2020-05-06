@@ -2,7 +2,7 @@
 #include <cstdlib>
 #include <vector>
 
-//assignation de variables statiques
+//initialize static variables
 std::vector<vector<EntityBase*>> GameView::Game::newEntities = std::vector<vector<EntityBase*>>();
 
 namespace GameView
@@ -11,6 +11,7 @@ namespace GameView
 	{
 		data->window.setVerticalSyncEnabled(true);
 		data->window.create(VideoMode(width, height), titleScreen, Style::Close | Style::Titlebar);
+		camera = new ViewManager({ 0, 0 });
 	}
 
 	Game::~Game()
@@ -86,12 +87,12 @@ namespace GameView
 
 	void Game::updateInput()
 	{
-		//Update chaque "Entity"
+		//Update each "Entity"
 		for (auto a : entities)
 			for (EntityBase* e : a)
 				e->update();
 
-		//Rajoute a "entities" celles spawner pendant l'Update
+		//Add "newEntities" to "entities"
 		int i = 0;
 		for (auto a : entities)
 		{
@@ -106,7 +107,7 @@ namespace GameView
 		update();
 	}
 
-	//statique, permet d'ajouter de nouvelles "Entity" à partir de n'importe quelle classe.  GameView::Game::AddEntity(myEntity);
+	//static, allow new "Entity" to be spawned from anywhere.  GameView::Game::AddEntity(myEntity);
 	void Game::AddEntity(EntityBase* e, unsigned int layer)
 	{
 		newEntities[layer].push_back(e);
@@ -140,7 +141,7 @@ namespace GameView
 			for (EntityBase* e : a)
 			{
 				e->draw(data->window);
-				e->drawHitBox(data->window);
+				//e->drawHitBox(data->window);
 			}
 
 		data->window.display();
@@ -148,43 +149,45 @@ namespace GameView
 
 	bool Game::SATCollision(EntityBase* eb1, EntityBase* eb2)
 	{
-		//extracting the points
 		vector<Vector2f> points1;
 		vector<Vector2f> points2;
 
 		FloatRect* hitbox1 = eb1->getHitBox();
 		FloatRect* hitbox2 = eb2->getHitBox();
 
-		Transform t = eb1->getTransform();
-		points1.push_back(t.transformPoint({ 0, 0 }));
-		points1.push_back(t.transformPoint({ hitbox1->width, 0 }));
-		points1.push_back(t.transformPoint({ 0, hitbox1->height }));
-		points1.push_back(t.transformPoint({ hitbox1->width, hitbox1->height }));
+		//get the minimal amount of coordinate needed to calculate the first two axes
+		Transform* t = &eb1->getTransform();
+		points1.push_back(t->transformPoint({ 0, 0 }));
+		points1.push_back(t->transformPoint({ hitbox1->width, 0 }));
+		points1.push_back(t->transformPoint({ 0, hitbox1->height }));
 
-		t = eb2->getTransform();
-		points2.push_back(t.transformPoint({ 0, 0 }));
-		points2.push_back(t.transformPoint({ hitbox2->width, 0 }));
-		points2.push_back(t.transformPoint({ 0, hitbox2->height }));
-		points2.push_back(t.transformPoint({ hitbox2->width, hitbox2->height }));
-
-
-		//Calculating the normals used for projection
 		vector<Vector2f> normals;
-
 		normals.push_back({ points1[1].x - points1[0].x, points1[1].y - points1[0].y });
 		normals.push_back({ points1[2].x - points1[0].x, points1[2].y - points1[0].y });
 
 		if (eb1->getRotation() != eb2->getRotation())
 		{
+			//need to check all corner when the rotation is different
+			points1.push_back(t->transformPoint({ hitbox1->width, hitbox1->height }));
+
+			t = &eb2->getTransform();
+			points2.push_back(t->transformPoint({ 0, 0 }));
+			points2.push_back(t->transformPoint({ hitbox2->width, 0 }));
+			points2.push_back(t->transformPoint({ 0, hitbox2->height }));
+			points2.push_back(t->transformPoint({ hitbox2->width, hitbox2->height }));
+
+			//on two more axes
 			normals.push_back({ points2[1].x - points2[0].x, points2[1].y - points2[0].y });
 			normals.push_back({ points2[2].x - points2[0].x, points2[2].y - points2[0].y });
 		}
 		else
 		{
+			//only need to check 2 opposed corner when the rotation is the same on both entities
 			points1.erase(points1.begin());
-			points1.pop_back();
-			points2.erase(points2.begin());
-			points2.pop_back();
+
+			t = &eb2->getTransform();
+			points2.push_back(t->transformPoint({ hitbox2->width, 0 }));
+			points2.push_back(t->transformPoint({ 0, hitbox2->height }));
 		}
 
 		//projecting each points on each axis
@@ -214,14 +217,14 @@ namespace GameView
 					maxProj2 = currentProjection;
 			}
 
-			//return false if non-collition is proven
+			//break and return false if non-collision is proven (if there's a gap in the projection)
 			if (maxProj2 < minProj1 || maxProj1 < minProj2)
 				return false;
 		}
 		return true;
 	}
 
-	float Game::DotProduct(Vector2f v2, Vector2f v1)
+	float Game::DotProduct(Vector2f v1, Vector2f v2)
 	{
 		return v1.x * v2.x + v1.y * v2.y;
 	}

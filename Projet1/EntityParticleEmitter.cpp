@@ -31,7 +31,7 @@ void EntityParticleEmitter::update()
 		{
 			(*it)->update();
 			if (particlesMoveWithParent)
-				(*it)->parentMove(getPosition().x, getPosition().y);
+				(*it)->onParentMove();
 			it++;
 		}
 	}
@@ -46,8 +46,6 @@ void EntityParticleEmitter::draw(sf::RenderTarget& target)
 
 void EntityParticleEmitter::AddParticle(Particle* p)
 { 
-	p->move(this->getPosition().x, this->getPosition().y);
-	p->setParentPosition(this->getPosition().x, this->getPosition().y);
 	particles.push_back(p);
 }
 

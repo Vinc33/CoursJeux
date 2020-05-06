@@ -31,7 +31,7 @@ public:
 	virtual void setOrigin(Vector2f origin);
 
 	virtual Vector2f getPosition();
-	virtual void setPosition(Vector2f origin);
+	virtual void setPosition(Vector2f position);
 	virtual void setPosition(float x, float y);
 	virtual void move(float x, float y);
 

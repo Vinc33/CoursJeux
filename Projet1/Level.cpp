@@ -21,7 +21,7 @@ namespace GameView
 		//TODO: Receive the level in param
 		vector<vector<vector<TileIdentity>>> levelInfo = loader.LoadFromFile("Level/Church_for_test.lvl");
 		int tileSize = 16;
-		int scale = 2;
+		int scale = 1;
 		for(int i = 0; i < levelInfo.size(); i++)
 		{	
 			playGround.push_back(vector<vector<Sprite>>());
