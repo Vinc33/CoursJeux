@@ -1,18 +1,17 @@
 #include "MonkHoldAttack.h"
 #include "HeroActionsEnum.h"
 #include "TimeManager.h"
-#include "InputManager.h"
-#include "Entity.h"
+#include "Hero.h"
 #include "MonkChargeParticle.h"
 
 
-MonkHoldAttack::MonkHoldAttack(Entity* e) : ActionEntity(e)
+MonkHoldAttack::MonkHoldAttack(Hero* e) : HeroAction(e)
 {
 	currentTime = .0f;
 	particleTimer = .0f;
 
-	bool left = InputManager::GetKeyState(LEFT);
-	bool right = InputManager::GetKeyState(RIGHT);
+	bool left = parent->getKeyState(KEYLEFT);
+	bool right = parent->getKeyState(KEYRIGHT);
 	if (left && !right)
 		parent->imageReversed = true;
 	else if (!left && right)
@@ -46,7 +45,7 @@ int MonkHoldAttack::update()
 
 	if (currentTime > .1f)
 	{
-		if (!InputManager::GetKeyState(X))
+		if (!parent->getKeyState(KEYATTACK))
 		{
 			parent->ResetEmitter();
 			return (int)PlayerAction::RELEASEATTACK;

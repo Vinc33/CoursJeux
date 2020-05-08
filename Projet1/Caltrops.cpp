@@ -7,7 +7,7 @@ Caltrops::Caltrops(float initialSpeed)
 {
 
 	sf::Texture* texture = &AssetManager::getTexture("caltrops");
-	Spritesheet spritesheet = { texture, 4, 3 };
+	Spritesheet spritesheet = { texture, 7, 3 };
 	Animation * anim = new Animation(spritesheet);
 	anim->addFrame({ 0, 0 }, 31);
 	anim->addFrame({ 1, 0 }, 31);
@@ -24,19 +24,16 @@ Caltrops::Caltrops(float initialSpeed)
 	addAnimation(anim, "Roll");
 	jumpToFrame(rand() % 12);
 
-
-	texture = &AssetManager::getTexture("caltrops_deployed");
-	spritesheet = { texture, 3, 3 };
 	anim = new Animation(spritesheet);
-	anim->addFrame({ 0, 0 }, -1);
-	anim->addFrame({ 1, 0 }, -1);
-	anim->addFrame({ 2, 0 }, -1);
-	anim->addFrame({ 0, 1 }, -1);
-	anim->addFrame({ 1, 1 }, -1);
-	anim->addFrame({ 2, 1 }, -1);
-	anim->addFrame({ 0, 2 }, -1);
-	anim->addFrame({ 1, 2 }, -1);
-	anim->addFrame({ 2, 2 }, -1);
+	anim->addFrame({ 0, 4 }, -1);
+	anim->addFrame({ 1, 4 }, -1);
+	anim->addFrame({ 2, 4 }, -1);
+	anim->addFrame({ 0, 5 }, -1);
+	anim->addFrame({ 1, 5 }, -1);
+	anim->addFrame({ 2, 5 }, -1);
+	anim->addFrame({ 0, 6 }, -1);
+	anim->addFrame({ 1, 6 }, -1);
+	anim->addFrame({ 2, 6 }, -1);
 	addAnimation(anim, "Land");
 
 
@@ -60,10 +57,10 @@ void Caltrops::update()
 	EntityPhysic::update();
 
 	//temporary ground
-	if (velY > 0 && getPosition().y > 440)
+	if (velY > 0 && getPosition().y > 240)
 	{
 		isAirborne = false;
-		setPosition({ getPosition().x, 440 });
+		setPosition({ getPosition().x, 240 });
 		velY = 0;
 		changeAnimation("Land");
 		jumpToFrame(rand() % 9);

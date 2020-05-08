@@ -1,14 +1,13 @@
 #include "RogueStanding.h"
-#include "InputManager.h"
 #include "HeroActionsEnum.h"
-#include "Entity.h"
+#include "Hero.h"
 #include "Settings.h"
 
 
 
-RogueStanding::RogueStanding(Entity* e) : ActionEntity(e)
+RogueStanding::RogueStanding(Hero* e) : HeroAction(e)
 {
-	if (!InputManager::GetKeyState(Keys::A))
+	if (!parent->getKeyState(KEYJUMP))
 		jumpReady = true;
 }
 
@@ -19,8 +18,8 @@ RogueStanding::~RogueStanding()
 
 int RogueStanding::update()
 {
-	bool right = InputManager::GetKeyState(Keys::RIGHT);
-	bool left = InputManager::GetKeyState(Keys::LEFT);
+	bool right = parent->getKeyState(KEYRIGHT);
+	bool left = parent->getKeyState(KEYLEFT);
 
 	if (right != left)
 	{
@@ -30,25 +29,25 @@ int RogueStanding::update()
 			parent->accelerate(-1);
 	}
 
-	if (InputManager::GetKeyState(Keys::B))
+	if (parent->getKeyState(KEYSKILL1))
 	{
-		if (InputManager::GetKeyState(Keys::UP))
+		if (parent->getKeyState(KEYUP))
 			return (int)PlayerAction::ITEMUP;
-		if (InputManager::GetKeyState(Keys::DOWN))
+		if (parent->getKeyState(KEYDOWN))
 			return (int)PlayerAction::ITEMDOWN;
 		if (right != left)
 			return (int)PlayerAction::ITEMFRONT;
 		return (int)PlayerAction::ITEMSTAND;
 	}
 
-	if (InputManager::GetKeyState(Keys::X))
+	if (parent->getKeyState(KEYATTACK))
 		return (int)PlayerAction::BASICATTACK;
 
-	if (InputManager::GetKeyState(Keys::A))
+	if (parent->getKeyState(KEYJUMP))
 	{
 		if (jumpReady)
 		{
-			if (InputManager::GetKeyState(Keys::UP))
+			if (parent->getKeyState(KEYUP))
 				return (int)PlayerAction::SOMERSAULT;
 			else
 				return (int)PlayerAction::JUMP;
@@ -73,7 +72,7 @@ int RogueStanding::update()
 		}
 	}
 
-	if (InputManager::GetKeyState(Keys::DOWN))
+	if (parent->getKeyState(KEYDOWN))
 		return (int)PlayerAction::CROUNCH;
 
 	return -1;

@@ -1,8 +1,8 @@
 #include "MonkFall.h"
+#include "Hero.h"
 
 
-
-MonkFall::MonkFall(Entity* e, bool canRoundhouse, bool canPunch, bool canDropkick, bool canJump) : ActionEntity(e)
+MonkFall::MonkFall(Hero* e, bool canRoundhouse, bool canPunch, bool canDropkick, bool canJump) : HeroAction(e)
 {
 	parent->gravityMult = 1;
 	this->canDropkick = canDropkick;
@@ -19,11 +19,11 @@ MonkFall::~MonkFall()
 
 int MonkFall::update()
 {
-	bool right = InputManager::GetKeyState(Keys::RIGHT);
-	bool left = InputManager::GetKeyState(Keys::LEFT);
-	bool down = InputManager::GetKeyState(Keys::DOWN);
-	bool up = InputManager::GetKeyState(Keys::UP);
-	bool attack = InputManager::GetKeyState(Keys::X);
+	bool right = parent->getKeyState(KEYRIGHT);
+	bool left = parent->getKeyState(KEYLEFT);
+	bool down = parent->getKeyState(KEYDOWN);
+	bool up = parent->getKeyState(KEYUP);
+	bool attack = parent->getKeyState(KEYATTACK);
 
 	if (!parent->isAirborne)
 	{
@@ -43,7 +43,7 @@ int MonkFall::update()
 			parent->accelerate(-0.75);
 	}
 
-	if (InputManager::GetKeyState(Keys::A) && canJump)
+	if (parent->getKeyState(KEYJUMP) && canJump)
 		return (int)PlayerAction::SECONDJUMP;
 
 	if (attack)

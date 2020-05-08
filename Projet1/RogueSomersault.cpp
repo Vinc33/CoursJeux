@@ -1,16 +1,15 @@
 #include "RogueSomersault.h"
-#include "InputManager.h"
 #include "HeroActionsEnum.h"
 #include "Timemanager.h"
-#include "Entity.h"
+#include "Hero.h"
 #include <cmath>
 
 enum direction { NA, EST, WEST };
 
-RogueSomersault::RogueSomersault(Entity* e) : ActionEntity(e)
+RogueSomersault::RogueSomersault(Hero* e) : HeroAction(e)
 {
-	bool right = InputManager::GetKeyState(Keys::RIGHT);
-	bool left = InputManager::GetKeyState(Keys::LEFT);
+	bool right = parent->getKeyState(KEYRIGHT);
+	bool left = parent->getKeyState(KEYLEFT);
 	if (right)
 		parent->imageReversed = false;
 	else if (left)
@@ -38,12 +37,12 @@ int RogueSomersault::update()
 	if (parent->velX > parent->maxVelX * 0.4f || -parent->velX > parent->maxVelX * 0.4f)
 		parent->velX /= 1 + abs(parent->velX / 100) * TimeManager::DeltaTime;
 
-	bool left = InputManager::GetKeyState(LEFT);
-	bool right = InputManager::GetKeyState(RIGHT);
+	bool left = parent->getKeyState(KEYLEFT);
+	bool right = parent->getKeyState(KEYRIGHT);
 
 	if (timeRemaining < 0.7f)
 	{
-		if (InputManager::GetKeyState(B))
+		if (parent->getKeyState(KEYSKILL1))
 		{
 			if (left != right)
 			{
@@ -57,14 +56,14 @@ int RogueSomersault::update()
 				chainDirection = direction::NA;
 			}
 
-			if (InputManager::GetKeyState(DOWN))
+			if (parent->getKeyState(KEYDOWN))
 			{
 				chainItemStand = false;
 				chainItemFront = false;
 				chainItemDown = true;
 				chainItemUp = false;
 			}
-			else if (InputManager::GetKeyState(UP))
+			else if (parent->getKeyState(KEYUP))
 			{
 				chainItemStand = false;
 				chainItemFront = false;
@@ -87,7 +86,7 @@ int RogueSomersault::update()
 			}
 		}
 
-		if (InputManager::GetKeyState(X))
+		if (parent->getKeyState(KEYATTACK))
 			chainAttack = true;
 	}
 
@@ -150,7 +149,7 @@ int RogueSomersault::update()
 	if (!parent->isAirborne)
 	{
 		parent->imageReversed = !parent->imageReversed;
-		if (InputManager::GetKeyState(DOWN))
+		if (parent->getKeyState(KEYDOWN))
 			return (int)PlayerAction::CROUNCH;
 
 		if (right != left)

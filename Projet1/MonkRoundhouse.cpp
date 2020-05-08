@@ -1,14 +1,13 @@
 #include "MonkRoundhouse.h"
 #include "HeroActionsEnum.h"
 #include "TimeManager.h"
-#include "InputManager.h"
-#include "Entity.h"
+#include "Hero.h"
 
 
-MonkRoundhouse::MonkRoundhouse(Entity* e, bool asDoubleJump, bool canPunch, bool canDropkick, bool canJump) : ActionEntity(e)
+MonkRoundhouse::MonkRoundhouse(Hero* e, bool asDoubleJump, bool canPunch, bool canDropkick, bool canJump) : HeroAction(e)
 {
-	bool left = InputManager::GetKeyState(LEFT);
-	bool right = InputManager::GetKeyState(RIGHT);
+	bool left = parent->getKeyState(KEYLEFT);
+	bool right = parent->getKeyState(KEYRIGHT);
 	if (left && !right)
 		parent->imageReversed = true;
 	else if (!left && right)
@@ -39,11 +38,11 @@ MonkRoundhouse::~MonkRoundhouse()
 int MonkRoundhouse::update()
 {
 	timeRemaining -= TimeManager::DeltaTime;
-	bool right = InputManager::GetKeyState(Keys::RIGHT);
-	bool left = InputManager::GetKeyState(Keys::LEFT);
-	bool down = InputManager::GetKeyState(Keys::DOWN);
-	bool attack = InputManager::GetKeyState(Keys::X);
-	bool jump = InputManager::GetKeyState(Keys::A);
+	bool right = parent->getKeyState(KEYRIGHT);
+	bool left = parent->getKeyState(KEYLEFT);
+	bool down = parent->getKeyState(KEYDOWN);
+	bool attack = parent->getKeyState(KEYATTACK);
+	bool jump = parent->getKeyState(KEYJUMP);
 
 	if (right && !left)
 		parent->accelerate(0.75);

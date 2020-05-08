@@ -2,15 +2,15 @@
 #include "HeroActionsEnum.h"
 #include "TimeManager.h"
 #include "InputManager.h"
-#include "Entity.h"
+#include "Hero.h"
 
 
-MonkCrounching::MonkCrounching(Entity* e, float forceAction) : ActionEntity(e)
+MonkCrounching::MonkCrounching(Hero* e, float forceAction) : HeroAction(e)
 {
 	this->forceAction = forceAction;
 	forceActionCounter = 0;
-	bool left = InputManager::GetKeyState(LEFT);
-	bool right = InputManager::GetKeyState(RIGHT);
+	bool left = parent->getKeyState(KEYLEFT);
+	bool right = parent->getKeyState(KEYRIGHT);
 	if (left && !right)
 		parent->imageReversed = true;
 	else if (!left && right)
@@ -25,11 +25,11 @@ MonkCrounching::~MonkCrounching()
 int MonkCrounching::update()
 {
 	forceActionCounter += TimeManager::DeltaTime;
-	if (forceActionCounter < 100 && InputManager::GetKeyState(UP) && InputManager::GetKeyState(A))
+	if (forceActionCounter < 100 && parent->getKeyState(KEYUP) && parent->getKeyState(KEYJUMP))
 		return (int)PlayerAction::SECONDJUMP;
-	if (InputManager::GetKeyState(X) && forceAction < forceActionCounter)
+	if (parent->getKeyState(KEYATTACK) && forceAction < forceActionCounter)
 		return (int)PlayerAction::CROUNCHATTACK;
-	if (!InputManager::GetKeyState(DOWN) && forceAction < forceActionCounter)
+	if (!parent->getKeyState(KEYDOWN) && forceAction < forceActionCounter)
 		return (int)PlayerAction::STAND;
 	return -1;
 }

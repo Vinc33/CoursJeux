@@ -2,10 +2,10 @@
 #include "HeroActionsEnum.h"
 #include "TimeManager.h"
 #include "InputManager.h"
-#include "Entity.h"
+#include "Hero.h"
 #include "Settings.h"
 
-MonkJump::MonkJump(Entity* e, bool canRoundhouse, bool canPunch, bool canDropkick, bool canJump) : ActionEntity(e)
+MonkJump::MonkJump(Hero* e, bool canRoundhouse, bool canPunch, bool canDropkick, bool canJump) : HeroAction(e)
 {
 	parent->gravityMult = 1;
 
@@ -23,12 +23,9 @@ MonkJump::~MonkJump()
 int MonkJump::update()
 {
 
-	bool right = InputManager::GetKeyState(Keys::RIGHT);
-	bool left = InputManager::GetKeyState(Keys::LEFT);
-	bool down = InputManager::GetKeyState(Keys::DOWN);
-	bool up = InputManager::GetKeyState(Keys::UP);
-	bool jump = InputManager::GetKeyState(Keys::A);
-	bool attack = InputManager::GetKeyState(Keys::X);
+	bool right = parent->getKeyState(KEYRIGHT);
+	bool left = parent->getKeyState(KEYLEFT);
+	bool down = parent->getKeyState(KEYDOWN);
 
 	if (!parent->isAirborne)
 	{
@@ -40,10 +37,10 @@ int MonkJump::update()
 		return ((int)PlayerAction::STAND);
 	}
 
-	if (attack)
+	if (parent->getKeyState(KEYATTACK))
 	{
 		parent->gravityMult = 1;
-		if (up && canRoundhouse)	
+		if (parent->getKeyState(KEYUP) && canRoundhouse)	
 			return (int)PlayerAction::ROUNDHOUSE;
 		if (down && canDropkick) 
 			return (int)PlayerAction::DIVEKICK;
@@ -51,7 +48,7 @@ int MonkJump::update()
 			return (int)PlayerAction::BASICATTACK;
 	}
 
-	if (jump)
+	if (parent->getKeyState(KEYJUMP))
 	{
 		parent->gravityMult = 1;
 		if (canJump && doubleJumpReady)

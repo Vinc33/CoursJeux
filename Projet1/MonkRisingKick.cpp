@@ -1,14 +1,12 @@
 #include "MonkRisingKick.h"
 #include "HeroActionsEnum.h"
 #include "TimeManager.h"
-#include "InputManager.h"
-#include "Entity.h"
-#include "Settings.h"
+#include "Hero.h"
 
-MonkRisingKick::MonkRisingKick(Entity* e) : ActionEntity(e)
+MonkRisingKick::MonkRisingKick(Hero* e) : HeroAction(e)
 {
-	bool right = InputManager::GetKeyState(Keys::RIGHT);
-	bool left = InputManager::GetKeyState(Keys::LEFT);
+	bool right = parent->getKeyState(KEYRIGHT);
+	bool left = parent->getKeyState(KEYLEFT);
 	if (right != left)
 	{
 		if (right)
@@ -36,9 +34,9 @@ int MonkRisingKick::update()
 	else
 		parent->velX = 750.0f * timeRemaining + 100;
 
-	bool right = InputManager::GetKeyState(Keys::RIGHT);
-	bool left = InputManager::GetKeyState(Keys::LEFT);
-	bool down = InputManager::GetKeyState(Keys::DOWN);
+	bool right = parent->getKeyState(KEYRIGHT);
+	bool left = parent->getKeyState(KEYLEFT);
+	bool down = parent->getKeyState(KEYDOWN);
 
 	if (!parent->isAirborne)
 	{
@@ -56,7 +54,7 @@ int MonkRisingKick::update()
 	{
 		if (parent->isAirborne)
 		{
-			if (InputManager::GetKeyState(Keys::A))
+			if (parent->getKeyState(KEYJUMP))
 				return (int)PlayerAction::SECONDJUMP;
 			else
 				return (int)PlayerAction::FALL;

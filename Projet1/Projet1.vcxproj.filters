@@ -102,24 +102,6 @@
     <ClCompile Include="MonkHoldAttack.cpp">
       <Filter>Vania\Actions\Monk</Filter>
     </ClCompile>
-    <ClCompile Include="Crounching.cpp">
-      <Filter>Engine\GenericAction - player</Filter>
-    </ClCompile>
-    <ClCompile Include="Falling.cpp">
-      <Filter>Engine\GenericAction - player</Filter>
-    </ClCompile>
-    <ClCompile Include="Jumping.cpp">
-      <Filter>Engine\GenericAction - player</Filter>
-    </ClCompile>
-    <ClCompile Include="Knockback.cpp">
-      <Filter>Engine\GenericAction - player</Filter>
-    </ClCompile>
-    <ClCompile Include="Standing.cpp">
-      <Filter>Engine\GenericAction - player</Filter>
-    </ClCompile>
-    <ClCompile Include="Walking.cpp">
-      <Filter>Engine\GenericAction - player</Filter>
-    </ClCompile>
     <ClCompile Include="Action.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
@@ -167,9 +149,6 @@
     </ClCompile>
     <ClCompile Include="EntityInanimate.cpp">
       <Filter>Engine\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="ActionEntity.cpp">
-      <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="StraightProjectile.cpp">
       <Filter>Engine\Entity</Filter>
@@ -228,7 +207,25 @@
     <ClCompile Include="Platform.cpp">
       <Filter>Engine\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="GameVania.cpp" />
+    <ClCompile Include="GameVania.cpp">
+      <Filter>Vania</Filter>
+    </ClCompile>
+    <ClCompile Include="JoystickMap.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Standing.cpp">
+      <Filter>Vania\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Knockback.cpp">
+      <Filter>Vania\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="HeroAction.cpp">
+      <Filter>Vania\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityAction.cpp" />
+    <ClCompile Include="KeyboardMap.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Level.h" />
@@ -332,24 +329,6 @@
     <ClInclude Include="MonkHoldAttack.h">
       <Filter>Vania\Actions\Monk</Filter>
     </ClInclude>
-    <ClInclude Include="Crounching.h">
-      <Filter>Engine\GenericAction - player</Filter>
-    </ClInclude>
-    <ClInclude Include="Falling.h">
-      <Filter>Engine\GenericAction - player</Filter>
-    </ClInclude>
-    <ClInclude Include="Jumping.h">
-      <Filter>Engine\GenericAction - player</Filter>
-    </ClInclude>
-    <ClInclude Include="Knockback.h">
-      <Filter>Engine\GenericAction - player</Filter>
-    </ClInclude>
-    <ClInclude Include="Standing.h">
-      <Filter>Engine\GenericAction - player</Filter>
-    </ClInclude>
-    <ClInclude Include="Walking.h">
-      <Filter>Engine\GenericAction - player</Filter>
-    </ClInclude>
     <ClInclude Include="Action.h">
       <Filter>Engine</Filter>
     </ClInclude>
@@ -397,9 +376,6 @@
     </ClInclude>
     <ClInclude Include="EntityInanimate.h">
       <Filter>Engine\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="ActionEntity.h">
-      <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="StraightProjectile.h">
       <Filter>Engine\Entity</Filter>
@@ -458,7 +434,31 @@
     <ClInclude Include="Platform.h">
       <Filter>Engine\Entity</Filter>
     </ClInclude>
-    <ClInclude Include="GameVania.h" />
+    <ClInclude Include="GameVania.h">
+      <Filter>Vania</Filter>
+    </ClInclude>
+    <ClInclude Include="InputMap.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="JoystickMap.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="EnumInput.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Standing.h">
+      <Filter>Vania\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Knockback.h">
+      <Filter>Vania\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="HeroAction.h">
+      <Filter>Vania\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityAction.h" />
+    <ClInclude Include="KeyboardMap.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Vania">
@@ -475,9 +475,6 @@
     </Filter>
     <Filter Include="Vania\Character\Hero">
       <UniqueIdentifier>{dbd5cb87-b1f2-447d-84cb-19dc2847ad55}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\GenericAction - player">
-      <UniqueIdentifier>{10e34f31-691b-46f2-a69c-328207d86bad}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\Entity">
       <UniqueIdentifier>{58c83756-3989-42ee-b7f2-9aab3ecf3ecb}</UniqueIdentifier>

@@ -1,14 +1,14 @@
 #include "HunterJump.h"
-#include "Entity.h"
+#include "Hero.h"
 #include "HeroActionsEnum.h"
 #include "InputManager.h"
 #include "Settings.h"
 
-HunterJump::HunterJump(Entity* e) : ActionEntity(e)
+HunterJump::HunterJump(Hero* e) : HeroAction(e)
 {
 
-	bool left = InputManager::GetKeyState(LEFT);
-	bool right = InputManager::GetKeyState(RIGHT);
+	bool left = parent->getKeyState(KEYLEFT);
+	bool right = parent->getKeyState(KEYRIGHT);
 	if (left != right)
 	{
 		if (left)
@@ -26,8 +26,8 @@ HunterJump::~HunterJump()
 
 int HunterJump::update()
 {
-	bool left = InputManager::GetKeyState(LEFT);
-	bool right = InputManager::GetKeyState(RIGHT);
+	bool left = parent->getKeyState(KEYLEFT);
+	bool right = parent->getKeyState(KEYRIGHT);
 
 	if (right && !left)
 		parent->accelerate(0.7f);

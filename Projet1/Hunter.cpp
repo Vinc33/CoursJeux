@@ -1,16 +1,12 @@
 #include "Hunter.h"
 #include "Animation.h"
 #include "HeroActionsEnum.h"
-#include "Standing.h"
-#include "Walking.h"
 #include "HunterJump.h"
 #include "HunterJumpMid.h"
-#include "Falling.h"
-#include "Crounching.h"
 #include "HunterShoot.h"
 #include "Manager\AssetManager.h"
 
-Hunter::Hunter() : Hero("Hunter", 50, 100)
+Hunter::Hunter(short s) : Hero("Hunter", s, 50, 100)
 {
 	acc = 800;
 	maxVelX = 350;
@@ -22,7 +18,7 @@ Hunter::Hunter() : Hero("Hunter", 50, 100)
 	setPosition(50, 200);
 
 	addAnimations();
-	currentAction = new Standing(this);
+	currentAction = new HunterJump(this);
 }
 
 Hunter::~Hunter()
@@ -37,12 +33,12 @@ void Hunter::changeAction(int enumIndex)
 	case STAND:
 		changeAnimation("Stand");
 		delete currentAction;
-		currentAction = new Standing(this);
+		//currentAction = new Standing(this);
 		break;
 	case WALK:
 		changeAnimation("Walk");
 		delete currentAction;
-		currentAction = new Walking(this);
+		//currentAction = new Walking(this);
 		break;
 	case JUMP:
 		changeAnimation("JumpRise");
@@ -57,12 +53,12 @@ void Hunter::changeAction(int enumIndex)
 	case FALL:
 		changeAnimation("Fall");
 		delete currentAction;
-		currentAction = new Falling(this);
+		//currentAction = new Falling(this);
 		break;
 	case CROUNCH:
 		changeAnimation("Crounch");
 		delete currentAction;
-		currentAction = new Crounching(this);
+		//currentAction = new Crounching(this);
 		break;
 	case BASICATTACK:
 		changeAnimation("Shoot");

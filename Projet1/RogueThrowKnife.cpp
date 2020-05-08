@@ -1,11 +1,9 @@
 #include "RogueThrowKnife.h"
-#include "Entity.h"
+#include "Hero.h"
 #include "ThrownKnife.h"
-#include "TimeManager.h"
-#include "InputManager.h"
 #include "HeroActionsEnum.h"
 
-RogueThrowKnife::RogueThrowKnife(Entity* e) : RogueItemUse(e, .1f)
+RogueThrowKnife::RogueThrowKnife(Hero* e) : RogueItemUse(e, .1f)
 {
 	if (parent->imageReversed)
 	{

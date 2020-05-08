@@ -2,11 +2,11 @@
 #include "HeroActionsEnum.h"
 #include "TimeManager.h"
 #include "InputManager.h"
-#include "Entity.h"
+#include "hero.h"
 
 
 
-MonkPunch::MonkPunch(Entity* e, bool canJump) : ActionEntity(e)
+MonkPunch::MonkPunch(Hero* e, bool canJump) : HeroAction(e)
 {
 	timeRemaining = 0.375f;
 }
@@ -40,10 +40,10 @@ int MonkPunch::update()
 				return (int)PlayerAction::SECONDJUMP;
 			return (int)PlayerAction::FALL;
 		}
-		bool right = InputManager::GetKeyState(Keys::RIGHT);
-		bool left = InputManager::GetKeyState(Keys::LEFT);
-		bool down = InputManager::GetKeyState(Keys::DOWN);
-		bool holdingJump = InputManager::GetKeyState(Keys::A);
+		bool right = parent->getKeyState(KEYRIGHT);
+		bool left = parent->getKeyState(KEYLEFT);
+		bool down = parent->getKeyState(KEYDOWN);
+		bool holdingJump = parent->getKeyState(KEYJUMP);
 
 		if (down)
 			return (int)PlayerAction::CROUNCH;

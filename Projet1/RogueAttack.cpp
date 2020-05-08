@@ -1,10 +1,9 @@
 #include "RogueAttack.h"
 #include "TimeManager.h"
-#include "InputManager.h"
 #include "HeroActionsEnum.h"
-#include "Entity.h"
+#include "Hero.h"
 
-RogueAttack::RogueAttack(Entity* e) : ActionEntity(e)
+RogueAttack::RogueAttack(Hero* e) : HeroAction(e)
 {
 	timeRemaining = 0.35f;
 	if (parent->velY > 0)
@@ -17,7 +16,6 @@ RogueAttack::RogueAttack(Entity* e) : ActionEntity(e)
 		parent->accelerate(-.7f);
 	else
 		parent->accelerate(.7f);
-
 }
 
 
@@ -28,8 +26,8 @@ RogueAttack::~RogueAttack()
 
 int RogueAttack::update()
 {
-	bool left = InputManager::GetKeyState(LEFT);
-	bool right = InputManager::GetKeyState(RIGHT);
+	bool left = parent->getKeyState(KEYLEFT);
+	bool right = parent->getKeyState(KEYRIGHT);
 
 
 	if (right && !left)
@@ -43,7 +41,7 @@ int RogueAttack::update()
 		parent->gravityMult = 1;
 		if (parent->isAirborne)
 			return (int)PlayerAction::FALLMAYROLL;
-		bool down = InputManager::GetKeyState(DOWN);
+		bool down = parent->getKeyState(KEYDOWN);
 
 		if (down)
 			return (int)PlayerAction::CROUNCH;

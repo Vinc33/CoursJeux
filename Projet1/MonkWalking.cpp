@@ -1,14 +1,12 @@
 #include "MonkWalking.h"
-#include "InputManager.h"
 #include "HeroActionsEnum.h"
-#include "Timemanager.h"
-#include "Entity.h"
+#include "Hero.h"
 
 
-MonkWalking::MonkWalking(Entity* e) : ActionEntity(e)
+MonkWalking::MonkWalking(Hero* e) : HeroAction(e)
 {
-	bool right = InputManager::GetKeyState(Keys::RIGHT);
-	bool left = InputManager::GetKeyState(Keys::LEFT);
+	bool right = parent->getKeyState(KEYRIGHT);
+	bool left = parent->getKeyState(KEYLEFT);
 	if (right)
 		parent->imageReversed = false;
 	else if (left)
@@ -21,12 +19,12 @@ MonkWalking::~MonkWalking()
 
 int MonkWalking::update()
 {
-	bool right = InputManager::GetKeyState(Keys::RIGHT);
-	bool left = InputManager::GetKeyState(Keys::LEFT);
-	bool down = InputManager::GetKeyState(Keys::DOWN);
-	bool up = InputManager::GetKeyState(Keys::UP);
-	bool jump = InputManager::GetKeyState(Keys::A);
-	bool attack = InputManager::GetKeyState(Keys::X);
+	bool right = parent->getKeyState(KEYRIGHT);
+	bool left = parent->getKeyState(KEYLEFT);
+	bool down = parent->getKeyState(KEYDOWN);
+	bool up = parent->getKeyState(KEYUP);
+	bool jump = parent->getKeyState(KEYJUMP);
+	bool attack = parent->getKeyState(KEYATTACK);
 
 	if (right && !left)
 		parent->accelerate(1);

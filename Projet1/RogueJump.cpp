@@ -1,10 +1,9 @@
 #include "RogueJump.h"
-#include "InputManager.h"
 #include "HeroActionsEnum.h"
-#include "Entity.h"
+#include "Hero.h"
 #include "TimeManager.h"
 
-RogueJump::RogueJump(Entity* e, bool jump, bool canRoll) : ActionEntity(e)
+RogueJump::RogueJump(Hero* e, bool jump, bool canRoll) : HeroAction(e)
 {
 	if (jump)
 	{
@@ -24,9 +23,9 @@ RogueJump::~RogueJump()
 
 int RogueJump::update()
 {
-	bool right = InputManager::GetKeyState(Keys::RIGHT);
-	bool left = InputManager::GetKeyState(Keys::LEFT);
-	bool jump = InputManager::GetKeyState(Keys::A);
+	bool right = parent->getKeyState(KEYRIGHT);
+	bool left = parent->getKeyState(KEYLEFT);
+	bool jump = parent->getKeyState(KEYJUMP);
 
 	if (jump)
 	{
@@ -49,10 +48,10 @@ int RogueJump::update()
 		if (chainJump)
 			return (int)PlayerAction::CHAINEDJUMP;
 
-		if (InputManager::GetKeyState(Keys::DOWN))
+		if (parent->getKeyState(KEYDOWN))
 			return (int)PlayerAction::CROUNCH;
 
-		if (right || left)
+		if (right != left)
 			return (int)PlayerAction::WALK;
 		return ((int)PlayerAction::STAND);
 	}
@@ -62,17 +61,17 @@ int RogueJump::update()
 	else if (left && !right)
 		parent->accelerate(-0.5f);
 
-	if (InputManager::GetKeyState(UP) && parent->velY < -parent->jumpingStrength * 0.8f)
+	if (parent->getKeyState(KEYUP) && parent->velY < -parent->jumpingStrength * 0.8f)
 		return(int)PlayerAction::SOMERSAULT;
 
-	if (InputManager::GetKeyState(B))
+	if (parent->getKeyState(KEYSKILL1))
 	{
 		if (canUseItem)
 		{
 			parent->gravityMult = 1;
-			if (InputManager::GetKeyState(Keys::DOWN))
+			if (parent->getKeyState(KEYDOWN))
 				return (int)PlayerAction::ITEMDOWN;
-			if (InputManager::GetKeyState(Keys::UP))
+			if (parent->getKeyState(KEYUP))
 				return (int)PlayerAction::ITEMUP;
 			if (right != left)
 				return (int)PlayerAction::ITEMFRONT;
@@ -84,7 +83,7 @@ int RogueJump::update()
 		canUseItem = true;
 	}
 
-	if (InputManager::GetKeyState(X))
+	if (parent->getKeyState(KEYATTACK))
 	{
 		if (canAttack)
 			return (int)PlayerAction::BASICATTACK;
@@ -94,7 +93,7 @@ int RogueJump::update()
 		canAttack = true;
 	}
 
-	if (InputManager::GetKeyState(Keys::DOWN) && jump && canRoll)
+	if (parent->getKeyState(KEYDOWN) && jump && canRoll)
 	{
 		parent->gravityMult = 1;
 		return(int)PlayerAction::ROLL;

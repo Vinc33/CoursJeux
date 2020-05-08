@@ -15,7 +15,7 @@
 #include "MonkDiveKick.h"
 #include "Manager\AssetManager.h"
 
-Monk::Monk() : Hero("Monk", 50, 30)
+Monk::Monk(short playerID) : Hero("Monk", playerID, 50, 30)
 {
 	acc = 350;
 	maxVelX = 100;
@@ -35,13 +35,12 @@ Monk::Monk() : Hero("Monk", 50, 30)
 	maxNumberOfJumps = 4;
 	jumpRemaining = maxNumberOfJumps;
 
-	particlesMoveWithParent = false;
-
-	srand((unsigned)time(NULL));
+	particlesMoveWithParent = true;
 }
 
 Monk::~Monk()
 {
+
 }
 
 void Monk::changeAction(int enumIndex)
@@ -68,9 +67,9 @@ void Monk::changeAction(int enumIndex)
 		hasPunched = false;
 		hasDropkicked = false;
 		changeAnimation("Jump");
-		delete currentAction;
 		jump();
 		jumpRemaining = maxNumberOfJumps - 1;
+		delete currentAction;
 		currentAction = new MonkJump(this, !hasRoundhoused, !hasPunched, !hasDropkicked, jumpRemaining > 0);
 		break;
 	case SECONDJUMP:

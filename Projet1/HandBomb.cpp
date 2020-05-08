@@ -3,8 +3,10 @@
 #include "Manager\AssetManager.h"
 
 
-HandBomb::HandBomb(float initialSpeed)
+HandBomb::HandBomb(Hero * parent, float initialSpeed)
 {
+	this->parent = parent;
+
 	addAnimations();
 
 	maxVelX = 10000;
@@ -29,7 +31,7 @@ void HandBomb::update()
 	EntityAnimated::update();
 	EntityPhysic::update();
 
-	if (!InputManager::GetKeyState(B))
+	if (!parent->getKeyState(KEYSKILL1))
 	{
 		isAirborne = false;
 		velY = 0;

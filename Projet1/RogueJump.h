@@ -1,10 +1,10 @@
 #pragma once
-#include "ActionEntity.h"
+#include "HeroAction.h"
 class RogueJump :
-	public ActionEntity
+	public HeroAction
 {
 public:
-	RogueJump(Entity* e, bool jump = true, bool canRoll = true);
+	RogueJump(Hero* e, bool jump = true, bool canRoll = true);
 	~RogueJump();
 	int update();
 private:

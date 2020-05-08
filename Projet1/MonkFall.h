@@ -1,15 +1,12 @@
 #pragma once
-#include "ActionEntity.h"
+#include "HeroAction.h"
 #include "HeroActionsEnum.h"
-#include "TimeManager.h"
-#include "InputManager.h"
-#include "Entity.h"
 
 class MonkFall :
-	public ActionEntity
+	public HeroAction
 {
 public:
-	MonkFall(Entity* e, bool canRoundhouse, bool canPunch, bool canDropkick, bool canJump);
+	MonkFall(Hero* e, bool canRoundhouse, bool canPunch, bool canDropkick, bool canJump);
 	~MonkFall();
 
 	int update();

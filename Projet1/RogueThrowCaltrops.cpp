@@ -1,22 +1,22 @@
 #include "RogueThrowCaltrops.h"
 #include "Caltrops.h"
-#include "Entity.h"
+#include "Hero.h"
 
-RogueThrowCaltrops::RogueThrowCaltrops(Entity * e) : RogueItemUse(e, .05f)
+RogueThrowCaltrops::RogueThrowCaltrops(Hero * e) : RogueItemUse(e, .05f)
 {
 	if (parent->imageReversed)
 	{
 		parent->accelerate(-.5f);
-		parent->Spawn(new Caltrops(-200 + (parent->velX) * .9f), 88, 90);
-		parent->Spawn(new Caltrops(-226 + (parent->velX) * .9f), 88, 90);
-		parent->Spawn(new Caltrops(-250 + (parent->velX) * .9f), 88, 90);
+		parent->Spawn(new Caltrops(-120 + (parent->velX) * .9f), -10, 10);
+		parent->Spawn(new Caltrops(-133 + (parent->velX) * .9f), -10, 10);
+		parent->Spawn(new Caltrops(-155 + (parent->velX) * .9f), -10, 10);
 	}
 	else
 	{
 		parent->accelerate(.5f);
-		parent->Spawn(new Caltrops(200 + (parent->velX) * .9f), 146, 90);
-		parent->Spawn(new Caltrops(226 + (parent->velX) * .9f), 146, 90);
-		parent->Spawn(new Caltrops(250 + (parent->velX) * .9f), 146, 90);
+		parent->Spawn(new Caltrops(120 + (parent->velX) * .9f), 10, 10);
+		parent->Spawn(new Caltrops(133 + (parent->velX) * .9f), 10, 10);
+		parent->Spawn(new Caltrops(155 + (parent->velX) * .9f), 10, 10);
 	}
 }
 

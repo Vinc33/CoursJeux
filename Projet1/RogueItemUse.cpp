@@ -1,11 +1,10 @@
 #include "RogueItemUse.h"
-#include "Entity.h"
+#include "Hero.h"
 #include "TimeManager.h"
-#include "InputManager.h"
 #include "HeroActionsEnum.h"
 
 
-RogueItemUse::RogueItemUse(Entity* e, float timer) : ActionEntity(e)
+RogueItemUse::RogueItemUse(Hero* e, float timer) : HeroAction(e)
 {
 	this->timer = timer;
 }
@@ -23,10 +22,10 @@ int RogueItemUse::update()
 		if (parent->isAirborne)
 			return (int)PlayerAction::FALL;
 
-		if (InputManager::GetKeyState(DOWN))
+		if (parent->getKeyState(KEYDOWN))
 			return (int)PlayerAction::CROUNCH;
 
-		if (InputManager::GetKeyState(RIGHT) != InputManager::GetKeyState(LEFT))
+		if (parent->getKeyState(KEYRIGHT) != parent->getKeyState(KEYLEFT))
 			return (int)PlayerAction::WALK;
 
 		return ((int)PlayerAction::STAND);

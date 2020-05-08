@@ -1,10 +1,9 @@
 #include "Standing.h"
-#include "InputManager.h"
 #include "HeroActionsEnum.h"
-#include "Entity.h"
 #include "Settings.h"
+#include "Hero.h"
 
-Standing::Standing(Entity* e) : ActionEntity(e)
+Standing::Standing(Hero* e) : HeroAction(e)
 {
 
 }
@@ -17,24 +16,20 @@ Standing::~Standing()
 
 int Standing::update()
 {
-	bool right = InputManager::GetKeyState(Keys::RIGHT);
-	bool left = InputManager::GetKeyState(Keys::LEFT);
-	bool down = InputManager::GetKeyState(Keys::DOWN);
-	bool up = InputManager::GetKeyState(Keys::UP);
-	bool jump = InputManager::GetKeyState(Keys::A);
-	bool attack = InputManager::GetKeyState(Keys::X);
-
-	if (jump)
+	if (parent->getKeyState(KEYJUMP))
 		return (int)PlayerAction::JUMP;
-	else if (down)
+	else if (parent->getKeyState(KEYDOWN))
 		return (int)PlayerAction::CROUNCH;
-	else if (attack)
+	else if (parent->getKeyState(KEYATTACK))
 	{
-		if (up)
+		if (parent->getKeyState(KEYUP))
 			return (int)PlayerAction::NOJUMPROUNDHOUSE;
 		return (int)PlayerAction::BASICATTACK;
 
 	}
+
+	bool right = parent->getKeyState(KEYRIGHT);
+	bool left = parent->getKeyState(KEYLEFT);
 
 	if (right && !left )
 	{

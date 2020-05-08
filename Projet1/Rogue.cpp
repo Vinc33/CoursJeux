@@ -19,7 +19,7 @@
 
 #include "Manager\AssetManager.h"
 
-Rogue::Rogue() : Hero("Rogue", 20, 40)
+Rogue::Rogue(short playerID) : Hero("Rogue", playerID, 20, 40)
 {
 
 	acc = 500;
@@ -44,7 +44,7 @@ Rogue::Rogue() : Hero("Rogue", 20, 40)
 	frontToolCooldown = 0.75f;
 	standToolCooldown = 0.75f;
 
-	equipedUp = SAWBLADE;
+	equipedUp = AXE;
 	equipedDown = SPEAR;
 	equipedFront = KNIFE;
 	equipedStand = CALTROPS;

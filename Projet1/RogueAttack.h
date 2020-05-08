@@ -1,10 +1,10 @@
 #pragma once
-#include "ActionEntity.h"
+#include "HeroAction.h"
 class RogueAttack :
-	public ActionEntity
+	public HeroAction
 {
 public:
-	RogueAttack(Entity* e);
+	RogueAttack(Hero* e);
 	~RogueAttack();
 
 	int update();

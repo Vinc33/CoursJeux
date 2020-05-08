@@ -1,9 +1,8 @@
 #include "MonkSecondJump.h"
-#include "InputManager.h"
 #include "HeroActionsEnum.h"
-#include "Entity.h"
+#include "Hero.h"
 
-MonkSecondJump::MonkSecondJump(Entity* e, bool canRoundhouse, bool canPunch, bool canDropkick) : ActionEntity(e)
+MonkSecondJump::MonkSecondJump(Hero* e, bool canRoundhouse, bool canPunch, bool canDropkick) : HeroAction(e)
 {
 	parent->gravityMult = 1.5;
 	parent->isAirborne = true;
@@ -21,11 +20,11 @@ MonkSecondJump::~MonkSecondJump()
 
 int MonkSecondJump::update()
 {
-	bool right = InputManager::GetKeyState(Keys::RIGHT);
-	bool left = InputManager::GetKeyState(Keys::LEFT);
-	bool down = InputManager::GetKeyState(Keys::DOWN);
-	bool up = InputManager::GetKeyState(Keys::UP);
-	bool attack = InputManager::GetKeyState(Keys::X);
+	bool right = parent->getKeyState(KEYRIGHT);
+	bool left = parent->getKeyState(KEYLEFT);
+	bool down = parent->getKeyState(KEYDOWN);
+	bool up = parent->getKeyState(KEYUP);
+	bool attack = parent->getKeyState(KEYATTACK);
 
 	if (!parent->isAirborne)
 	{

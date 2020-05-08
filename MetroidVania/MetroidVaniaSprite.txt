@@ -6,10 +6,9 @@ Assets/SpriteSheet/MonkFX_Fiery.png monkfx_fiery|
 Assets/SpriteSheet/MonkFX_Yellow.png monkfx_yellow|
 Assets/SpriteSheet/Rogue.png rogue|
 Assets/ToolAndMagic/Caltrops.png caltrops|
-Assets/ToolAndMagic/Caltrops_Deployed.png caltrops_deployed|
 Assets/ToolAndMagic/SawBlade.png sawblade|
 Assets/ToolAndMagic/SmallBomb.png handbomb|
 Assets/ToolAndMagic/Spear.png spear|
 Assets/ToolAndMagic/ThrownAxe.png axe|
 Assets/ToolAndMagic/ThrownKnife.png knife|
-Assets/Particle/MonkCharge.png monk_charge_particle|
+Assets/Particle/MonkCharge.png monk_charge_particle

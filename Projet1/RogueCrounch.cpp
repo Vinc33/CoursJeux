@@ -2,10 +2,10 @@
 #include "HeroActionsEnum.h"
 #include "TimeManager.h"
 #include "InputManager.h"
-#include "Entity.h"
+#include "Hero.h"
 
 
-RogueCrounch::RogueCrounch(Entity* e, float forceAction) : ActionEntity(e)
+RogueCrounch::RogueCrounch(Hero* e, float forceAction) : HeroAction(e)
 {
 	this->forceAction = forceAction;
 }
@@ -16,28 +16,28 @@ RogueCrounch::~RogueCrounch()
 
 int RogueCrounch::update()
 {
-	bool jump = InputManager::GetKeyState(A);
-	bool down = InputManager::GetKeyState(DOWN);
 	forceAction -= TimeManager::DeltaTime;
-	if (jump)
+	if (parent->getKeyState(KEYJUMP))
 		return (int)PlayerAction::ROLL;
 	if (forceAction < 0)
 	{
-		if (InputManager::GetKeyState(X))
+		bool down = parent->getKeyState(KEYDOWN);
+		if (parent->getKeyState(KEYATTACK))
 			return (int)PlayerAction::BASICATTACK;
 
-		if (InputManager::GetKeyState(B))
+		if (parent->getKeyState(KEYSKILL1))
 		{
-			if (InputManager::GetKeyState(UP))
+			if (parent->getKeyState(KEYUP))
 				return (int)PlayerAction::ITEMUP;
 			if (down)
 				return (int)PlayerAction::ITEMDOWN;
-			if (InputManager::GetKeyState(LEFT) && InputManager::GetKeyState(RIGHT))
+
+			if (parent->getKeyState(KEYLEFT) != parent->getKeyState(KEYRIGHT))
 				return (int)PlayerAction::ITEMFRONT;
 			return (int)PlayerAction::ITEMSTAND;
 		}
 
-		if (!down && forceAction < 0)
+		if (!down)
 			return (int)PlayerAction::STAND;
 	}
 	return -1;

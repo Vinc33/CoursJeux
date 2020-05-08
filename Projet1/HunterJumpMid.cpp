@@ -1,10 +1,10 @@
 #include "HunterJumpMid.h"
-#include "Entity.h"
+#include "Hero.h"
 #include "HeroActionsEnum.h"
 #include "InputManager.h"
 #include "Settings.h"
 
-HunterJumpMid::HunterJumpMid(Entity* e) : ActionEntity(e)
+HunterJumpMid::HunterJumpMid(Hero* e) : HeroAction(e)
 {
 }
 
@@ -15,8 +15,8 @@ HunterJumpMid::~HunterJumpMid()
 
 int HunterJumpMid::update()
 {
-	bool left = InputManager::GetKeyState(LEFT);
-	bool right = InputManager::GetKeyState(RIGHT);
+	bool left = parent->getKeyState(KEYLEFT);
+	bool right = parent->getKeyState(KEYRIGHT);
 
 	if (right && !left)
 		parent->accelerate(0.5);

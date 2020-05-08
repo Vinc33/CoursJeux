@@ -2,10 +2,9 @@
 #include "InputManager.h"
 #include "HeroActionsEnum.h"
 #include "Timemanager.h"
-#include "Entity.h"
 
 
-HunterShoot::HunterShoot(Entity* e) : ActionEntity(e)
+HunterShoot::HunterShoot(Hero* e) : HeroAction(e)
 {
 	timeRemaining = .4f;
 }
@@ -20,9 +19,9 @@ int HunterShoot::update()
 	timeRemaining -= TimeManager::DeltaTime;
 	if (timeRemaining < 0)
 	{
-		bool right = InputManager::GetKeyState(Keys::RIGHT);
-		bool left = InputManager::GetKeyState(Keys::LEFT);
-		bool down = InputManager::GetKeyState(Keys::DOWN);
+		bool right = parent->getKeyState(KEYRIGHT);
+		bool left = parent->getKeyState(KEYLEFT);
+		bool down = parent->getKeyState(KEYDOWN);
 
 		if (down)
 			return (int)PlayerAction::CROUNCH;

@@ -4,7 +4,7 @@ class RogueThrowCaltrops :
 	public RogueItemUse
 {
 public:
-	RogueThrowCaltrops(Entity * e);
+	RogueThrowCaltrops(Hero * e);
 	~RogueThrowCaltrops();
 };
 

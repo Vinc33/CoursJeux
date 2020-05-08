@@ -1,13 +1,13 @@
 #pragma once
-#include "ActionEntity.h"
+#include "HeroAction.h"
 
 enum direction;
 
 class RogueSomersault :
-	public ActionEntity
+	public HeroAction
 {
 public:
-	RogueSomersault(Entity* e);
+	RogueSomersault(Hero* e);
 	~RogueSomersault();
 	int update();
 private:

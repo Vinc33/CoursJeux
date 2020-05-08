@@ -4,7 +4,7 @@ class RogueThrowKnife :
 	public RogueItemUse
 {
 public:
-	RogueThrowKnife(Entity* e);
+	RogueThrowKnife(Hero* e);
 	~RogueThrowKnife();
 
 	int update();

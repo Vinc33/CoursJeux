@@ -5,7 +5,7 @@
 #include "Entity.h"
 
 
-Knockback::Knockback(int initialForceX, int initialForceY, Entity* e) : ActionEntity(e)
+Knockback::Knockback(int initialForceX, int initialForceY, Entity* e) : EntityAction(e)
 {
 	parent->velX += initialForceX;
 	parent->velY += initialForceY;

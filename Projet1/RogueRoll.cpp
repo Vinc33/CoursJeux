@@ -2,24 +2,40 @@
 #include "InputManager.h"
 #include "HeroActionsEnum.h"
 #include "Timemanager.h"
-#include "Entity.h"
+#include "Hero.h"
 
 enum direction { NA, EST, WEST };
 
-RogueRoll::RogueRoll(Entity* e) : ActionEntity(e)
+RogueRoll::RogueRoll(Hero* e) : HeroAction(e)
 {
-	bool right = InputManager::GetKeyState(Keys::RIGHT);
-	bool left = InputManager::GetKeyState(Keys::LEFT);
-	if (right)
+	if (parent->getKeyState(KEYRIGHT))
 		parent->imageReversed = false;
-	else if (left)
+	else if (parent->getKeyState(KEYLEFT))
 		parent->imageReversed = true;
 	parent->isAirborne = true;
+	parent->gravityMult = 1.1f;
+
 	timeRemaining = 0.80f;
+
+	chainDirection = NA;
 	jumpAtHalf = false;
 	releasedJump = false;
+	chainAttack = false;
+	chainItemUp = false;
+	chainItemDown = false;
+	chainItemFront = false;
+	chainItemStand = false;
 
-	parent->gravityMult = 1.1f;
+	if (!parent->getKeyState(KEYSKILL1))
+		canChainItem = true;
+	else
+		canChainItem = false;
+
+	if (!parent->getKeyState(KEYATTACK))
+		canChainAttack = true;
+	else
+		canChainAttack = false;
+
 }
 
 RogueRoll::~RogueRoll()
@@ -39,7 +55,7 @@ int RogueRoll::update()
 
 	if (timeRemaining > .25f)
 	{
-		if (!InputManager::GetKeyState(A))
+		if (!parent->getKeyState(KEYJUMP))
 			jumpAtHalf = false;
 		else
 			jumpAtHalf = true;
@@ -54,8 +70,8 @@ int RogueRoll::update()
 		}
 	}
 
-	bool item = InputManager::GetKeyState(B);
-	bool attack = InputManager::GetKeyState(X);
+	bool item = parent->getKeyState(KEYSKILL1);
+	bool attack = parent->getKeyState(KEYATTACK);
 	if (!item)
 		canChainItem = true;
 	if (!attack)
@@ -70,8 +86,8 @@ int RogueRoll::update()
 			else
 				chainDirection = direction::EST;
 
-			bool right = InputManager::GetKeyState(RIGHT);
-			bool left = InputManager::GetKeyState(LEFT);
+			bool right = parent->getKeyState(KEYRIGHT);
+			bool left = parent->getKeyState(KEYLEFT);
 			if (right != left)
 			{
 				if (right)
@@ -80,14 +96,14 @@ int RogueRoll::update()
 					chainDirection = direction::EST;
 			}
 
-			if (InputManager::GetKeyState(DOWN))
+			if (parent->getKeyState(KEYDOWN))
 			{
 				chainItemDown = true;
 				chainItemUp = false;
 				chainItemFront = false;
 				chainItemStand = false;
 			}
-			else if (InputManager::GetKeyState(UP))
+			else if (parent->getKeyState(KEYUP))
 			{
 				chainItemDown = false;
 				chainItemUp = true;
@@ -169,11 +185,11 @@ int RogueRoll::update()
 
 		if (parent->isAirborne)
 			return (int)PlayerAction::FALL;
-		if (InputManager::GetKeyState(DOWN))
+		if (parent->getKeyState(KEYDOWN))
 			return (int)PlayerAction::CROUNCH;
 
-		bool right = InputManager::GetKeyState(Keys::RIGHT);
-		bool left = InputManager::GetKeyState(Keys::LEFT);
+		bool right = parent->getKeyState(KEYRIGHT);
+		bool left = parent->getKeyState(KEYLEFT);
 
 		if (right != left)
 		{

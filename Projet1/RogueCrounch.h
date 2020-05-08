@@ -1,10 +1,10 @@
 #pragma once
-#include "ActionEntity.h"
+#include "HeroAction.h"
 class RogueCrounch :
-	public ActionEntity
+	public HeroAction
 {
 public:
-	RogueCrounch(Entity* e, float forceAction = 0.0f);
+	RogueCrounch(Hero* e, float forceAction = 0.0f);
 	~RogueCrounch();
 	int update();
 private:

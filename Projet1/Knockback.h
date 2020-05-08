@@ -1,8 +1,8 @@
 #pragma once
-#include "ActionEntity.h"
+#include "EntityAction.h"
 
 class Knockback :
-	public ActionEntity
+	public EntityAction
 {
 public:
 	Knockback(int initialForceX, int initialForceY, Entity* e);

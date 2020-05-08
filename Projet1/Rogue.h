@@ -17,7 +17,7 @@ class Rogue :
 	public Hero
 {
 public:
-	Rogue();
+	Rogue(short playerID);
 	~Rogue();
 
 	void changeAction(int enumIndex);

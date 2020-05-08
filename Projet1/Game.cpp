@@ -1,6 +1,7 @@
 #include "Game.h"
 #include <cstdlib>
 #include <vector>
+#include <iostream>
 
 //initialize static variables
 std::vector<vector<EntityBase*>> GameView::Game::newEntities = std::vector<vector<EntityBase*>>();
@@ -87,6 +88,7 @@ namespace GameView
 
 	void Game::updateInput()
 	{
+		InputManager::update();
 		//Update each "Entity"
 		for (auto a : entities)
 			for (EntityBase* e : a)

@@ -1,14 +1,13 @@
 #include "RogueWalk.h"
-#include "InputManager.h"
 #include "HeroActionsEnum.h"
 #include "Timemanager.h"
-#include "Entity.h"
+#include "Hero.h"
 
 
-RogueWalk::RogueWalk(Entity* e) : ActionEntity(e)
+RogueWalk::RogueWalk(Hero* e) : HeroAction(e)
 {
-	bool right = InputManager::GetKeyState(Keys::RIGHT);
-	bool left = InputManager::GetKeyState(Keys::LEFT);
+	bool right = parent->getKeyState(KEYRIGHT);
+	bool left = parent->getKeyState(KEYLEFT);
 	if (right != left)
 	{
 		if (right)
@@ -17,8 +16,16 @@ RogueWalk::RogueWalk(Entity* e) : ActionEntity(e)
 			parent->imageReversed = true;
 	}
 
-	if (!InputManager::GetKeyState(Keys::A))
+	if (!parent->getKeyState(KEYJUMP))
 		jumpReady = true;
+
+	if (!parent->getKeyState(KEYATTACK))
+		attackReady = true;
+
+	if (!parent->getKeyState(KEYSKILL1))
+		itemReady = true;
+	else
+		itemReady = false;
 }
 
 
@@ -28,8 +35,8 @@ RogueWalk::~RogueWalk()
 
 int RogueWalk::update()
 {
-	bool right = InputManager::GetKeyState(Keys::RIGHT);
-	bool left = InputManager::GetKeyState(Keys::LEFT);
+	bool right = parent->getKeyState(KEYRIGHT);
+	bool left = parent->getKeyState(KEYLEFT);
 
 	if (right != left)
 	{
@@ -39,13 +46,13 @@ int RogueWalk::update()
 			parent->accelerate(-1);
 	}
 
-	if (InputManager::GetKeyState(Keys::B))
+	if (parent->getKeyState(KEYSKILL1))
 	{
 		if (itemReady)
 		{
-			if (InputManager::GetKeyState(Keys::UP))
+			if (parent->getKeyState(KEYUP))
 				return (int)PlayerAction::ITEMUP;
-			if (InputManager::GetKeyState(Keys::DOWN))
+			if (parent->getKeyState(KEYDOWN))
 				return (int)PlayerAction::ITEMDOWN;
 			if (right != left)
 				return (int)PlayerAction::ITEMFRONT;
@@ -57,11 +64,11 @@ int RogueWalk::update()
 		itemReady = true;
 	}
 
-	if (InputManager::GetKeyState(Keys::A))
+	if (parent->getKeyState(KEYJUMP))
 	{
 		if (jumpReady)
 		{
-			if (InputManager::GetKeyState(Keys::UP))
+			if (parent->getKeyState(KEYUP))
 				return (int)PlayerAction::SOMERSAULT;
 			else
 				return (int)PlayerAction::JUMP;
@@ -72,7 +79,7 @@ int RogueWalk::update()
 		jumpReady = true;
 	}
 
-	if (InputManager::GetKeyState(Keys::X))
+	if (parent->getKeyState(KEYATTACK))
 	{
 		if (attackReady)
 			return (int)PlayerAction::BASICATTACK;
@@ -82,7 +89,7 @@ int RogueWalk::update()
 		attackReady = true;
 	}
 
-	if (InputManager::GetKeyState(Keys::DOWN))
+	if (parent->getKeyState(KEYDOWN))
 	{
 		if (right != left)
 			return (int)PlayerAction::ROLL;

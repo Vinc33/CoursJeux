@@ -29,8 +29,8 @@ ThrownAxe::ThrownAxe(int initialSpeed)
 
 	maxVelX = 10000;
 	velX = (float)initialSpeed;
-	jumpingStrength = 700;
-	airdrag = 400;
+	jumpingStrength = 600;
+	airdrag = 150;
 	gravity = 2000;
 
 	jump();

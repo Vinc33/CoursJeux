@@ -24,17 +24,18 @@ namespace GameView
 		//Test
 		AddCollisionBetweenLayers(1, 2);
 
-		Monk * monk = new Monk();
-		camera->setTarget(monk);
-
-		camera->getView()->zoom(0.5);
-
+		Monk * monk = new Monk(0);
 		AddEntity(monk, 1);
-		AddEntity(new Rogue(), 2);
+		//Rogue * rogue = new Rogue(0);
+		//AddEntity(rogue, 2);
 		//AddEntity(new Hunter());
 
-		sf::Texture* texture = new sf::Texture();
-		texture->loadFromFile("Assets/ToolAndMagic/ThrownAxe.png");
+		camera->setTarget(monk);
+		camera->getView()->zoom(0.5f);
+
+
+		/*sf::Texture* texture = new sf::Texture();
+		texture->loadFromFile("Assets/ToolAndMagic/ThrownAxe.png");*/
 		//AddEntity(new Platform(texture, Vector2f(200.0f, 300.0f)), 2);
 
 		//End Test

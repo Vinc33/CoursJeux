@@ -4,7 +4,7 @@ class RogueThrowSpear :
 	public RogueItemUse
 {
 public:
-	RogueThrowSpear(Entity* e);
+	RogueThrowSpear(Hero* e);
 	~RogueThrowSpear();
 };
 

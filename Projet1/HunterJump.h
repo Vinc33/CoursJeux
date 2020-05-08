@@ -1,10 +1,10 @@
 #pragma once
-#include "ActionEntity.h"
+#include "HeroAction.h"
 class HunterJump :
-	public ActionEntity
+	public HeroAction
 {
 public:
-	HunterJump(Entity* e);
+	HunterJump(Hero* e);
 	~HunterJump();
 	int update();
 };

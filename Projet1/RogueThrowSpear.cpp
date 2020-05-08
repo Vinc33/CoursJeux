@@ -1,9 +1,8 @@
 #include "RogueThrowSpear.h"
-#include "Entity.h"
+#include "Hero.h"
 #include "Spear.h"
 
-
-RogueThrowSpear::RogueThrowSpear(Entity* e) : RogueItemUse(e, .3f)
+RogueThrowSpear::RogueThrowSpear(Hero* e) : RogueItemUse(e, .3f)
 {
 	if (parent->imageReversed)
 	{

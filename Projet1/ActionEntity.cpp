@@ -1,14 +1,14 @@
-#include "ActionEntity.h"
+#include "HeroAction.h"
 #include "EntityStateMachine.h"
 
 
-ActionEntity::ActionEntity(Entity* e) : Action((EntityStateMachine*)e)
+HeroAction::HeroAction(Entity* e) : Action((EntityStateMachine*)e)
 {
 	parent = e;
 }
 
 
-ActionEntity::~ActionEntity()
+HeroAction::~HeroAction()
 {
 
 }

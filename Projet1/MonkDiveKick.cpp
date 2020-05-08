@@ -2,15 +2,15 @@
 #include "InputManager.h"
 #include "HeroActionsEnum.h"
 #include "TimeManager.h"
-#include "Entity.h"
+#include "Hero.h"
 #include "Settings.h"
 
 
-MonkDiveKick::MonkDiveKick(Entity* e) : ActionEntity(e)
+MonkDiveKick::MonkDiveKick(Hero* e) : HeroAction(e)
 {
 	parent->gravityMult = 1;
-	bool right = InputManager::GetKeyState(Keys::RIGHT);
-	bool left = InputManager::GetKeyState(Keys::LEFT);
+	bool right = parent->getKeyState(KEYRIGHT);
+	bool left = parent->getKeyState(KEYLEFT);
 	if (right)
 		parent->imageReversed = false;
 	else if (left)
@@ -38,9 +38,9 @@ int MonkDiveKick::update()
 
 	countDown -= TimeManager::DeltaTime;
 
-	bool right = InputManager::GetKeyState(Keys::RIGHT);
-	bool left = InputManager::GetKeyState(Keys::LEFT);
-	bool down = InputManager::GetKeyState(Keys::DOWN);
+	bool right = parent->getKeyState(KEYRIGHT);
+	bool left = parent->getKeyState(KEYLEFT);
+	bool down = parent->getKeyState(KEYDOWN);
 
 	if (!parent->isAirborne)
 	{
@@ -59,11 +59,10 @@ int MonkDiveKick::update()
 
 	if (countDown < 0)
 	{
-		if (!InputManager::GetKeyState(Keys::X) || abs(parent->velX) <= 1.4 * parent->maxVelX)
+		if (!parent->getKeyState(KEYATTACK) || abs(parent->velX) <= 1.4 * parent->maxVelX)
 		{
 			if (parent->isAirborne)
 				return (int)PlayerAction::FALL;
-			bool holdingJump = InputManager::GetKeyState(Keys::A);
 
 			if (down)
 				return (int)PlayerAction::CROUNCH;

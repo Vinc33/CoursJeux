@@ -1,9 +1,10 @@
 #include "Hero.h"
+#include "InputManager.h"
 
 
-
-Hero::Hero(string unitName, short baseDamage, short maxHP) : Character (unitName, baseDamage, maxHP)
+Hero::Hero(string unitName, short playerID, short baseDamage, short maxHP) : Character (unitName, baseDamage, maxHP)
 {
+	this->playerID = playerID;
 }
 
 
@@ -12,7 +13,7 @@ Hero::~Hero()
 
 }
 
-void Hero::changeAction(int enumIndex)
+bool Hero::getKeyState(INPUT key)
 {
-	
+	return InputManager::getKeyState(playerID, key);
 }

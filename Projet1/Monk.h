@@ -4,7 +4,7 @@
 class Monk : public Hero
 {
 public:
-	Monk();
+	Monk(short playerID);
 	~Monk();
 	void changeAction(int enumPlaceholder) override;
 

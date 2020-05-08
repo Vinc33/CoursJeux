@@ -1,10 +1,10 @@
 #pragma once
-#include "ActionEntity.h"
+#include "HeroAction.h"
 class MonkHoldAttack :
-	public ActionEntity
+	public HeroAction
 {
 public:
-	MonkHoldAttack(Entity* e);
+	MonkHoldAttack(Hero* e);
 	~MonkHoldAttack();
 	int update();
 private:

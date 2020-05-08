@@ -1,10 +1,10 @@
 #pragma once
-#include "ActionEntity.h"
+#include "HeroAction.h"
 class MonkDiveKick :
-	public ActionEntity
+	public HeroAction
 {
 public:
-	MonkDiveKick(Entity* e);
+	MonkDiveKick(Hero* e);
 	~MonkDiveKick();
 
 	int update();

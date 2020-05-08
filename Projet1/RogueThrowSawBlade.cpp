@@ -1,10 +1,10 @@
 #include "RogueThrowSawBlade.h"
-#include "Entity.h"
+#include "Hero.h"
 #include "SawBlade.h"
 
 
 
-RogueThrowSawBlade::RogueThrowSawBlade(Entity* e) : RogueItemUse(e, .4f)
+RogueThrowSawBlade::RogueThrowSawBlade(Hero* e) : RogueItemUse(e, .4f)
 {
 	if (parent->imageReversed)
 	{
